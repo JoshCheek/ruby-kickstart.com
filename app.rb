@@ -16,6 +16,15 @@ end
 database_config = YAML.load( File.read database_file )[ settings.environment.to_s ]
 ActiveRecord::Base.establish_connection(database_config)
 
+# load models
+models_dir = File.dirname(__FILE__) + "/app/models"
+Dir[models_dir].each do |model|
+  next unless model =~ /\.rb$/
+  require model
+end
+
+# set views
+set :views, File.dirname(__FILE__) + '/app/views'
 
 
 get '/' do
