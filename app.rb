@@ -1,5 +1,5 @@
-require 'yaml'
 require 'bundler/setup'
+require 'yaml'
 require 'sinatra'
 require 'active_record'
 
