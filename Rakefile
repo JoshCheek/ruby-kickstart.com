@@ -3,3 +3,10 @@ namespace :db do
   task :migrate do
   end
 end
+
+task :spec do
+  system  'rspec '                  +
+          '--color '                +
+          '--format=documentation ' +
+          'spec/**_spec.rb'
+end

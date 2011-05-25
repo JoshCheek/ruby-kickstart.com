@@ -1,0 +1,12 @@
+#!/usr/bin/env watchr
+
+def run_specs
+  system 'rake spec'
+  puts "-" * 20 + "\n\n"
+end
+
+run_specs
+watch '^.*\.rb$' do
+  run_specs
+end
+
