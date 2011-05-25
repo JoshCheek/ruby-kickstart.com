@@ -30,3 +30,9 @@ set :views, File.dirname(__FILE__) + '/app/views'
 get '/' do
   haml :home
 end
+
+
+get '/quiz1' do
+  @quiz = Quiz.find(1)
+  haml :quiz
+end
