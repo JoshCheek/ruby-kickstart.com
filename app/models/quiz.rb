@@ -30,8 +30,13 @@ class Quiz
     instance_eval &block
   end
   
-  def add_problem &block
-    self.problems << Problem.new(&block)
+  def add_problem type, &block
+    problem_class = case type
+      when :match_answer    then MatchAnswerProblem
+      when :multiple_choice then MultipleChoiceProblem
+      else raise "#{type} is not a valid problem type"
+    end
+    self.problems << problem_class.new(&block)
   end
   
   def inspect
@@ -49,7 +54,7 @@ end
 
 
 class Quiz  
-  class Problem < Struct.new(:question, :options)
+  class MultipleChoiceProblem < Struct.new(:question, :options)
     
     alias_method :set_question, :question=
     
@@ -67,6 +72,26 @@ class Quiz
       options.each_with_index do |option, index|
         yield index.next, option
       end
+    end
+    
+  end
+end
+
+
+
+class Quiz
+  class MatchAnswerProblem < Struct.new(:question, :regexes)
+    
+    alias_method :set_question, :question=
+    
+    def initialize &block
+      super()
+      self.regexes = Array.new
+      instance_eval &block if block
+    end
+    
+    def should_match regex
+      regexes << regex
     end
     
   end
