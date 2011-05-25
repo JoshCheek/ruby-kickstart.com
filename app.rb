@@ -1,6 +1,3 @@
-# NEED TO ADD SQLITE3 TO GEMFILE BEFORE COMMITTING
-# BUT I LOST INTERNET CONNECTION AND CAN'T LOOK UP GEM NAME
-
 require 'yaml'
 require 'bundler/setup'
 require 'sinatra'
