@@ -12,8 +12,8 @@ describe Quiz do
       end
       add_problem :match_answer do
         set_question  "what is an object?"
-        should_match  '/data/i'
-        should_match  '/objects/i'
+        should_match  /data/i
+        should_match  /methods/i
       end
     end
   end
@@ -53,6 +53,11 @@ describe Quiz do
   describe 'match answer problem' do
     subject { Quiz.find_by_number(5).problems.last }
     its(:question) { should == 'what is an object?' }
+    specify '#each_regex should yield both regexes' do
+      regexes = Array.new
+      subject.each_regex { |regex| regexes << regex }
+      regexes.should == [/data/i,/methods/i]
+    end
   end
   
 end

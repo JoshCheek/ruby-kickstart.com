@@ -10,4 +10,8 @@ class QuizRegex < ActiveRecord::Base
     YAML.load(super)
   end
   
+  def regex
+    @regex ||= content
+  end
+  
 end
