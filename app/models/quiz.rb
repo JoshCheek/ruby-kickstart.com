@@ -32,18 +32,37 @@ class Quiz < ActiveRecord::Base
     problems.each &block
   end
   
-  def problem _question, options
-    if options[:match]
-      add_problem :match_answer do
-        self.question = _question
-        options[:match].each { |regex| should_match regex }
-      end
-    elsif options[:options]
-      add_problem :multiple_choice do
-        self.question = _question
-        options[:options].each_with_index do |option, index|
-          add_option option, :solution => (index == options[:solution])
-        end
+  def problem question, options
+    if match_answer_problem? options
+      add_match_answer(question, options[:match])
+    elsif multiple_choice_problem? options
+      add_multiple_choice(question, options[:solution], options[:options])
+    end
+  end
+
+private
+
+  def match_answer_problem? options
+    !!options[:match]
+  end
+  
+  def multiple_choice_problem? options
+    !!options[:options]
+  end
+  
+  def add_match_answer _question, regexes
+    add_problem :match_answer do
+      self.question = _question
+      regexes.each { |regex| should_match regex }
+    end
+  end
+  
+  def add_multiple_choice _question, solution_index, options
+    add_problem :multiple_choice do
+      self.question = _question
+      options.each_with_index do |option, index|
+        is_solution = (index == solution_index)
+        add_option option, :solution => is_solution
       end
     end
   end
