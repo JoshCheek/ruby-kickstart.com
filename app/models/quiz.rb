@@ -1,98 +1,33 @@
-Quiz = Class.new
-
-
-
-class << Quiz
+class Quiz < ActiveRecord::Base
   
-  attr_accessor :quizzes
-  
-  def find n
-    @quizzes[n] || raise("There is no quiz ##{n}")
-  end
-
-  def add n, quiz
-    @quizzes[n] = quiz
+  def self.add n, name, &block
+    quiz = Quiz.create :name => name , :number => n
+    quiz.instance_eval &block
   end
   
-end
-Quiz.quizzes = Hash.new
-
-
-
-class Quiz
-  
-  attr_accessor :name, :problems
-
-  def initialize n, name, &block
-    self.name = name
-    self.problems = Array.new
-    Quiz.add n, self
-    instance_eval &block
-  end
+  has_many :quiz_problems
   
   def add_problem type, &block
     problem_class = case type
-      when :match_answer    then MatchAnswerProblem
-      when :multiple_choice then MultipleChoiceProblem
+      when :match_answer    then QuizMatchAnswerProblem
+      when :multiple_choice then QuizMultipleChoiceProblem
       else raise "#{type} is not a valid problem type"
     end
-    self.problems << problem_class.new(&block)
+    problem = problem_class.new
+    problem.instance_eval &block
+    QuizProblem.create :problemable => problem , :quiz => self
   end
   
   def inspect
     "<Quiz:#{name}>"
   end
   
-  def each_problem
-    problems.each do |problem|
-      yield problem
-    end
+  def problems
+    quiz_problems.map &:problemable
   end
   
-end
-
-
-
-class Quiz  
-  class MultipleChoiceProblem < Struct.new(:question, :options)
-    
-    alias_method :set_question, :question=
-    
-    def initialize &block
-      super()
-      self.options = Array.new
-      instance_eval &block if block
-    end
-    
-    def add_option option
-      options << option
-    end
-    
-    def each_option
-      options.each_with_index do |option, index|
-        yield index.next, option
-      end
-    end
-    
+  def each_problem &block
+    problems.each &block
   end
-end
-
-
-
-class Quiz
-  class MatchAnswerProblem < Struct.new(:question, :regexes)
     
-    alias_method :set_question, :question=
-    
-    def initialize &block
-      super()
-      self.regexes = Array.new
-      instance_eval &block if block
-    end
-    
-    def should_match regex
-      regexes << regex
-    end
-    
-  end
 end
