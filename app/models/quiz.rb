@@ -61,8 +61,7 @@ private
     add_problem :multiple_choice do
       self.question = _question
       options.each_with_index do |option, index|
-        is_solution = (index == solution_index)
-        add_option option, :solution => is_solution
+        add_option option, :solution => (index == solution_index)
       end
     end
   end
