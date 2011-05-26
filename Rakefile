@@ -26,12 +26,20 @@ end
 # ==========  Miscellaneous  ==========
 
 task :spec do
-  system  'rspec '                  +
-          '--color '                +
-          '--format=documentation ' +
-          'spec/**_spec.rb'
+  sh  'rspec '                  +
+      '--color '                +
+      '--format=documentation ' +
+      'spec/**_spec.rb'
 end
 
 task :server do
-  system 'shotgun config.ru -p 9394'
+  sh 'shotgun config.ru -p 9394'
+end
+
+task :ssh do
+  sh 'ssh deploy@ec2-184-73-246-218.compute-1.amazonaws.com'
+end
+
+task :console do
+  sh 'pry -r ./environment'
 end
