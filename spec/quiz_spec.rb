@@ -1,35 +1,4 @@
 require 'spec_helper'
-require 'app/models/quiz'
-
-
-def clean_db
-  [Quiz, QuizProblem, QuizOption, QuizRegex, QuizMatchAnswerProblem, QuizMultipleChoiceProblem].each(&:delete_all)
-end
-
-def block_based_reinit
-  clean_db
-  Quiz.add 5, 'Example Problem' do
-    add_problem :multiple_choice do
-      set_question  'can you see this?'
-      add_option    'yes' , :solution => true
-      add_option    'no'
-    end
-    add_problem :match_answer do
-      set_question  "what is an object?"
-      should_match  /data/i
-      should_match  /methods/i
-    end
-  end
-end
-
-def hash_based_reinit
-  clean_db
-  Quiz.add 5, 'Example Problem' do
-    problem 'can you see this?', :options => ['yes', 'no'], :solution => 0
-    problem 'what is an object?', :match => [/data/i, /methods/i]
-  end
-end
-
 
 describe Quiz do
   specs = lambda do |syntax_context, reinit_function|
