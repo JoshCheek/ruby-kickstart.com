@@ -1,9 +1,12 @@
 %h1= @quiz.name
 
 - @quiz.each_problem do |problem|
-  %h2= problem.question
-  %dl
-    - problem.each_option do |number, text|
-      %dt= number
-      %dd= text
-      
+  - if problem.is_a? QuizMultipleChoiceProblem
+    %h2= problem.question
+    %dl
+      - problem.each_option do |number, text|
+        %dt= number
+        %dd= text
+  - elsif problem.is_a? QuizMatchAnswerProblem
+    %h2= problem.question
+    answer goes here
