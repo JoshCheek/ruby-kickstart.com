@@ -19,7 +19,6 @@ specs = lambda do |syntax_context, reinit_function|
     
       context 'one quiz' do
         subject { Quiz.find_by_number 5 }
-        specify { subject.each_problem { |pr| p pr }}
         its(:name) { should == 'Example Problem' }
         its(:inspect) { should == "<Quiz:Example Problem>" }
         it { should == Quiz.find_by_number(5) }
