@@ -6,7 +6,7 @@ def reinitialize_db
   Quiz.add 5, 'Example Problem' do
     add_problem :multiple_choice do
       set_question  'can you see this?'
-      add_option    'yes'
+      add_option    'yes' , :solution => true
       add_option    'no'
     end
     add_problem :match_answer do
@@ -58,6 +58,9 @@ describe Quiz do
         numbers = Array.new
         subject.each_option { |number,_| numbers << number }
         numbers.should == [1,2]
+      end
+      specify 'its solution should be the one specified' do
+        subject.solution.body.should == 'yes'
       end
     end
   end
