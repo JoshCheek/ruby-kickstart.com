@@ -14,14 +14,6 @@ MigratorTasks.new do |t|
   t.verbose     =  true
 end
 
-MigratorTasks.new do |t|
-  t.sub_namespace  =  "quizzes"
-  t.migrations     =  "db/quiz-migrations"
-  t.config         =  database_file
-  t.verbose        =  true
-end
-
-
 
 # ==========  Miscellaneous  ==========
 
