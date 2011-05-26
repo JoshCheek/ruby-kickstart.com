@@ -33,6 +33,7 @@ specs = lambda do |syntax_context, reinit_function|
     
       describe 'multiple choice problem' do
         subject { Quiz.find_by_number(5).problems.first }
+        it { should be_instance_of QuizMultipleChoiceProblem }
         its(:question) { should == 'can you see this?' }
         its(:options) { should == %w(yes no) }
         describe '#each_option' do
@@ -54,6 +55,7 @@ specs = lambda do |syntax_context, reinit_function|
     
       describe 'match answer problem' do
         subject { Quiz.find_by_number(5).problems.last }
+        it { should be_instance_of QuizMatchAnswerProblem }
         its(:question) { should == 'what is an object?' }
         specify '#each_regex should yield both regexes' do
           regexes = Array.new
