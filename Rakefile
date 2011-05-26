@@ -41,3 +41,7 @@ desc 'open console into app'
 task :console do
   sh 'pry -r ./environment'
 end
+
+task :load_env do
+  require './environment'
+end
