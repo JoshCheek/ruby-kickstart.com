@@ -31,5 +31,21 @@ class Quiz < ActiveRecord::Base
   def each_problem &block
     problems.each &block
   end
+  
+  def problem _question, options
+    if options[:match]
+      add_problem :match_answer do
+        self.question = _question
+        options[:match].each { |regex| should_match regex }
+      end
+    elsif options[:options]
+      add_problem :multiple_choice do
+        self.question = _question
+        options[:options].each_with_index do |option, index|
+          add_option option, :solution => (index == options[:solution])
+        end
+      end
+    end
+  end
     
 end

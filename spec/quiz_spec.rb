@@ -76,8 +76,12 @@ end
 
 
 
-def reinitialize_db
+def clean_db
   [Quiz, QuizProblem, QuizOption, QuizRegex, QuizMatchAnswerProblem, QuizMultipleChoiceProblem].each(&:delete_all)
+end
+
+def block_based_reinit
+  clean_db
   Quiz.add 5, 'Example Problem' do
     add_problem :multiple_choice do
       set_question  'can you see this?'
@@ -92,4 +96,13 @@ def reinitialize_db
   end
 end
 
-specs.call 'with block based syntax', method(:reinitialize_db)
+def hash_based_reinit
+  clean_db
+  Quiz.add 5, 'Example Problem' do
+    problem 'can you see this?', :options => ['yes', 'no'], :solution => 0
+    problem 'what is an object?', :match => [/data/i, /methods/i]
+  end
+end
+
+specs.call 'with block based syntax', method(:block_based_reinit)
+specs.call 'with hash based syntax', method(:hash_based_reinit)
