@@ -1,0 +1,9 @@
+%h1= @quiz.name
+
+- @quiz.each_problem do |problem|
+  %h2= problem.question
+  %dl
+    - problem.each_option do |number, text|
+      %dt= number
+      %dd= text
+      
