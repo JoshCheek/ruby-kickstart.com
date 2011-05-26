@@ -6,6 +6,6 @@ end
 
 
 get '/quiz1' do
-  @quiz = Quiz.find(1)
+  @quiz = Quiz.find_by_number(1)
   haml :quiz
 end

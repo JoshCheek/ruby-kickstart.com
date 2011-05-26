@@ -2,10 +2,12 @@ class Quiz < ActiveRecord::Base
   
   def self.add n, name, &block
     quiz = Quiz.create :name => name , :number => n
-    quiz.instance_eval &block
+    quiz.instance_eval &block if block
+    quiz
   end
   
   has_many :quiz_problems
+  validates_uniqueness_of :number
   
   def add_problem type, &block
     problem_class = case type
