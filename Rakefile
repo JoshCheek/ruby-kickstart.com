@@ -1,8 +1,29 @@
-namespace :db do
-  desc 'migrate the database'
-  task :migrate do
-  end
+require 'bundler/setup'
+
+
+# ==========  Database  ==========
+require 'tasks/standalone_migrations'
+
+database_file = ENV['RACK_ENV'] == 'production' ? 
+                  "/data/rubykickstartcom/shared/config/database.yml" : 
+                  "#{File.dirname __FILE__}/db/database.yml"
+
+MigratorTasks.new do |t|
+  t.migrations  =  "db/migrations"
+  t.config      =  database_file
+  t.verbose     =  true
 end
+
+MigratorTasks.new do |t|
+  t.sub_namespace  =  "quizzes"
+  t.migrations     =  "db/quiz-migrations"
+  t.config         =  database_file
+  t.verbose        =  true
+end
+
+
+
+# ==========  Miscellaneous  ==========
 
 task :spec do
   system  'rspec '                  +
