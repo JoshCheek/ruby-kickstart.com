@@ -1,8 +1,38 @@
 require 'spec_helper'
 require 'app/models/quiz'
 
-specs = lambda do |syntax_context, reinit_function|
-  describe Quiz do
+
+def clean_db
+  [Quiz, QuizProblem, QuizOption, QuizRegex, QuizMatchAnswerProblem, QuizMultipleChoiceProblem].each(&:delete_all)
+end
+
+def block_based_reinit
+  clean_db
+  Quiz.add 5, 'Example Problem' do
+    add_problem :multiple_choice do
+      set_question  'can you see this?'
+      add_option    'yes' , :solution => true
+      add_option    'no'
+    end
+    add_problem :match_answer do
+      set_question  "what is an object?"
+      should_match  /data/i
+      should_match  /methods/i
+    end
+  end
+end
+
+def hash_based_reinit
+  clean_db
+  Quiz.add 5, 'Example Problem' do
+    problem 'can you see this?', :options => ['yes', 'no'], :solution => 0
+    problem 'what is an object?', :match => [/data/i, /methods/i]
+  end
+end
+
+
+describe Quiz do
+  specs = lambda do |syntax_context, reinit_function|
     context syntax_context do
       
       before(:all) { reinit_function.call }
@@ -53,7 +83,7 @@ specs = lambda do |syntax_context, reinit_function|
       end
     
       describe 'match answer problem' do
-        subject { Quiz.find_by_number(5).problems.last }
+        subject { Quiz.find_by_number(5).problems[1] }
         it { should be_instance_of QuizMatchAnswerProblem }
         its(:question) { should == 'what is an object?' }
         specify '#each_regex should yield both regexes' do
@@ -71,38 +101,23 @@ specs = lambda do |syntax_context, reinit_function|
       
     end
   end
-end
-
-
-
-
-def clean_db
-  [Quiz, QuizProblem, QuizOption, QuizRegex, QuizMatchAnswerProblem, QuizMultipleChoiceProblem].each(&:delete_all)
-end
-
-def block_based_reinit
-  clean_db
-  Quiz.add 5, 'Example Problem' do
-    add_problem :multiple_choice do
-      set_question  'can you see this?'
-      add_option    'yes' , :solution => true
-      add_option    'no'
-    end
-    add_problem :match_answer do
-      set_question  "what is an object?"
-      should_match  /data/i
-      should_match  /methods/i
+  
+  specs.call 'with block based syntax', method(:block_based_reinit)
+  specs.call 'with hash based syntax', method(:hash_based_reinit)
+  
+  context 'with one hash based problem matching to one regex' do
+    describe 'its problem' do
+      specify '#each_regex should yield one regex' do
+        quiz = Quiz.add 1, 'Example Problem' do
+          problem 'What is 10 / 4', :match => /\b2\b|\btwo\b/i
+        end
+        regexes = Array.new
+        quiz.problems.first.each_regex { |regex| regexes << regex }
+        regexes.should == [/\b2\b|\btwo\b/i]
+      end    
     end
   end
+  
 end
 
-def hash_based_reinit
-  clean_db
-  Quiz.add 5, 'Example Problem' do
-    problem 'can you see this?', :options => ['yes', 'no'], :solution => 0
-    problem 'what is an object?', :match => [/data/i, /methods/i]
-  end
-end
 
-specs.call 'with block based syntax', method(:block_based_reinit)
-specs.call 'with hash based syntax', method(:hash_based_reinit)

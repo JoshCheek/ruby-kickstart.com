@@ -53,7 +53,7 @@ private
   def add_match_answer _question, regexes
     add_problem :match_answer do
       self.question = _question
-      regexes.each { |regex| should_match regex }
+      Array(regexes).each { |regex| should_match regex }
     end
   end
   
