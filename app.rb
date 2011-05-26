@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__),'environment')
+require File.join(File.dirname(__FILE__),'bootstrap')
 
 get '/' do
   haml :home

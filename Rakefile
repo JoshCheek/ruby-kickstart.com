@@ -23,11 +23,11 @@ end
 
 desc 'open console into app'
 task :console do
-  sh 'pry -r ./environment'
+  sh 'pry -r ./bootstrap'
 end
 
-task :load_env do
-  require './environment'
+task :bootstrap do
+  require './bootstrap'
 end
 
 desc 'run in production environment'
@@ -61,7 +61,7 @@ MigratorTasks.new do |t|
 end
 
 namespace :db do
-  task :populate => :load_env do
+  task :populate => :bootstrap do
     Quiz.add 1, 'Chapter 1 Quiz' do
       problem 'What is a set of instructions called?', :match => /method/i
       problem 'What is 10 / 4', :match => /\b2\b|\btwo\b/i

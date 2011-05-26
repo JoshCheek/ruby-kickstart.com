@@ -2,7 +2,7 @@
 ENV['DB'] = ENV["RACK_ENV"] = ENV['MERB_ENV'] = ENV['RAILS_ENV'] = 'test'
 
 # load the application code
-require File.expand_path("#{File.dirname __FILE__}/../environment")
+require File.expand_path("#{File.dirname __FILE__}/../bootstrap")
 
 # since we're doing this in memory, have to explicitly run migrations
 ActiveRecord::Migration.verbose = false
