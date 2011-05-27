@@ -3,7 +3,7 @@ class CreateQuizProblems < ActiveRecord::Migration
     create_table :quiz_problems do |t|
       t.references :quiz
       t.references :problemable, :polymorphic => true
-      t.integer    :order
+      t.integer    :position
       t.timestamps
     end
   end
