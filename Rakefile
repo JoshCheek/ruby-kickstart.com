@@ -1,6 +1,21 @@
 require 'bundler/setup'
 
 
+# ==========  Helpers  ==========
+
+task :bootstrap do
+  require './bootstrap'
+end
+
+task :dangerous! do
+  if %w(DB RACK_ENV MERB_ENV RAILS_ENV).any? { |key| ENV[key] == 'production' }
+    $stderr.puts "\e[31mTHIS SHOULDN'T BE RUN IN PRODUCTION MODE\e[0m"
+    exit 1
+  end
+end
+
+
+
 # ==========  Miscellaneous  ==========
 
 desc 'compare app to specs'
@@ -24,10 +39,6 @@ end
 desc 'open console into app'
 task :console do
   sh 'pry -r ./bootstrap'
-end
-
-task :bootstrap do
-  require './bootstrap'
 end
 
 desc 'run in production environment'
