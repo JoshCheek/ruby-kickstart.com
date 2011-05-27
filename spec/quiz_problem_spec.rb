@@ -24,10 +24,8 @@ describe QuizProblem do
       end
       
       specify 'when order is changed, it should display in the new order' do
-        ActiveRecord::Base.transaction do
-          @problem1.update_attributes :position => 2
-          @problem2.update_attributes :position => 1
-        end
+        @problem1.update_attributes :position => 2
+        @problem2.update_attributes :position => 1
         problems = Array.new
         @quiz.each_problem { |problem| problems << problem }
         problems.should == [@problem2.problemable, @problem1.problemable]
