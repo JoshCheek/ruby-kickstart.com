@@ -72,6 +72,10 @@ MigratorTasks.new do |t|
 end
 
 namespace :db do
+  desc 'wipe the db out and repopulate from scratch -- DANGEROUS!'
+  task :reset => [ :dangerous!, 'db:drop', 'db:migrate', 'db:populate' ]
+  
+  desc 'populate the quizzes into the db'
   task :populate => :bootstrap do
     Quiz.add 1, 'Chapter 1 Quiz' do
       problem 'What is a set of instructions called?', :match => /method/i
