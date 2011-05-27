@@ -4,20 +4,36 @@ describe QuizProblem do
   
   before :each do
     @quiz = hash_based_reinit
+    @problem1 = QuizProblem.first
+    @problem2 = QuizProblem.last
+    QuizProblem.count.should == 2
   end
   
   describe '#position' do
     
-    it "shouldn't be able to duplicate for a given quiz" do
-      qp = QuizProblem.new :quiz => @quiz, :problemable => QuizRegex.create, :position => 1
-      qp.save.should_not be
+    it "should be added in consecutive positive integers" do
+      @problem1.position.should == 1
+      @problem2.position.should == 2
     end
     
-    it "should be added in consecutive positive integers"
-    
     describe 'Quiz#each_problem' do
-      it 'should display in the given order'
-      specify 'when order is changed, it should display in the new order'
+      it 'should display in the given order' do
+        problems = Array.new
+        @quiz.each_problem { |problem| problems << problem }
+        problems.should == [@problem1.problemable, @problem2.problemable]
+      end
+      
+      specify 'when order is changed, it should display in the new order' do
+        ActiveRecord::Base.transaction do
+          @problem1.position = 2
+          @problem2.position = 1
+          @problem1.save!
+          @problem2.save!
+        end
+        problems = Array.new
+        @quiz.each_problem { |problem| problems << problem }
+        problems.should == [@problem2.problemable, @problem1.problemable]
+      end
     end
     
   end
