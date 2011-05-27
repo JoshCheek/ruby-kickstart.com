@@ -6,7 +6,7 @@ class Quiz < ActiveRecord::Base
     quiz
   end
   
-  has_many :quiz_problems
+  has_many :quiz_problems, :order => :position
   validates_uniqueness_of :number
   
   def add_problem type, &block
