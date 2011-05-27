@@ -18,7 +18,7 @@ end
 
 desc 'ssh into deploy environment'
 task :ssh do
-  sh 'ssh deploy@ec2-184-73-246-218.compute-1.amazonaws.com'
+  sh 'ssh deploy@ruby-kickstart.com'
 end
 
 desc 'open console into app'
