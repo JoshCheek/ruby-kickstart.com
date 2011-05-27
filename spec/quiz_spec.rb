@@ -27,6 +27,11 @@ describe Quiz do
           subject.each_problem { |problem| problems << problem }
           problems.should == subject.problems
         end
+        it 'should yield both problems and their positions to each_problem_with_index' do
+          problems = Array.new
+          subject.each_problem_with_index { |problem, index| problems << problem << index }
+          problems.should == subject.problems.zip([1,2]).flatten
+        end
       end
     
       describe 'multiple choice problem' do
