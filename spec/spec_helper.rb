@@ -1,12 +1,18 @@
 # set proper env
 ENV['DB'] = ENV["RACK_ENV"] = ENV['MERB_ENV'] = ENV['RAILS_ENV'] = 'test'
 
-# load the application code
+# load the db
+require File.expand_path("#{File.dirname __FILE__}/../bootstrap_database")
+
+# migrate the db -- since we're doing this in memory, have to explicitly run migrations
+ActiveRecord::Migration.verbose = false
+ActiveRecord::Migrator.migrate(
+  File.expand_path("#{File.dirname __FILE__}/../db/migrations"), nil
+)
+
+# load the rest of the environment
 require File.expand_path("#{File.dirname __FILE__}/../bootstrap")
 
-# since we're doing this in memory, have to explicitly run migrations
-ActiveRecord::Migration.verbose = false
-ActiveRecord::Migrator.migrate("#{$root}/db/migrations", nil)
 
 
 def clean_db
