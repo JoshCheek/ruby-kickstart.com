@@ -6,15 +6,12 @@ require 'active_record'
 $root = File.expand_path(File.dirname __FILE__)
 $: << $root
 
-# activerecord
-case settings.environment  
-when 'production', :production
-  database_file = "/data/rubykickstartcom/shared/config/database.yml"
-when 'development', :development, 'test', :test
-  database_file = File.dirname(__FILE__) + "/db/database.yml"
-end
-database_config = YAML.load( File.read database_file )[ settings.environment.to_s ]
-ActiveRecord::Base.establish_connection(database_config)
+require 'bootstrap_database'
+
+# load plugins
+require "#{$root}/vendor/acts_as_list/lib/active_record/acts/list.rb"
+ActiveRecord::Base.send :include, ActiveRecord::Acts::List
+
 
 # load models
 models_pattern = "#{File.dirname __FILE__}/app/models/*"
