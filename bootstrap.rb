@@ -8,8 +8,8 @@ $: << $root
 
 require 'bootstrap_database'
 
-# load plugins
-require "#{$root}/vendor/acts_as_list/lib/active_record/acts/list.rb"
+# load acts_as_list
+require "active_record/acts/list.rb"
 ActiveRecord::Base.send :include, ActiveRecord::Acts::List
 
 
