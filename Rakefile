@@ -1,6 +1,3 @@
-require 'bundler/setup'
-
-
 # ==========  Helpers  ==========
 
 task :bootstrap do
@@ -20,7 +17,7 @@ end
 
 desc 'compare app to specs'
 task :spec do
-  sh  'rspec '                  +
+  sh  'bin/rspec '              +
       '--color '                +
       '--format=documentation ' +
       'spec/**_spec.rb'
@@ -28,12 +25,12 @@ end
 
 desc 'run the features'
 task :cuke do
-  sh 'bundle exec cucumber features'
+  sh 'bin/cucumber features'
 end
 
 desc 'run the server on port 9394'
 task :server do
-  sh 'shotgun config.ru -p 9394'
+  sh 'bin/shotgun config.ru -p 9394'
 end
 
 desc 'ssh into deploy environment'
@@ -43,7 +40,7 @@ end
 
 desc 'open console into app'
 task :console do
-  sh 'pry -r ./bootstrap'
+  sh 'bin/pry -r ./bootstrap'
 end
 
 desc 'run in production environment'
