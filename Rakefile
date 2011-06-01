@@ -26,6 +26,11 @@ task :spec do
       'spec/**_spec.rb'
 end
 
+desc 'run the features'
+task :cuke do
+  sh 'bundle exec cucumber features'
+end
+
 desc 'run the server on port 9394'
 task :server do
   sh 'shotgun config.ru -p 9394'
