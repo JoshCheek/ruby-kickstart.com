@@ -7,6 +7,7 @@ gem 'standalone_migrations' , '0.4.7'
 gem 'pry'                   , '0.8.3'
 gem 'shotgun'               , '0.9'
 gem 'acts_as_list'          , '1' , :git => "git@github.com:JoshCheek/acts_as_list.git"
+gem 'omniauth'              , '~> 0.2.6'
 
 group :development, :test do
   gem 'sqlite3-ruby'  , '1.3.3'
