@@ -30,7 +30,7 @@ end
 
 desc 'run the server on port 9394'
 task :server do
-  sh 'bin/shotgun config.ru -p 9394'
+  sh "bin/shotgun config.ru -p #{ENV['port']||9394}"
 end
 
 desc 'ssh into deploy environment'
