@@ -1,3 +1,12 @@
+%p
+  - if current_user
+    Quizzes will be coming soon!
+    %a{ :href => '/logout' }
+      Logout
+  - else
+    %a{ :href => '/login' }
+      Login to take the quizzes!
+
 %h1
   Ruby Kickstart
 
