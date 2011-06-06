@@ -1,0 +1,20 @@
+%h1= @quiz.name
+
+
+- @quiz.review_each do |problem, index, user_answer, solution|
+  %h3= index
+  
+  
+  - if problem.is_a? QuizMultipleChoiceProblem
+    %h2= problem.question
+    %ul
+      - problem.each_option do |number, text|
+        - klass = solution == number ? ['solution'] : []
+        - klass << 'answer' if user_answer == number
+        %li{ :class => klass.join(' ') }
+          = text
+  
+            
+  - elsif problem.is_a? QuizMatchAnswerProblem
+    %h2= problem.question
+    %input{ :type => "text", :name => "quiz_results[#{index}]", :value => user_answer }
