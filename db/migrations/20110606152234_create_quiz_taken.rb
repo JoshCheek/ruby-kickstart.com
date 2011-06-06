@@ -1,6 +1,6 @@
-class CreateQuizSolution < ActiveRecord::Migration
+class CreateQuizTaken < ActiveRecord::Migration
   def self.up
-    create_table :quiz_solutions do |t|
+    create_table :quiz_takens do |t|
       t.references :user
       t.references :quiz
       t.timestamps
@@ -8,6 +8,6 @@ class CreateQuizSolution < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :quiz_solutions
+    drop_table :quiz_takens
   end
 end

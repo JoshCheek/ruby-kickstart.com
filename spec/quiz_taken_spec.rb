@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe QuizSolution do
+describe QuizTaken do
   
   before :each do
     clean_db
@@ -14,19 +14,36 @@ describe QuizSolution do
   end
 
   subject do
-    QuizSolution.new :user => @user, :quiz => @quiz
+    QuizTaken.new :user => @user, :quiz => @quiz
   end
 
   its(:quiz) { should == @quiz }
   its(:user) { should == @user }
   
   describe '.apply_solutions' do
-    it 'should save when its keys match its quiz problems'
+    it 'should enable saving' do
+      pending
+      subject.save.should_not be
+      should be_new_record
+      subject.apply_solutions 1 => 0, 2 => 'data and methods'
+      save.should be
+      should_not be_new_record
+    end
+    it 'should save when its keys match its quiz problems' do
+      pending
+      subject.apply_solutions 1 => 0, 2 => 'data and methods'
+      should_not be_new_record
+    end
     it 'should not save when its keys do not match its quiz problems'    
     it 'should not save when its its values do not match its quiz problems'
     it 'should not care whether its keys are integers or strings'
     it 'should have saved solutions after a successful application'
-  end  
+  end
+  
+  it 'should have a solution for every problem' do
+    pending
+    subject.quiz_solutions.count.should == subject.quiz_problems.count
+  end
   
   describe '.each_solution' do
     it 'should yield its solutions in order'
