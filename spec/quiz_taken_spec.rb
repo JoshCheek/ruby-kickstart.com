@@ -20,6 +20,27 @@ describe QuizTaken do
   its(:quiz) { should == @quiz }
   its(:user) { should == @user }
   
+  specify "its quiz problems should be the same as its quiz's" do
+    subject.quiz_problems.should == subject.quiz.quiz_problems
+  end
+  
+  it 'should have a solution for every problem' do
+    should have(2).quiz_problems
+    should have(2).quiz_solutions
+  end
+  
+  describe '.quiz_solutions' do
+    it 'should be unsaved before .apply_solutions' do
+      subject.quiz_solutions.should be_all &:new_record?
+    end
+  end
+  
+  describe '.each_solution' do
+    it 'should yield its solutions in order' do
+      subject.quiz_solutions.map(&:quiz_problem).should == subject.quiz_problems
+    end
+  end
+  
   describe '.apply_solutions' do
     it 'should enable saving' do
       pending
@@ -39,19 +60,5 @@ describe QuizTaken do
     it 'should not care whether its keys are integers or strings'
     it 'should have saved solutions after a successful application'
   end
-  
-  specify "its quiz problems should be the same as its quiz's" do
-    subject.quiz_problems.should == subject.quiz.quiz_problems
-  end
-  
-  it 'should have a solution for every problem' do
-    should have(2).quiz_problems
-    should have(2).quiz_solutions
-  end
-  
-  describe '.each_solution' do
-    it 'should yield its solutions in order'
-    it 'should have unsaved solutions before .apply_solutions'
-  end
-  
+        
 end
