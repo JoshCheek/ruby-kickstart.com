@@ -41,7 +41,9 @@ describe QuizTaken do
   end
   
   it 'should have a solution for every problem' do
-    subject.quiz_solutions.count.should == subject.quiz_problems.count
+    subject.quiz.should have(2).quiz_problems
+    should              have(2).quiz_problems
+    should              have(2).quiz_solutions
   end
   
   describe '.each_solution' do
