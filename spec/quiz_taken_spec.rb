@@ -41,7 +41,6 @@ describe QuizTaken do
   end
   
   it 'should have a solution for every problem' do
-    pending
     subject.quiz_solutions.count.should == subject.quiz_problems.count
   end
   
