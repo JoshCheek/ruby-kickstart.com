@@ -13,8 +13,12 @@ describe QuizSolution do
                         :name     => 'Josh Cheek'
   end
 
-  it 'should know its quiz'
-  it 'should know its user'
+  subject do
+    QuizSolution.new :user => @user, :quiz => @quiz
+  end
+
+  its(:quiz) { should == @quiz }
+  its(:user) { should == @user }
   
   describe '.apply_solutions' do
     it 'should save when its keys match its quiz problems'
