@@ -43,11 +43,11 @@ describe QuizTaken do
   
   describe '.apply_solutions' do
     it 'should enable saving' do
-      pending
-      subject.save.should_not be
+      should_not be_valid
       should be_new_record
       subject.apply_solutions 1 => 0, 2 => 'data and methods'
-      save.should be
+      should be_valid
+      subject.save.should be
       should_not be_new_record
     end
     it 'should save when its keys match its quiz problems' do
