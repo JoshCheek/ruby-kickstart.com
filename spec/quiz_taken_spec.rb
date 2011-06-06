@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+def valid_solutions
+  return 1 => 0, 2 => 'data and methods'
+end
+
 describe QuizTaken do
   
   before :each do
@@ -19,6 +23,17 @@ describe QuizTaken do
 
   its(:quiz) { should == @quiz }
   its(:user) { should == @user }
+  
+  context 'should not be valid without' do
+    specify 'user' do
+      subject.user = nil
+      should_not be_valid
+    end
+    specify 'quiz' do
+      subject.quiz = nil
+      should_not be_valid
+    end
+  end
   
   specify "its quiz problems should be the same as its quiz's" do
     subject.quiz_problems.should == subject.quiz.quiz_problems
@@ -43,16 +58,17 @@ describe QuizTaken do
   
   describe '.apply_solutions' do
     it 'should enable saving' do
+      pending
       should_not be_valid
       should be_new_record
-      subject.apply_solutions 1 => 0, 2 => 'data and methods'
+      subject.apply_solutions valid_solutions
       should be_valid
       subject.save.should be
       should_not be_new_record
     end
     it 'should save when its keys match its quiz problems' do
       pending
-      subject.apply_solutions 1 => 0, 2 => 'data and methods'
+      subject.apply_solutions valid_solutions
       should_not be_new_record
     end
     it 'should not save when its keys do not match its quiz problems'    
