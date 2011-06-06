@@ -1,6 +1,6 @@
 class CreateQuizSolution < ActiveRecord::Migration
   def self.up
-    create_table :quiz_solutionsdo do |t|
+    create_table :quiz_solutions do |t|
       t.references :user
       t.references :quiz
       t.timestamps
