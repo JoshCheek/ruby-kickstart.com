@@ -40,10 +40,13 @@ describe QuizTaken do
     it 'should have saved solutions after a successful application'
   end
   
+  specify "its quiz problems should be the same as its quiz's" do
+    subject.quiz_problems.should == subject.quiz.quiz_problems
+  end
+  
   it 'should have a solution for every problem' do
-    subject.quiz.should have(2).quiz_problems
-    should              have(2).quiz_problems
-    should              have(2).quiz_solutions
+    should have(2).quiz_problems
+    should have(2).quiz_solutions
   end
   
   describe '.each_solution' do
