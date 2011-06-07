@@ -5,7 +5,7 @@ class QuizTaken < ActiveRecord::Base
   
   validates_presence_of :user
   validates_presence_of :quiz
-  validates_associated :quiz_solutions
+  validates_associated  :quiz_solutions
 
   
   def quiz_problems
