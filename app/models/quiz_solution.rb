@@ -5,9 +5,9 @@ class QuizSolution < ActiveRecord::Base
   belongs_to :solutionable, :polymorphic => true
   has_one    :quiz, :through => :quiz_taken
   has_one    :user, :through => :quiz_taken
-  # validates_associated  :solutionable
-  # validates_presence_of :solutionable
-  # validates_presence_of :quiz_problem
+  validates_associated  :solutionable
+  validates_presence_of :solutionable
+  validates_presence_of :quiz_problem
   
   def problem
     raise 'Expected a quiz_problem' unless quiz_problem

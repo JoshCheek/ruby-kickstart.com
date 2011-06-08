@@ -1,17 +1,19 @@
 require 'spec_helper'
 
-def valid_solutions
-  return 1 => 0, 2 => 'data and methods'
-end
-
 describe QuizTaken do
   
   before :each do
     clean_db
+    
     @quiz = Quiz.add 5, 'Example Problem' do
       problem 'can you see this?', :options => ['yes', 'no'], :solution => 0
       problem 'what is an object?', :match => [/data/i, /methods/i]
     end
+        
+    define_singleton_method :valid_solutions do
+      {@quiz.quiz_problems[0].id => 0 , @quiz.quiz_problems[1].id => "data and methods"}
+    end
+    
     @user = User.create :provider => 'provider',
                         :uid      => 'uid',
                         :name     => 'Josh Cheek'
@@ -58,7 +60,7 @@ describe QuizTaken do
   
   describe '.apply_solutions' do
     it 'should enable saving' do
-      should_not be_valid
+      should_not be_valid 
       should be_new_record
       subject.apply_solutions valid_solutions
       should be_valid
