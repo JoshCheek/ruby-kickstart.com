@@ -19,14 +19,11 @@ class QuizTaken < ActiveRecord::Base
   end
     
   def apply_solutions(solutions={})
-    # quiz_solutions = quiz_solutions.to_a
-    # quiz_problems.each_with_index do |quiz_problem, index|
-    #   solution = solutions[index] || solutions[index.to_s]
-    #   next unless solution
-    #   quiz_solution = quiz_solutions.build :quiz_problem => quiz_problem
-    #   quiz_solution.solve solution
-    # end
-    # save
+    solutions.each do |id , solution|
+      quiz_solutions.detect {|s| s.quiz_problem_id == id}.solve solution
+    end
+    
+    save
   end
   
 end

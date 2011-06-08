@@ -5,16 +5,13 @@ describe QuizTaken do
   before :each do
     clean_db
     
-    problem_one = nil
-    problem_two = nil
-    
     @quiz = Quiz.add 5, 'Example Problem' do
-      problem_one = problem 'can you see this?', :options => ['yes', 'no'], :solution => 0
-      problem_two = problem 'what is an object?', :match => [/data/i, /methods/i]
+      problem 'can you see this?', :options => ['yes', 'no'], :solution => 0
+      problem 'what is an object?', :match => [/data/i, /methods/i]
     end
         
     define_singleton_method :valid_solutions do
-      return problem_one.id => 0 , problem_two.id => "data and methods"
+      {@quiz.quiz_problems[0].id => 0 , @quiz.quiz_problems[1].id => "data and methods"}
     end
     
     @user = User.create :provider => 'provider',
