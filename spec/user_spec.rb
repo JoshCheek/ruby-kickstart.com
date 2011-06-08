@@ -15,7 +15,7 @@ describe User do
   it 'should not be a new record after saving' do
     subject.save
     should_not be_new_record
-    subject.id.should == 1
+    User.count.should == 1
   end
   
   its(:provider) { should == 'some provider' }
