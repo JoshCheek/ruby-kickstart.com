@@ -11,11 +11,16 @@ class QuizTaken < ActiveRecord::Base
   def quiz_problems
     quiz && quiz.quiz_problems
   end
-  
-  after_initialize do |quiz_taken|
-    quiz_problems.each do |quiz_problem|
-      quiz_solutions.build :quiz_problem => quiz_problem
+    
+  def apply_solutions(solutions={})
+    quiz_solutions = quiz_solutions.to_a
+    quiz_problems.each_with_index do |quiz_problem, index|
+      solution = solutions[index] || solutions[index.to_s]
+      next unless solution
+      quiz_solution = quiz_solutions.build :quiz_problem => quiz_problem
+      quiz_solution.solve solution
     end
+    save
   end
   
 end

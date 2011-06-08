@@ -58,7 +58,6 @@ describe QuizTaken do
   
   describe '.apply_solutions' do
     it 'should enable saving' do
-      pending
       should_not be_valid
       should be_new_record
       subject.apply_solutions valid_solutions

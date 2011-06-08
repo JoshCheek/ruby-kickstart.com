@@ -1,7 +1,7 @@
 class CreateQuizMatchAnswerProblem < ActiveRecord::Migration
   def self.up
     create_table :quiz_match_answer_problems do |t|
-      t.string :question
+      t.text :question
       t.timestamps
     end
   end
