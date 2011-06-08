@@ -1,23 +1,46 @@
-# NEED TO ADD SQLITE3 TO GEMFILE BEFORE COMMITTING
-# BUT I LOST INTERNET CONNECTION AND CAN'T LOOK UP GEM NAME
+require File.join(File.dirname(__FILE__),'bootstrap')
 
-require 'yaml'
-require 'bundler/setup'
-require 'sinatra'
-require 'active_record'
 
-# activerecord
-case settings.environment  
-when 'production', :production
-  database_file = "/data/rubykickstartcom/shared/config/database.yml"
-when 'development', :development
-  database_file = File.dirname(__FILE__) + "/db/database.yml"
+helpers do
+  def current_user
+    @current_user ||= User.find session[:user_id] if session[:user_id]
+  end
 end
-database_config = YAML.load( File.read database_file )[ settings.environment.to_s ]
-ActiveRecord::Base.establish_connection(database_config)
-
 
 
 get '/' do
   haml :home
+end
+
+get '/quiz1' do
+  @quiz = Quiz.find_by_number(1)
+  haml :quiz
+end
+
+
+get '/auth/:name/callback' do
+  auth = request.env["omniauth.auth"]
+  user = User.find_by_uid(auth["uid"])
+  user ||= User.create  :uid      => auth["uid"], 
+                        :provider => params[:name],
+                        :name     => auth["user_info"]["name"]
+  session[:user_id] = user.id
+  redirect '/'
+end
+
+
+%w[/sign_in/? /sign-in/? /signin/? 
+   /log_in/?  /log-in/?  /login/?
+   /sign_up/? /sign-up/? /signup/?].each do |path|
+  get path do
+    redirect '/auth/twitter'
+  end
+end
+
+
+%w[/sign_out /signout /log_out /logout /log-out /sign-out].each do |path|
+  get path do
+    session[:user_id] = nil
+    redirect '/'
+  end
 end

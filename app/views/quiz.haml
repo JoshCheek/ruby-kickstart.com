@@ -1,0 +1,16 @@
+%h1= @quiz.name
+
+%form{ :name => 'quiz_results', :action => "quiz#{@quiz.number}", :method => 'post' }
+  - @quiz.each_problem_with_index do |problem, index|
+    %h3= index
+    - if problem.is_a? QuizMultipleChoiceProblem
+      %h2= problem.question
+      %ul
+        - problem.each_option do |number, text|
+          %li
+            %input{ :type => "radio", :name => "quiz_results[#{index}]", :value => number }
+              = text
+    - elsif problem.is_a? QuizMatchAnswerProblem
+      %h2= problem.question
+      %input{ :type => "text", :name => "quiz_results[#{index}]" }
+  %input{ :type => 'submit', :value => 'submit' }

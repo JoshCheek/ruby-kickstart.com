@@ -1,3 +1,14 @@
+%p
+  - if current_user
+    Quizzes will be coming soon!
+    %a{ :href => '/logout' }
+      Logout
+  - else
+    Login to take the quizzes!
+    %a{ :href => '/auth/twitter'  } Twitter
+    %a{ :href => '/auth/facebook' } Facebook
+      
+
 %h1
   Ruby Kickstart
 
