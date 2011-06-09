@@ -14,8 +14,12 @@ describe QuizTaken do
       {@quiz.quiz_problems[0].id => 0 , @quiz.quiz_problems[1].id => "data and methods"}
     end
     
-    define_singleton_method :invalid_solutions do
+    define_singleton_method :invalid_keys do
       {@quiz.quiz_problems[0].id => 0 , @quiz.quiz_problems[1].id.next => "data and methods"}
+    end
+
+    define_singleton_method :invalid_values do
+      {@quiz.quiz_problems[0].id => 'this should be an index' , @quiz.quiz_problems[1].id.next => "data and methods"}
     end
     
     @user = User.create :provider => 'provider',
@@ -76,10 +80,13 @@ describe QuizTaken do
       should_not be_new_record
     end
     it 'should not save when its keys do not match its quiz problems' do
-      subject.apply_solutions invalid_solutions
+      subject.apply_solutions invalid_keys
       should be_new_record
     end
-    it 'should not save when its its values do not match its quiz problems'
+    it 'should not save when its its values do not match its quiz problems' do
+      subject.apply_solutions invalid_values
+      should be_new_record
+    end
     it 'should not care whether its keys are integers or strings'
     it 'should have saved solutions after a successful application'
   end
