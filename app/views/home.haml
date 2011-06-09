@@ -1,3 +1,6 @@
+- @messages.each do |type, message|
+  %div{ :class => type }= message
+
 %p
   - if current_user
     Quizzes will be coming soon!

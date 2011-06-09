@@ -18,10 +18,15 @@ helpers do
     end
   end
   
+  def extract_messages
+    @messages = Hash.new
+    @messages[:error] = session.delete :error if session[:error]
+  end
 end
 
 
 get '/' do
+  extract_messages
   haml :home
 end
  
