@@ -15,10 +15,13 @@ class QuizTaken < ActiveRecord::Base
     end
   end
 
-  
   def quiz_problems
     quiz && quiz.quiz_problems
   end
+  
+  def solutions
+    quiz_solutions.map(&:solutionable)
+  end  
     
   def apply_solutions(solutions={})
     solutions.each do |id , solution|
@@ -41,7 +44,12 @@ class QuizTaken < ActiveRecord::Base
   end
   
   def summary
-    "stub"
+    correct = total = 0
+    solutions.each do |solution|
+      correct += 1 if solution.correct?
+      total += 1
+    end
+    "#{correct} / #{total}"
   end
   
 end
