@@ -49,12 +49,6 @@ post '/quizzes/:quiz_number' do
   haml :quiz_results
 end
 
-get '/quiz1' do
-  @quiz = Quiz.find_by_number(1)
-  haml :quiz
-end
-
-
 get '/auth/:name/callback' do
   auth = request.env["omniauth.auth"]
   user = User.find_by_uid(auth["uid"])
