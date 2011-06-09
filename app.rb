@@ -43,6 +43,7 @@ get '/quizzes/:quiz_number' do
 end
 
 post '/quizzes/:quiz_number' do  
+  restricted 'You must be logged in to submit quizzes'
   @quiz = Quiz.find_by_number params[:quiz_number]
   @quiz_taken = QuizTaken.new :quiz => @quiz, :user => current_user
   @quiz_taken.apply_solutions params[:quiz_results]
