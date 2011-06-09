@@ -30,7 +30,7 @@ end
 
 desc 'run the server on port 9394'
 task :server do
-  sh 'bin/shotgun config.ru -p 9394'
+  sh "bin/shotgun config.ru -p #{ENV['port']||9394}"
 end
 
 desc 'ssh into deploy environment'
@@ -65,7 +65,7 @@ require 'tasks/standalone_migrations'
 
 database_file = ENV['RACK_ENV'] == 'production' ? 
                   "/data/rubykickstartcom/shared/config/database.yml" : 
-                  "#{File.dirname __FILE__}/db/database.yml"
+                  "#{File.dirname __FILE__}/config/database.yml"
 
 MigratorTasks.new do |t|
   t.migrations  =  "db/migrations"

@@ -2,16 +2,12 @@ class QuizRegex < ActiveRecord::Base
   
   belongs_to :quiz_match_answer_problem
   
-  def content=(regex)
-    super YAML.dump(regex)
-  end
-  
-  def content
-    YAML.load(super)
+  def regex=(regex)
+    self.content = YAML.dump regex
   end
   
   def regex
-    @regex ||= content
+    @regex ||= YAML.load(content)
   end
   
 end

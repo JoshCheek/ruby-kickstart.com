@@ -38,6 +38,12 @@ class Quiz < ActiveRecord::Base
     end
   end
   
+  def each_id_problem_and_index &block
+    quiz_problems.each do |quiz_problem|
+      block.call quiz_problem.id, quiz_problem.problemable, quiz_problem.position
+    end
+  end
+  
   def problem question, options
     if match_answer_problem? options
       add_match_answer(question, options[:match])

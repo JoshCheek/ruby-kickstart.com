@@ -3,7 +3,7 @@ class QuizMultipleChoiceProblem < ActiveRecord::Base
   has_many    :quiz_options , :dependent => :destroy
   has_many    :quiz_problems , :as => :problemable
   has_many    :quizzes , :through => :quiz_problems
-  belongs_to  :solution , :class_name => 'QuizOption'
+  belongs_to  :solution , :class_name => 'QuizOption', :autosave => true
    
   def set_question(question)
     self.question = question
@@ -16,12 +16,6 @@ class QuizMultipleChoiceProblem < ActiveRecord::Base
   
   def options
     quiz_options.map(&:body)
-  end
-  
-  def each_option
-    options.each_with_index do |option, index|
-      yield index.next, option
-    end
   end
   
 end

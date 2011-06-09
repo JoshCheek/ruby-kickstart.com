@@ -1,16 +1,17 @@
 %h1= @quiz.name
 
-%form{ :name => 'quiz_results', :action => "quiz#{@quiz.number}", :method => 'post' }
-  - @quiz.each_problem_with_index do |problem, index|
+%form{ :name => 'quiz_results', :action => "/quizzes/#{@quiz.number}", :method => 'post' }
+  - @quiz.each_id_problem_and_index do |id, problem, index|
     %h3= index
+    %h2= problem.question
+    
     - if problem.is_a? QuizMultipleChoiceProblem
-      %h2= problem.question
       %ul
-        - problem.each_option do |number, text|
+        - problem.quiz_options.each do |quiz_option|
           %li
-            %input{ :type => "radio", :name => "quiz_results[#{index}]", :value => number }
-              = text
+            %input{ :type => "radio", :name => "quiz_results[#{id}]", :value => quiz_option.id }
+              = quiz_option.body
+              
     - elsif problem.is_a? QuizMatchAnswerProblem
-      %h2= problem.question
-      %input{ :type => "text", :name => "quiz_results[#{index}]" }
+      %input{ :type => "text", :name => "quiz_results[#{id}]" }
   %input{ :type => 'submit', :value => 'submit' }
