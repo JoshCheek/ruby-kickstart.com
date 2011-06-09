@@ -11,6 +11,13 @@ helpers do
     !!current_user
   end
   
+  def restricted(message, landing_page='/')
+    unless logged_in?
+      session[:error] = message
+      redirect landing_page
+    end
+  end
+  
 end
 
 
@@ -20,13 +27,9 @@ end
  
   
 get '/quizzes/:quiz_number' do
-  if logged_in?
-    @quiz = Quiz.find_by_number params[:quiz_number].to_i
-    haml :quiz
-  else
-    session[:notice] = 'You must be logged in to take quizzes.'
-    redirect '/'
-  end
+  restricted 'You must be logged in to take quizzes.'
+  @quiz = Quiz.find_by_number params[:quiz_number]
+  haml :quiz
 end
 
 post '/quizzes/:quiz_number' do
