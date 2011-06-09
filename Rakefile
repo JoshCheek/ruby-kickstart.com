@@ -65,7 +65,7 @@ require 'tasks/standalone_migrations'
 
 database_file = ENV['RACK_ENV'] == 'production' ? 
                   "/data/rubykickstartcom/shared/config/database.yml" : 
-                  "#{File.dirname __FILE__}/db/database.yml"
+                  "#{File.dirname __FILE__}/config/database.yml"
 
 MigratorTasks.new do |t|
   t.migrations  =  "db/migrations"
