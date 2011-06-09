@@ -20,4 +20,4 @@ end
 
 
 set :views, File.dirname(__FILE__) + '/app/views'
-enable :sessions
+
