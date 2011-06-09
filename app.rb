@@ -1,5 +1,5 @@
 require File.join(File.dirname(__FILE__),'bootstrap')
-
+require 'erb'
 
 helpers do
   
@@ -22,6 +22,11 @@ helpers do
     @messages = Hash.new
     @messages[:error] = session.delete :error if session[:error]
   end
+  
+  def h *args
+    ERB::Util.h *args
+  end
+  
 end
 
 
@@ -37,9 +42,11 @@ get '/quizzes/:quiz_number' do
   haml :quiz
 end
 
-post '/quizzes/:quiz_number' do
-  require 'erb'
-  ERB::Util.h params.inspect
+post '/quizzes/:quiz_number' do  
+  @quiz = Quiz.find_by_number params[:quiz_number]
+  @quiz_taken = QuizTaken.new :quiz => @quiz, :user => current_user
+  @quiz_taken.apply_solutions params[:quiz_results]
+  haml :quiz_taken
 end
 
 get '/quiz1' do
