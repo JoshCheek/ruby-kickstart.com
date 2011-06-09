@@ -15,7 +15,11 @@
                   :class      =>  css_class }
             = quiz_option.body
   - elsif problem.is_a? QuizMatchAnswerProblem
-    %input{ :type => "text", 
-            :name => "quiz_results[#{problem.id}]", 
-            :value => solution.answer, 
-            :disabled => true }
+    - css_class = (solution.correct? ? :correct : :incorrect)
+    %input{ :type     => "text", 
+            :name     => "quiz_results[#{problem.id}]", 
+            :value    => solution.answer, 
+            :disabled => true,
+            :class    => css_class }
+    - if css_class == :incorrect
+      = solution.failure_explanation

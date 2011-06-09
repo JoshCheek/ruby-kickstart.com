@@ -9,7 +9,7 @@ class QuizMatchAnswerProblem < ActiveRecord::Base
   end
     
   def should_match regex
-    quiz_regexes.build :content => regex
+    quiz_regexes.build :regex => regex
   end
   
   def each_regex
