@@ -8,11 +8,16 @@ describe QuizSolution do
       problem 'can you see this?', :options => ['yes', 'no'], :solution => 0
       problem 'what is an object?', :match => [/data/i, /methods/i]
     end
+    
+    define_singleton_method :valid_solutions do
+      {@quiz.quiz_problems[0].id => 0 , @quiz.quiz_problems[1].id => "data and methods"}
+    end
+    
     @user = User.create :provider => 'provider',
                         :uid      => 'uid',
                         :name     => 'Josh Cheek'
     @quiz_taken = QuizTaken.new :user => @user, :quiz => @quiz
-    @quiz_taken.save
+    @quiz_taken.apply_solutions valid_solutions
   end
   
   subject do
