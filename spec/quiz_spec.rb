@@ -33,6 +33,25 @@ describe Quiz do
           problems.should == subject.problems.zip([1,2]).flatten
         end
       end
+      
+      describe '#each_id_problem_and_index' do
+        subject { Quiz.find_by_number 5 }
+        it 'should yield the ids of its problems' do
+          ids = Array.new
+          subject.each_id_problem_and_index { |id,_,__| ids << id }
+          subject.quiz_problems.map(&:id).should == ids
+        end
+        it 'should yield both problems' do
+          problems = Array.new
+          subject.each_id_problem_and_index { |_,problem,__| problems << problem }
+          problems.should == subject.problems
+        end
+        it 'should yield increasing indexes beginning at 1' do
+          indexes = Array.new
+          subject.each_id_problem_and_index { |_,__,index| indexes << index }
+          indexes.should == [1,2]
+        end
+      end
     
       describe 'multiple choice problem' do
         subject { Quiz.find_by_number(5).problems.first }
