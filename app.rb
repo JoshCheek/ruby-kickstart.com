@@ -46,7 +46,7 @@ post '/quizzes/:quiz_number' do
   @quiz = Quiz.find_by_number params[:quiz_number]
   @quiz_taken = QuizTaken.new :quiz => @quiz, :user => current_user
   @quiz_taken.apply_solutions params[:quiz_results]
-  haml :quiz_taken
+  haml :quiz_results
 end
 
 get '/quiz1' do

@@ -1,20 +1,25 @@
 %h1= @quiz.name
 
-
-- @quiz.review_each do |problem, index, user_answer, solution|
+- @quiz_taken.each_problem_with_solution_and_index do |problem, solution, index|
   %h3= index
-  
-  
+  %h2= problem.question
   - if problem.is_a? QuizMultipleChoiceProblem
-    %h2= problem.question
     %ul
-      - problem.each_option do |number, text|
-        - klass = solution == number ? ['solution'] : []
-        - klass << 'answer' if user_answer == number
-        %li{ :class => klass.join(' ') }
-          = text
-  
-            
+      - problem.quiz_options.each do |quiz_option|
+        %li
+          - id = quiz_option.id
+          - css_class = if id == problem.solution_id then :correct elsif id.to_s == solution.answer then :incorrect end
+          %input{ :type       =>  "radio",
+                  :checked    =>  (id.to_s == solution.answer),
+                  :disabled   =>  true,
+                  :class      =>  css_class }
+            = quiz_option.body
   - elsif problem.is_a? QuizMatchAnswerProblem
-    %h2= problem.question
-    %input{ :type => "text", :name => "quiz_results[#{index}]", :value => user_answer }
+    - css_class = (solution.correct? ? :correct : :incorrect)
+    %input{ :type     => "text", 
+            :name     => "quiz_results[#{problem.id}]", 
+            :value    => solution.answer, 
+            :disabled => true,
+            :class    => css_class }
+    - if css_class == :incorrect
+      = solution.failure_explanation
