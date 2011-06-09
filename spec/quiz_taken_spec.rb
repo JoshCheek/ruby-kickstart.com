@@ -66,6 +66,24 @@ describe QuizTaken do
     end
   end
   
+  describe '#each_problem_with_solution_and_index' do
+    it 'should yield its problems in order' do
+      problems = Array.new
+      subject.each_problem_with_solution_and_index { |problem,_,__| problems << problem }
+      problems.should == subject.quiz_problems.map(&:problemable)
+    end
+    it 'should yield its solutions in order' do
+      solutions = Array.new
+      subject.each_problem_with_solution_and_index { |_,solution,__| solutions << solution }
+      solutions.should == subject.quiz_solutions.map(&:solutionable)
+    end
+    it 'should yield indexes incrementing from 1' do
+      indexes = Array.new
+      subject.each_problem_with_solution_and_index { |_,__,index| indexes << index }
+      indexes.should == [1, 2]
+    end
+  end
+  
   describe '.apply_solutions' do
     it 'should enable saving' do
       should_not be_valid 

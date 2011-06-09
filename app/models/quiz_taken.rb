@@ -28,4 +28,10 @@ class QuizTaken < ActiveRecord::Base
     save
   end
   
+  def each_problem_with_solution_and_index &block
+    quiz_solutions.each_with_index do |solution, index|
+      block.call solution.problem, solution.solutionable, index.next
+    end
+  end
+  
 end
