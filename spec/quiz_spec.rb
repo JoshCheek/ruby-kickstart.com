@@ -39,21 +39,6 @@ describe Quiz do
         it { should be_instance_of QuizMultipleChoiceProblem }
         its(:question) { should == 'can you see this?' }
         its(:options) { should == %w(yes no) }
-        describe '#each_option' do
-          it 'should yield both options' do
-            options = Array.new
-            subject.each_option { |_,option| options << option }
-            options.should == subject.options
-          end
-          it 'should yield increasing numbers beginning at 1' do
-            numbers = Array.new
-            subject.each_option { |number,_| numbers << number }
-            numbers.should == [1,2]
-          end
-          specify 'its solution should be the one specified' do
-            subject.solution.body.should == 'yes'
-          end
-        end
       end
     
       describe 'match answer problem' do

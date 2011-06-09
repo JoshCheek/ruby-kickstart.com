@@ -18,10 +18,4 @@ class QuizMultipleChoiceProblem < ActiveRecord::Base
     quiz_options.map(&:body)
   end
   
-  def each_option
-    options.each_with_index do |option, index|
-      yield index.next, option
-    end
-  end
-  
 end
