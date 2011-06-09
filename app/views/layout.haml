@@ -3,6 +3,12 @@
 %html{ :xmlns => "http://www.w3.org/1999/xhtml" , "xml:lang" => "en",  :lang => "en" }
   %head
     %title Ruby Kickstart
-    %meta{ "http-equiv" => "Content-Type" , :content => "text/html; charset=utf-8" }    
+    %meta{ "http-equiv" => "Content-Type" , :content => "text/html; charset=utf-8" }
+    %style{ :type => "text/css", :media => "screen" }
+      \<!--
+      \.correct   { background-color: green; }
+      \.incorrect { background-color: red;   }
+      \-->
+    
   %body
     ~ yield if block_given?
