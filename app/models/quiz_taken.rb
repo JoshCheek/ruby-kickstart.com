@@ -49,7 +49,7 @@ class QuizTaken < ActiveRecord::Base
       correct += 1 if solution.correct?
       total += 1
     end
-    "#{correct} / #{total}"
+    "(#{correct} / #{total})"
   end
   
 end
