@@ -8,8 +8,10 @@ class QuizTaken < ActiveRecord::Base
   validates_associated  :quiz_solutions
 
   after_initialize do |quiz_taken|
-    quiz_problems.each do |quiz_problem|
-      quiz_solutions.build :quiz_problem => quiz_problem
+    if new_record?
+      quiz_problems.each do |quiz_problem|
+        quiz_solutions.build :quiz_problem => quiz_problem
+      end
     end
   end
 
@@ -32,6 +34,14 @@ class QuizTaken < ActiveRecord::Base
     quiz_solutions.each_with_index do |solution, index|
       block.call solution.problem, solution.solutionable, index.next
     end
+  end
+  
+  def name
+    quiz.name
+  end
+  
+  def summary
+    "stub"
   end
   
 end

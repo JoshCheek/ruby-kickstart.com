@@ -44,9 +44,21 @@ end
 
 post '/quizzes/:quiz_number' do  
   restricted 'You must be logged in to submit quizzes'
-  @quiz = Quiz.find_by_number params[:quiz_number]
-  @quiz_taken = QuizTaken.new :quiz => @quiz, :user => current_user
-  @quiz_taken.apply_solutions params[:quiz_results]
+  quiz = Quiz.find_by_number params[:quiz_number]
+  quiz_taken = QuizTaken.new :quiz => quiz, :user => current_user
+  quiz_taken.apply_solutions params[:quiz_results]
+  raise "something went wrong with the quiz submission :/" if quiz_taken.new_record?
+  redirect "/quiz_results/#{quiz_taken.id}"
+end
+
+get '/quiz_results' do
+  restricted 'You must be logged in to view your quizzes.'
+  @quiz_takens = current_user.quiz_takens
+  haml :quizzes
+end
+
+get '/quiz_results/:quiz_number' do
+  @quiz_taken = QuizTaken.find params[:quiz_number]
   haml :quiz_results
 end
 
