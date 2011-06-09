@@ -7,9 +7,12 @@
     %a{ :href => '/logout' }
       Logout
   - else
-    Login to take the quizzes!
-    %a{ :href => '/auth/twitter'  } Twitter
-    %a{ :href => '/auth/facebook' } Facebook
+    Login with
+    - if [:development, :test].include? Sinatra::Application.environment
+      %a{ :href => '/auth/twitter'  } Twitter
+    -else
+      %a{ :href => '/auth/facebook' } Facebook
+    to take the quizzes!
       
 
 %h1
