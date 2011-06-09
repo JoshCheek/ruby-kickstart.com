@@ -87,7 +87,12 @@ describe QuizTaken do
       subject.apply_solutions invalid_values
       should be_new_record
     end
-    it 'should not care whether its keys are integers or strings'
+    it 'should not care whether its keys are integers or strings' do
+      valid_with_string_keys = {}
+      valid_solutions.each { |key, value| valid_with_string_keys[key.to_s] = value }
+      subject.apply_solutions valid_with_string_keys
+      should_not be_new_record
+    end
     it 'should have saved solutions after a successful application'
   end
         

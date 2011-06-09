@@ -20,7 +20,9 @@ class QuizTaken < ActiveRecord::Base
     
   def apply_solutions(solutions={})
     solutions.each do |id , solution|
-      quiz_solution = quiz_solutions.detect {|s| s.quiz_problem_id == id}
+      quiz_solution = quiz_solutions.detect do |soln|
+        soln.quiz_problem_id == id || soln.quiz_problem_id.to_s == id
+      end
       quiz_solution.solve solution if quiz_solution
     end
     save
