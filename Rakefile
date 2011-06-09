@@ -33,11 +33,6 @@ task :server do
   sh "bin/shotgun config.ru -p #{ENV['port']||9394}"
 end
 
-desc 'ssh into deploy environment'
-task :ssh do
-  sh 'ssh deploy@ruby-kickstart.com'
-end
-
 desc 'open console into app'
 task :console do
   sh 'bin/pry -r ./bootstrap'
