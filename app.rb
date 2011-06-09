@@ -2,14 +2,36 @@ require File.join(File.dirname(__FILE__),'bootstrap')
 
 
 helpers do
+  
   def current_user
     @current_user ||= User.find session[:user_id] if session[:user_id]
   end
+  
+  def logged_in?
+    !!current_user
+  end
+  
 end
 
 
 get '/' do
   haml :home
+end
+ 
+  
+get '/quizzes/:quiz_number' do
+  if logged_in?
+    @quiz = Quiz.find_by_number params[:quiz_number].to_i
+    haml :quiz
+  else
+    session[:notice] = 'You must be logged in to take quizzes.'
+    redirect '/'
+  end
+end
+
+post '/quizzes/:quiz_number' do
+  require 'erb'
+  ERB::Util.h params.inspect
 end
 
 get '/quiz1' do

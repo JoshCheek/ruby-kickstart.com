@@ -1,6 +1,6 @@
 %h1= @quiz.name
 
-%form{ :name => 'quiz_results', :action => "quiz#{@quiz.number}", :method => 'post' }
+%form{ :name => 'quiz_results', :action => "/quizzes/#{@quiz.number}", :method => 'post' }
   - @quiz.each_problem_with_index do |problem, index|
     %h3= index
     - if problem.is_a? QuizMultipleChoiceProblem
