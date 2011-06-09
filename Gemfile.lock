@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:JoshCheek/acts_as_list.git
+  remote: git://github.com/JoshCheek/acts_as_list.git
   revision: 2a03d9fda419e3ae53c6ba584cc4f804dd7e929f
   specs:
     acts_as_list (1)
