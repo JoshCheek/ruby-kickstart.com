@@ -93,7 +93,10 @@ describe QuizTaken do
       subject.apply_solutions valid_with_string_keys
       should_not be_new_record
     end
-    it 'should have saved solutions after a successful application'
+    it 'should have saved solutions after a successful application' do
+      subject.apply_solutions valid_solutions
+      subject.quiz_solutions.should_not be_all &:new_record?
+    end
   end
         
 end
