@@ -2,7 +2,7 @@ source "http://rubygems.org"
 gem 'activerecord'          , '3.0.7'
 gem 'sinatra'               , '1.3.0.d'
 gem 'haml'                  , '3.1.1'
-gem 'mysql2'                , '0.2.7', :group => :production
+gem 'pg'                    , '~> 0.11.0', :group => :production
 gem 'standalone_migrations' , '0.4.7'
 gem 'pry'                   , '0.8.3'
 gem 'shotgun'               , '0.9'
