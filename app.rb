@@ -3,10 +3,6 @@ require 'erb'
 
 helpers do
   
-  def root_dir
-    Sinatra::Application.environment == :production ? 'http://ruby-kickstart.com' : 'http://localhost:9394/'
-  end
-  
   def current_user
     @current_user ||= User.find session[:user_id] if session[:user_id]
   rescue ActiveRecord::RecordNotFound
