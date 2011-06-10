@@ -9,9 +9,9 @@ namespace :db do
         'It means you should enter this in your text editor.',
         'It means you should enter this at the command line',
       ]
-      problem 'What is `25 / 2`', :match => /^\s*(12)\s*/
-      problem 'What is `25.0 / 2`', :match => /^\s*(12.5)\s*/
-      problem 'What is `25.0 / 5`', :match => /^\s*(5.0)\s*/
+      problem 'What is `25 / 2`', :match => /^\b12\b*/
+      problem 'What is `25.0 / 2`', :match => /^\b12\.5\b/
+      problem 'What is `25.0 / 5`', :match => /^\b5\.0\b/
       problem 'What is an object? (looking for two words)', :match => [/\bdata\b/i, /\bmethods?\b/i]
       problem 'What do variables do?', :solution => 2, :options => [
         'They represent data and methods',
@@ -84,7 +84,12 @@ namespace :db do
         "`$ ruby session:challenge`",
       ]
       problem 'Given a number, `num`, write the condition that evaluates to true if num is 2 or 3.', 
-        :match => /\bnum\s*==\s*2\|\|\s*num\s*==\s*3\b|\bnum\s*==\s*3\|\|\s*num\s*==\s*2\b/
+        :match => %r{
+                    \bnum\s*==\s*2\s*\|\|\s*num\s*==\s*3\b|
+                    \bnum\s*==\s*3\s*\|\|\s*num\s*==\s*2\b|
+                    \b2\s*==\s*num\s*\|\|\s*3\s*==\s*num\b|
+                    \b3\s*==\s*num\s*\|\|\s*2\s*==\s*num\b
+                  }x
       problem 'What does `!"abc"` evaluate to?', :match => /\bfalse\b/
       problem 'What does `!!"abc"` evaluate to?', :match => /\btrue\b/
       problem 'What does `"Jack and Jill".split` return?', :solution => 1, :options => [
