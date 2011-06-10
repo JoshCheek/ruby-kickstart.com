@@ -1,20 +1,3 @@
-- @messages.each do |type, message|
-  %div{ :class => type }= message
-
-%p
-  - if current_user
-    Quizzes will be coming soon!
-    %a{ :href => '/logout' }
-      Logout
-  - else
-    Login with
-    - if [:development, :test].include? Sinatra::Application.environment
-      %a{ :href => '/auth/twitter'  } Twitter
-    -else
-      %a{ :href => '/auth/facebook' } Facebook
-    to take the quizzes!
-      
-
 %h1
   Ruby Kickstart
 

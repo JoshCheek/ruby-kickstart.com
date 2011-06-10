@@ -11,4 +11,26 @@
       \-->
     
   %body
+    - messages.each do |type, message|
+      %div{ :class => type }= message
+
+    %p
+      - if current_user
+        %a{ :href => root_dir } Home
+        |
+        %a{ :href => '/quiz_results' } My Results
+        |
+        - @quizzes.each do |quiz|
+          %a{ :href => "/quizzes/#{quiz.number}" }= "Take #{quiz.name}"
+          |
+        %a{ :href => '/logout' }
+          Logout
+          
+      - else
+        Login with
+        - if [:development, :test].include? Sinatra::Application.environment
+          %a{ :href => '/auth/twitter'  } Twitter
+        -else
+          %a{ :href => '/auth/facebook' } Facebook
+        to take the quizzes!
     ~ yield if block_given?

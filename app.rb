@@ -3,6 +3,10 @@ require 'erb'
 
 helpers do
   
+  def root_dir
+    Sinatra::Application.environment == :production ? 'http://ruby-kickstart.com' : 'http://localhost:9394/'
+  end
+  
   def current_user
     @current_user ||= User.find session[:user_id] if session[:user_id]
   rescue ActiveRecord::RecordNotFound
@@ -20,9 +24,12 @@ helpers do
     end
   end
   
-  def extract_messages
-    @messages = Hash.new
-    @messages[:error] = session.delete :error if session[:error]
+  def messages
+    @messages ||= begin
+      hash = Hash.new
+      hash[:error] = session.delete :error if session[:error]
+      hash
+    end
   end
   
   def h *args
@@ -31,9 +38,11 @@ helpers do
   
 end
 
+before do
+  @quizzes = Quiz.all :order => :number
+end
 
 get '/' do
-  extract_messages
   haml :home
 end
  
