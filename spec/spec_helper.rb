@@ -16,7 +16,7 @@ require File.expand_path("#{File.dirname __FILE__}/../bootstrap")
 
 
 def clean_db
-  [Quiz, QuizProblem, QuizOption, QuizRegex, QuizMatchAnswerProblem, QuizMultipleChoiceProblem, QuizTaken, User].each(&:delete_all)
+  [Quiz, QuizProblem, QuizOption, QuizRegex, QuizMatchAnswerProblem, QuizMultipleChoiceProblem, QuizTaken, User, QuizPredicateProblem].each(&:delete_all)
 end
 
 def block_based_reinit
@@ -32,6 +32,10 @@ def block_based_reinit
       should_match  /data/i
       should_match  /methods/i
     end
+    add_problem :predicate do
+      set_question "do vegetarians rock?"
+      expect true
+    end
   end
 end
 
@@ -40,6 +44,7 @@ def hash_based_reinit
   Quiz.add 5, 'Example Problem' do
     problem 'can you see this?', :options => ['yes', 'no'], :solution => 0
     problem 'what is an object?', :match => [/data/i, /methods/i]
+    problem 'do vegetarians rock?', :predicate => true
   end
 end
 

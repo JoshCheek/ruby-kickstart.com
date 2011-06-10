@@ -13,6 +13,7 @@ class Quiz < ActiveRecord::Base
     problem_class = case type
       when :match_answer    then QuizMatchAnswerProblem
       when :multiple_choice then QuizMultipleChoiceProblem
+      when :predicate       then QuizPredicateProblem
       else raise "#{type} is not a valid problem type"
     end
     problem = problem_class.new
@@ -49,17 +50,32 @@ class Quiz < ActiveRecord::Base
       add_match_answer(question, options[:match])
     elsif multiple_choice_problem? options
       add_multiple_choice(question, options[:solution], options[:options])
+    elsif predicate_problem? options
+      add_predicate(question, options[:predicate])
+    else
+      raise "Don't know what to do with question:#{question.inspect}, options:#{options.inspect}"
     end
   end
 
 private
 
   def match_answer_problem? options
-    !!options[:match]
+    options.has_key? :match
   end
   
   def multiple_choice_problem? options
-    !!options[:options]
+    options.has_key? :options
+  end
+  
+  def predicate_problem? options
+    options.has_key? :predicate
+  end
+  
+  def add_predicate _question, predicate
+    add_problem :predicate do
+      self.question = _question
+      expect !!predicate
+    end
   end
   
   def add_match_answer _question, regexes
