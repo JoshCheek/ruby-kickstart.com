@@ -6,13 +6,12 @@
   - if problem.is_a? QuizMultipleChoiceProblem
     %ul
       - problem.quiz_options.each do |quiz_option|
-        %li
-          - id = quiz_option.id
-          - css_class = if id == problem.solution_id then :correct elsif id.to_s == solution.answer then :incorrect end
+        - id = quiz_option.id
+        - css_class = if id == problem.solution_id then :correct elsif id.to_s == solution.answer then :incorrect end
+        %li{ :class => css_class }
           %input{ :type       =>  "radio",
                   :checked    =>  (id.to_s == solution.answer),
-                  :disabled   =>  true,
-                  :class      =>  css_class }
+                  :disabled   =>  true }
             = quiz_option.body
   - elsif problem.is_a? QuizMatchAnswerProblem
     - css_class = (solution.correct? ? :correct : :incorrect)
