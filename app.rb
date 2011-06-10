@@ -68,8 +68,13 @@ get '/quiz_results' do
   haml :quizzes
 end
 
-get '/quiz_results/:quiz_number' do
-  @quiz_taken = QuizTaken.find params[:quiz_number]
+get '/quiz_results/:quiz_id' do
+  restricted 'You must be logged in to view your results'
+  @quiz_taken = QuizTaken.find params[:quiz_id]
+  if @quiz_taken.user != current_user
+    session[:error] = "You can only view your own quizzes."
+    redirect '/quiz_results'
+  end
   haml :quiz_results
 end
 
