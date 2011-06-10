@@ -25,6 +25,7 @@
           |
         %a{ :href => '/logout' }
           Logout
+          = current_user.name
           
       - else
         Login with
@@ -33,4 +34,7 @@
         -else
           %a{ :href => '/auth/facebook' } Facebook
         to take the quizzes!
+      |
+      %a{ :href => "/about" } About
+      
     ~ yield if block_given?

@@ -41,6 +41,10 @@ end
 get '/' do
   haml :home
 end
+
+get '/about' do
+  haml :about
+end
  
   
 get '/quizzes/:quiz_number' do
