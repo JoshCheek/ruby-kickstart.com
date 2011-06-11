@@ -1,4 +1,4 @@
-Website for ruby-kickstart.com
+Website for [ruby-kickstart.com](http://ruby-kickstart.com)
 
 
 This code is under the MIT license:
