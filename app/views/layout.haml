@@ -23,9 +23,12 @@
         - @quizzes.each do |quiz|
           %a{ :href => "/quizzes/#{quiz.number}" }= "Take #{quiz.name}"
           |
+        %a{ :href => "/about" } About
+        |
         %a{ :href => '/logout' }
           Logout
           = current_user.name
+
           
       - else
         Login with
@@ -34,7 +37,7 @@
         -else
           %a{ :href => '/auth/facebook' } Facebook
         to take the quizzes!
-      |
-      %a{ :href => "/about" } About
+        |
+        %a{ :href => "/about" } About
       
     ~ yield if block_given?
