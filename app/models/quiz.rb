@@ -14,6 +14,7 @@ class Quiz < ActiveRecord::Base
       when :match_answer    then QuizMatchAnswerProblem
       when :multiple_choice then QuizMultipleChoiceProblem
       when :predicate       then QuizPredicateProblem
+      when :many_to_many    then QuizManyToManyProblem
       else raise "#{type} is not a valid problem type"
     end
     problem = problem_class.new
@@ -52,12 +53,18 @@ class Quiz < ActiveRecord::Base
       add_multiple_choice(question, options[:solution], options[:options])
     elsif predicate_problem? options
       add_predicate(question, options[:predicate])
+    elsif many_to_many_problem? options
+      add_many_to_many(question, options[:mappings], options[:presentation_order])
     else
       raise "Don't know what to do with question:#{question.inspect}, options:#{options.inspect}"
     end
   end
 
 private
+
+  def many_to_many_problem?(options)
+    options.has_key? :mappings
+  end
 
   def match_answer_problem?(options)
     options.has_key? :match
@@ -69,6 +76,16 @@ private
   
   def predicate_problem? options
     options.has_key? :predicate
+  end
+  
+  def add_many_to_many(_question, mappings, order)
+    add_problem :many_to_many do
+      self.question = _question
+      mappings.each do |q, a|
+        subproblem q, a
+      end
+      presentation_order order
+    end
   end
   
   def add_predicate(_question, predicate)
