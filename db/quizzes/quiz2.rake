@@ -52,28 +52,37 @@ namespace :db do
         'Put it in the `initialize` method',
         'Pass the appropriate state to its setters after instantiating it',
       ]
-      problem <<-PROBLEM, :lhs => %w[(a) (b) (c) (d) (e) (f)], :rhs => ['main', 'Klass', "Klass' singleton class", 'Instances of Klass', 'Class', 'nil' ]
-        What is `self` in each case?
-        self # => (a)
-        class Klass
-          self # => (b)
-          
-          class << self
-            self # => (c)
+      add_problem :many_to_many do
+        set_question <<-PROBLEM
+          What is `self` in each case?
+          self # => (a)
+          class Klass
+            self # => (b)
+
+            class << self
+              self # => (c)
+              def method
+                self # => (d)
+              end
+            end
+
+            class << Klass
+              self # => (e)
+            end
+
             def method
-              self # => (d)
+              self # => (f)
             end
           end
-          
-          class << Klass
-            self # => (e)
-          end
-          
-          def method
-            self # => (f)
-          end
-        end
-      PROBLEM
+        PROBLEM
+        subproblem '(a)' , 'main'
+        subproblem '(b)' , 'Klass'
+        subproblem '(c)' , "Klass' singleton class"
+        subproblem '(d)' , 'Klass'
+        subproblem '(e)' , "Klass' singleton class"
+        subproblem '(f)' , 'Instances of Klass'
+        presentation_order ['Class', 'Klass', "Klass' singleton class", "nil", "main", "Object", 'Instances of Klass']
+      end
       problem 'A method can see instance variables set in other methods in the same class', :predicate => true
       problem 'A method can see local variables set in other methods in the same class', :predicate => true
       problem 'How do you define a method on a class?', :match => /\bsingleton\b.*\bclass/i
