@@ -10,6 +10,5 @@ class CreateQuizSolution < ActiveRecord::Migration
 
   def self.down
     drop_table :quiz_solutions
-    raise ActiveRecord::IrreversibleMigration
   end
 end

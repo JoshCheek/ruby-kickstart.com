@@ -8,6 +8,5 @@ class CreateQuizMultipleChoiceSolution < ActiveRecord::Migration
 
   def self.down
     drop_table :quiz_multiple_choice_solutions
-    raise ActiveRecord::IrreversibleMigration
   end
 end
