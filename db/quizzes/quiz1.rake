@@ -1,6 +1,6 @@
 namespace :db do  
   task :populate => :quiz1
-  task :quiz1 do
+  task :quiz1 => :bootstrap do
     Quiz.add 1, 'Session 1 Quiz' do
       problem 'What is a set of instructions called?', :match => /method/i
       problem 'What does the dollar sign mean in cases like `$ ruby -v`', :solution => 3, :options => [

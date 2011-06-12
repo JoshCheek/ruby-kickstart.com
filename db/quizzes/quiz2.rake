@@ -1,6 +1,6 @@
 namespace :db do  
   # task :populate => :quiz2
-  task :quiz2 do
+  task :quiz2 => :bootstrap do
     Quiz.add 2, 'Session 2 Quiz' do
       problem 'What is an ordered list of objects called?', :match => /\barrays?\b/i
       problem %q(If `array = ['zero', 'one', 'two']`, then what does `array[1]` return?), :solution => 1, :options => %w[zero one two nil]
