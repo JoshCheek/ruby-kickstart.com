@@ -6,7 +6,7 @@ namespace :db do
       problem %q(If `array = ['zero', 'one', 'two']`, then what does `array[1]` return?), :solution => 1, :options => %w[zero one two nil]
       problem %q(If `array = ['zero', 'one', 'two']`, then what does `array[-1]` return?), :solution => 3, :options => %w[zero one two nil]
       problem %q(If `array = ['zero', 'one', 'two']`, then what does `array[10]` return?), :solution => 2, :options => %w[zero one two nil]
-      problem 'If you have a big array' :solution => 2, :options => [
+      problem 'If you have a big array', :solution => 2, :options => [
         'it is faster to access the first element than the last',
         'it is faster to access the last element than the first',
         'it is just as fast to access the first element as the last'
@@ -32,7 +32,7 @@ namespace :db do
       problem 'Between Planet and Mars, which is the class?', :solution => 0, :options => %w[Planet Mars]
       problem "Where are class' methods stored?", :match => /\bsingleton\b.*\bclass\b/i
       problem "When you see something that begins with an @asperand, you know it is a", :match => /\binstance.*\bvariable\b/i
-      problem <<-PROBLEM, :match => /attr_accessor :value
+      problem <<-PROBLEM, :match => /attr_accessor :value/
         What is another way of defining these methods?
         def value=(value)
           @value = value
@@ -43,16 +43,16 @@ namespace :db do
       PROBLEM
       problem 'When you write `event.time = "11:00"`', :solution => 1, :options => [
         "You are invoking event's time method",
-        "You are invoking event's time= method"
+        "You are invoking event's time= method",
         "You are setting event's @time instance variable",
         "You are setting event's time attribute",
       ]
-      problem 'How do you give an object its initial state?', :solution => 1 :options => [
+      problem 'How do you give an object its initial state?', :solution => 1, :options => [
         'Put it in the `new` method',
         'Put it in the `initialize` method',
         'Pass the appropriate state to its setters after instantiating it',
       ]
-      problem <<-PROBLEM, :lhs => %w[(a) (b) (c) (d) (e) (f)], :rhs => ['main', 'Klass', "Klass' singleton class", 'Instances of Klass', 'Class', 'nil'' ]
+      problem <<-PROBLEM, :lhs => %w[(a) (b) (c) (d) (e) (f)], :rhs => ['main', 'Klass', "Klass' singleton class", 'Instances of Klass', 'Class', 'nil' ]
         What is `self` in each case?
         self # => (a)
         class Klass
