@@ -8,7 +8,7 @@ class QuizMatchAnswerProblem < ActiveRecord::Base
     self.question = question
   end
     
-  def should_match regex
+  def should_match(regex)
     quiz_regexes.build :regex => regex
   end
   

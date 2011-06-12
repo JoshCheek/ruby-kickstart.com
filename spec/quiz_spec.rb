@@ -21,16 +21,16 @@ describe Quiz do
         its(:name) { should == 'Example Problem' }
         its(:inspect) { should == "<Quiz:Example Problem>" }
         it { should == Quiz.find_by_number(5) }
-        it { should have(2).problems }
-        it 'should yield both problems to each_problem' do
+        it { should have(3).problems }
+        it 'should yield all problems to each_problem' do
           problems = Array.new
           subject.each_problem { |problem| problems << problem }
           problems.should == subject.problems
         end
-        it 'should yield both problems and their positions to each_problem_with_index' do
+        it 'should yield all problems and their positions to each_problem_with_index' do
           problems = Array.new
           subject.each_problem_with_index { |problem, index| problems << problem << index }
-          problems.should == subject.problems.zip([1,2]).flatten
+          problems.should == subject.problems.zip((1..subject.problems.size).to_a).flatten
         end
       end
       
@@ -41,7 +41,7 @@ describe Quiz do
           subject.each_id_problem_and_index { |id,_,__| ids << id }
           subject.quiz_problems.map(&:id).should == ids
         end
-        it 'should yield both problems' do
+        it 'should yield all problems' do
           problems = Array.new
           subject.each_id_problem_and_index { |_,problem,__| problems << problem }
           problems.should == subject.problems
@@ -49,7 +49,7 @@ describe Quiz do
         it 'should yield increasing indexes beginning at 1' do
           indexes = Array.new
           subject.each_id_problem_and_index { |_,__,index| indexes << index }
-          indexes.should == [1,2]
+          indexes.should == (1..subject.problems.size).to_a
         end
       end
     
@@ -69,6 +69,13 @@ describe Quiz do
           subject.each_regex { |regex| regexes << regex }
           regexes.should == [/data/i,/methods/i]
         end
+      end
+      
+      describe 'predicate problem' do
+        subject { Quiz.find_by_number(5).problems[2] }
+        it { should be_instance_of QuizPredicateProblem }
+        its(:question) { should == 'do vegetarians rock?' }
+        its(:predicate) { should == true }
       end
     
       context 'when adding another quiz for the same number' do

@@ -3,7 +3,11 @@
 - @quiz_taken.each_problem_with_solution_and_index do |problem, solution, index|
   %h3= index
   %h2= problem.question
-  - if problem.is_a? QuizMultipleChoiceProblem
+  
+  - case problem
+  
+  
+  - when QuizMultipleChoiceProblem
     %ul
       - problem.quiz_options.each do |quiz_option|
         - id = quiz_option.id
@@ -13,7 +17,9 @@
                   :checked    =>  (id.to_s == solution.answer),
                   :disabled   =>  true }
             = quiz_option.body
-  - elsif problem.is_a? QuizMatchAnswerProblem
+            
+            
+  - when QuizMatchAnswerProblem
     - css_class = (solution.correct? ? :correct : :incorrect)
     %input{ :type     => "text", 
             :name     => "quiz_results[#{problem.id}]", 
@@ -22,3 +28,21 @@
             :class    => css_class }
     - if css_class == :incorrect
       = solution.failure_explanation
+  
+  
+  - when QuizPredicateProblem
+    %ul
+      %li{ :class => (problem.predicate ? :correct : solution.answer ? :incorrect : '' ) }
+        %input{ :type     => "radio",
+                :checked  => solution.answer,
+                :disabled => true }
+          true
+      %li{ :class => (!problem.predicate ? :correct : !solution.answer ? :incorrect : '' ) }
+        %input{ :type     => "radio",
+                :checked  => !solution.answer,
+                :disabled => true }
+          false
+          
+    
+  - else
+    = raise "don't know how to ask #{problem.inspect}"

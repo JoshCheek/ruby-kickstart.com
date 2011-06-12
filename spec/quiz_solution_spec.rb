@@ -7,10 +7,13 @@ describe QuizSolution do
     @quiz = Quiz.add 5, 'Example Problem' do
       problem 'can you see this?', :options => ['yes', 'no'], :solution => 0
       problem 'what is an object?', :match => [/data/i, /methods/i]
+      problem 'Hamburger is good.', :predicate => false
     end
     
     define_singleton_method :valid_solutions do
-      {@quiz.quiz_problems[0].id => 0 , @quiz.quiz_problems[1].id => "data and methods"}
+      { @quiz.quiz_problems[0].id => 0,
+        @quiz.quiz_problems[1].id => "data and methods",
+        @quiz.quiz_problems[2].id => false }
     end
     
     @user = User.create :provider => 'provider',

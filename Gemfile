@@ -10,6 +10,7 @@ gem 'acts_as_list'          , '1' , :git => "git://github.com/JoshCheek/acts_as_
 gem 'omniauth'              , '~> 0.2.6'
 
 group :development, :test do
+  gem 'rake'          , '~> 0.9.2'
   gem 'sqlite3-ruby'  , '1.3.3'
   gem 'rspec'         , '2.6.0'  
   gem 'cucumber'      , '~> 0.10.3'

@@ -9,7 +9,7 @@ class QuizMultipleChoiceProblem < ActiveRecord::Base
     self.question = question
   end
     
-  def add_option body='', options={}
+  def add_option(body='', options={})
     option = quiz_options.build :body => body
     self.solution = option if options[:solution]
   end
