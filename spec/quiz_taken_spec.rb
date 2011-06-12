@@ -9,24 +9,31 @@ describe QuizTaken do
       problem 'can you see this?', :options => ['yes', 'no'], :solution => 0
       problem 'what is an object?', :match => [/data/i, /methods/i]
       problem 'cauliflower is yummy', :predicate => true
+      problem "Match em up" , :mappings => { '1 + 1' => '2', '2 + 2' => '3' }, :presentation_order => %w(1 2 3 4 5)
     end
         
     define_singleton_method :valid_solutions do
       { @quiz.quiz_problems[0].id   =>  0 , 
         @quiz.quiz_problems[1].id   =>  "data and methods",
-        @quiz.quiz_problems[2].id   =>  true }
+        @quiz.quiz_problems[2].id   =>  true,
+        @quiz.quiz_problems[3].id   => { '1 + 1' => '2', '2 + 2' => '3' },
+      }
     end
     
     define_singleton_method :invalid_keys do
       { (@quiz.quiz_problems[0].id-1)   =>  0 , 
         @quiz.quiz_problems[1].id       =>  "data and methods",
-        @quiz.quiz_problems[2].id       =>  true }
+        @quiz.quiz_problems[2].id       =>  true,
+        @quiz.quiz_problems[3].id       =>  { '1 + 1' => '2', '2 + 2' => '3' },
+      }
     end
 
     define_singleton_method :invalid_values do
       { @quiz.quiz_problems[0].id       =>  'this should be an index',
         @quiz.quiz_problems[1].id.next  =>  "data and methods",
-        @quiz.quiz_problems[1].id.next  =>  false }
+        @quiz.quiz_problems[1].id.next  =>  false,
+        @quiz.quiz_problems[3].id       =>  { '1 + 1' => '2', '2 + 2' => '3' },
+      }
     end
     
     @user = User.create :provider => 'provider',
@@ -57,8 +64,8 @@ describe QuizTaken do
   end
   
   it 'should have a solution for every problem' do
-    should have(3).quiz_problems
-    should have(3).quiz_solutions
+    should have(4).quiz_problems
+    should have(4).quiz_solutions
   end
   
   describe '.quiz_solutions' do
@@ -87,7 +94,7 @@ describe QuizTaken do
     it 'should yield indexes incrementing from 1' do
       indexes = Array.new
       subject.each_problem_with_solution_and_index { |_,__,index| indexes << index }
-      indexes.should == [1, 2, 3]
+      indexes.should == (1..subject.quiz_problems.size).to_a
     end
   end
   
