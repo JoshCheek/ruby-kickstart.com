@@ -1,27 +1,42 @@
 class QuizManyToManyProblem < ActiveRecord::Base
-  
+
+
   class Subproblems
+
     attr_accessor :question_set, :answer_set, :mappings
+
     def initialize
       @question_set  =  []
       @answer_set    =  nil
       @mappings      =  {}
     end
+
     def add(q, a)
       @question_set << q
       @mappings[q] = a
     end
-    def valid?
-      @mappings.all? do |question, answer|
-        @question_set.include?(question) && @answer_set.include?(answer)
+
+    def assert_valid_as_problems!
+      @mappings.each do |question, answer|
+        raise "#{question} is not in #@question_set"  unless @question_set.include?(question)
+        raise "#{answer} is not in #@answer_set"      unless @answer_set.include?(answer)
       end
     end
+    
+    def correct?(q, a)
+      @mappings[q] == a
+    end
+
   end
+
   
+  has_many  :quiz_problems , :as => :problemable
+  has_many  :quizzes , :through => :quiz_problems
   
   
   def valid?(*args)
-    subproblems.valid?
+    subproblems.assert_valid_as_problems!
+    true
   end
   
   after_initialize do
@@ -57,5 +72,11 @@ class QuizManyToManyProblem < ActiveRecord::Base
   def solution_set
     subproblems.answer_set
   end
-      
+  
+  def guessed_correct?(q, a)
+    subproblems.correct?(q, a)
+  end
+  
+  alias_method :correct?, :guessed_correct?
+  
 end

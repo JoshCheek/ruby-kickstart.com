@@ -29,6 +29,18 @@
           %input{ :type => 'radio', :name => "quiz_results[#{id}]", :value => 0 }
             false
     
+    
+    - when QuizManyToManyProblem
+      %ul
+        - problem.question_set.each do |question|
+          %li
+            = question
+            %select{ :name => "quiz_results[#{id}][#{question}]" }
+              -problem.solution_set.each do |potential_solution|
+                %option{ :value => potential_solution }
+                  = potential_solution
+    
+    
     - else
       - raise "Don't know how to ask #{problem.inspect}"
       

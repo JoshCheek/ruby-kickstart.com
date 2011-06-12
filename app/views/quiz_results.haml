@@ -42,7 +42,20 @@
                 :checked  => !solution.answer,
                 :disabled => true }
           false
-          
+  
+  
+  - when QuizManyToManyProblem
+    %ul
+      - problem.question_set.each do |question|
+        %li
+          = question
+          %select{ :class => (problem.guessed_correct?(question, solution.for(question)) ? :correct : :incorrect ) }
+            - problem.solution_set.each do |potential_solution|
+              %option{  :value     =>  potential_solution,
+                        :disabled  =>  true,
+                        :selected  =>  solution.guessed?(question, potential_solution) }
+                = potential_solution
+  
     
   - else
     = raise "don't know how to ask #{problem.inspect}"
