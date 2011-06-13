@@ -1,7 +1,7 @@
 class Quiz < ActiveRecord::Base
   
-  def self.add(n, name, &block)
-    quiz = Quiz.create :name => name , :number => n
+  def self.add(number, name, &block)
+    quiz = Quiz.create :name => name , :number => number
     quiz.instance_eval &block if block
     quiz
   end
