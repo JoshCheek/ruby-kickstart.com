@@ -34,6 +34,13 @@ helpers do
   
 end
 
+
+configure :development, :test do
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:twitter, {:uid => '12345'})
+end
+
+
 before do
   @quizzes = Quiz.all :order => :number
 end
