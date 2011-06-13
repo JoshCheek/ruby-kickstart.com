@@ -37,6 +37,7 @@ GEM
     haml (3.1.1)
     i18n (0.5.0)
     json (1.5.1)
+    kramdown (0.13.3)
     method_source (0.4.1)
       ruby_parser (>= 2.0.5)
     mime-types (1.16)
@@ -139,8 +140,10 @@ PLATFORMS
 DEPENDENCIES
   activerecord (= 3.0.7)
   acts_as_list (= 1)!
+  coderay (~> 0.9.7)
   cucumber (~> 0.10.3)
   haml (= 3.1.1)
+  kramdown (~> 0.13.3)
   omniauth (~> 0.2.6)
   pg (~> 0.11.0)
   pry (= 0.8.3)

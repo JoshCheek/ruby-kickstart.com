@@ -1,5 +1,5 @@
 require File.join(File.dirname(__FILE__),'bootstrap')
-require 'erb'
+
 
 helpers do
   

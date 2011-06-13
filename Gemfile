@@ -8,6 +8,10 @@ gem 'pry'                   , '0.8.3'
 gem 'shotgun'               , '0.9'
 gem 'acts_as_list'          , '1' , :git => "git://github.com/JoshCheek/acts_as_list.git"
 gem 'omniauth'              , '~> 0.2.6'
+gem 'kramdown'              , '~> 0.13.3'
+gem "coderay"               , '~> 0.9.7'
+
+
 
 group :development, :test do
   gem 'rake'          , '~> 0.9.2'
