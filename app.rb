@@ -28,7 +28,7 @@ helpers do
     end
   end
   
-  def h *args
+  def h(*args)
     ERB::Util.h *args
   end
   
