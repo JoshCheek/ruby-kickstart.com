@@ -9,14 +9,13 @@
   
   - when QuizMultipleChoiceProblem
     %ul
-      - problem.quiz_options.each do |quiz_option|
-        - id = quiz_option.id
-        - css_class = if id == problem.solution_id then :correct elsif id.to_s == solution.answer then :incorrect end
+      - problem.options.each do |quiz_option|
+        - css_class = if problem.correct?(quiz_option) then :correct elsif solution.guessed?(quiz_option) then :incorrect end
         %li{ :class => css_class }
           %input{ :type       =>  "radio",
-                  :checked    =>  (id.to_s == solution.answer),
+                  :checked    =>  problem.correct?(quiz_option),
                   :disabled   =>  true }
-            = quiz_option.body
+            = quiz_option
             
             
   - when QuizMatchAnswerProblem

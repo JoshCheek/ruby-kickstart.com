@@ -10,10 +10,10 @@
     
     - when QuizMultipleChoiceProblem
       %ul
-        - problem.quiz_options.each do |quiz_option|
+        - problem.options.each do |quiz_option|
           %li
-            %input{ :type => "radio", :name => "quiz_results[#{id}]", :value => quiz_option.id }
-              = quiz_option.body
+            %input{ :type => "radio", :name => "quiz_results[#{id}]", :value => quiz_option }
+              = quiz_option
               
               
     - when QuizMatchAnswerProblem

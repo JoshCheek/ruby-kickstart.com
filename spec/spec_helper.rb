@@ -16,7 +16,7 @@ require File.expand_path("#{File.dirname __FILE__}/../bootstrap")
 
 
 def clean_db
-  [Quiz, QuizProblem, QuizOption, QuizRegex, QuizMatchAnswerProblem, QuizMultipleChoiceProblem, QuizTaken, User, QuizPredicateProblem].each(&:delete_all)
+  [Quiz, QuizProblem, QuizRegex, QuizMatchAnswerProblem, QuizMultipleChoiceProblem, QuizTaken, User, QuizPredicateProblem].each(&:delete_all)
 end
 
 def block_based_reinit
