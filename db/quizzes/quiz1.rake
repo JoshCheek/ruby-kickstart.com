@@ -98,7 +98,7 @@ namespace :db do
         'A new copy of `"Jack and Jill"`'
       ]
       problem 'What does `"Jack and Jill".split.length` return?', :match => /3|three/i
-      problem 'What does `"Jack and Jill".split.length.times { |i| puts i }` send to standard output?', :match => /\b0\b.*\b1\b.*\b2\b/
+      problem 'What does `"Jack and Jill".split.length.times { |i| puts i }` send to standard output?', :match => /\b0.*1.*2\b/
     end
   end  
 end
