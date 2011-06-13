@@ -84,12 +84,7 @@ namespace :db do
         "`$ ruby session:challenge`",
       ]
       problem 'Given a number, `num`, write the condition that evaluates to true if num is 2 or 3.', 
-        :match => %r{
-                    \bnum\s*==\s*2\s*\|\|\s*num\s*==\s*3\b|
-                    \bnum\s*==\s*3\s*\|\|\s*num\s*==\s*2\b|
-                    \b2\s*==\s*num\s*\|\|\s*3\s*==\s*num\b|
-                    \b3\s*==\s*num\s*\|\|\s*2\s*==\s*num\b
-                  }x
+        :match => %r{\bnum\s*==\s*2\s*\|\|\s*num\s*==\s*3\b|\bnum\s*==\s*3\s*\|\|\s*num\s*==\s*2\b|\b2\s*==\s*num\s*\|\|\s*3\s*==\s*num\b|\b3\s*==\s*num\s*\|\|\s*2\s*==\s*num\b}x
       problem 'What does `!"abc"` evaluate to?', :match => /\bfalse\b/
       problem 'What does `!!"abc"` evaluate to?', :match => /\btrue\b/
       problem 'What does `"Jack and Jill".split` return?', :solution => 1, :options => [
