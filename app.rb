@@ -36,6 +36,10 @@ helpers do
     string.gsub(/^        /,'')
   end
   
+  def doing_maintenance?
+    'true' == ENV['DOING_MAINTENANCE']
+  end
+  
 end
 
 
