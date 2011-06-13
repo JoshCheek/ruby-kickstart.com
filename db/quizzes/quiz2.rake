@@ -1,5 +1,5 @@
 namespace :db do  
-  # task :populate => :quiz2
+  task :populate => :quiz2
   task :quiz2 => :bootstrap do
     Quiz.add 2, 'Session 2 Quiz' do
       problem 'What is an ordered list of objects called?', :match => /\barrays?\b/i
@@ -34,12 +34,13 @@ namespace :db do
       problem "When you see something that begins with an @asperand, you know it is a", :match => /\binstance.*\bvariable\b/i
       problem <<-PROBLEM, :match => /attr_accessor :value/
         What is another way of defining these methods?
-        def value=(value)
-          @value = value
-        end
-        def value
-          @value
-        end
+        
+            def value=(value)
+              @value = value
+            end
+            def value
+              @value
+            end
       PROBLEM
       problem 'When you write `event.time = "11:00"`', :solution => 1, :options => [
         "You are invoking event's time method",
@@ -55,25 +56,26 @@ namespace :db do
       add_problem :many_to_many do
         set_question <<-PROBLEM
           What is `self` in each case?
-          self # => (a)
-          class Klass
-            self # => (b)
-
-            class << self
-              self # => (c)
+            
+            self # => (a)
+            class Klass
+              self # => (b)
+            
+              class << self
+                self # => (c)
+                def method
+                  self # => (d)
+                end
+              end
+            
+              class << Klass
+                self # => (e)
+              end
+            
               def method
-                self # => (d)
+                self # => (f)
               end
             end
-
-            class << Klass
-              self # => (e)
-            end
-
-            def method
-              self # => (f)
-            end
-          end
         PROBLEM
         subproblem '(a)' , 'main'
         subproblem '(b)' , 'Klass'
@@ -88,10 +90,11 @@ namespace :db do
       problem 'How do you define a method on a class?', :match => /\bsingleton\b.*\bclass/i
       problem <<-PROBLEM, :solution => 0, :options => %w[Klass.method Klass.new.method]
         How do you invoke the method below?
-        class Klass
-          def method
-          end
-        end
+          
+            class Klass
+              def method
+              end
+            end
       PROBLEM
       
     end
