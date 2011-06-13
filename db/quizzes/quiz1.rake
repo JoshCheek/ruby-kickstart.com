@@ -27,7 +27,7 @@ namespace :db do
         '`$ run prog.rb`',
         '`$ execute prog.rb`',
       ]
-      problem 'What does a method return?', :solution => 1, :options => ['nil', 'its last instruction', 'the last object evaluated', 'its parameters', 'itself']
+      problem 'What does a method return?', :solution => 1, :options => ['nil', 'the result of the last instruction it evaluated', 'the last object evaluated', 'its parameters', 'itself']
       problem 'What does an empty method return?', :match => /\bnil\b/
       problem 'How should you indent?', :solution => 2, :options => ['With a tab', 'With a space', 'With two spaces', 'With four spaces', 'With eight spaces']
       problem 'Local variables can be seen across scope', :predicate => false
