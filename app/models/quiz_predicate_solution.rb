@@ -22,4 +22,8 @@ class QuizPredicateSolution < ActiveRecord::Base
     answer == problem.predicate
   end
   
+  def score
+    return (correct? ? 1 : 0), 1
+  end
+  
 end

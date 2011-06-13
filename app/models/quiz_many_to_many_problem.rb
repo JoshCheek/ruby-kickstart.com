@@ -26,6 +26,15 @@ class QuizManyToManyProblem < ActiveRecord::Base
     def correct?(q, a)
       @mappings[q] == a
     end
+    
+    def score_for(answers)
+      numerator = denominator = 0
+      answers.each do |q, a|
+        numerator += 1 if correct? q, a
+        denominator += 1
+      end
+      [numerator, denominator]
+    end
 
   end
 
@@ -75,6 +84,10 @@ class QuizManyToManyProblem < ActiveRecord::Base
   
   def guessed_correct?(q, a)
     subproblems.correct?(q, a)
+  end
+  
+  def score_for(answers)
+    subproblems.score_for answers
   end
   
   alias_method :correct?, :guessed_correct?

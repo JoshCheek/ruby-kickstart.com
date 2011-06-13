@@ -30,4 +30,8 @@ class QuizManyToManySolution < ActiveRecord::Base
     answers[q] == a
   end
   
+  def score
+    problem.score_for answers
+  end
+  
 end

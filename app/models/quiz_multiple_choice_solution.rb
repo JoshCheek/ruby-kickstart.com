@@ -17,4 +17,8 @@ class QuizMultipleChoiceSolution < ActiveRecord::Base
     problem.solution_id.to_s == answer
   end
 
+  def score
+    return (correct? ? 1 : 0), 1
+  end
+
 end

@@ -19,6 +19,10 @@ class QuizMatchAnswerSolution < ActiveRecord::Base
     true
   end
   
+  def score
+    return (correct? ? 1 : 0), 1
+  end
+  
   def each_regex(&block)
     problem.each_regex(&block)
   end

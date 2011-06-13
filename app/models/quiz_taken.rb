@@ -46,8 +46,10 @@ class QuizTaken < ActiveRecord::Base
   def summary
     correct = total = 0
     solutions.each do |solution|
-      correct += 1 if solution.correct?
-      total += 1
+      numerator, denominator = solution.score
+      puts "QUIZTAKEN: #{solution.score.inspect} from #{solution.inspect}"
+      correct += numerator
+      total += denominator
     end
     "(#{correct} / #{total})"
   end
