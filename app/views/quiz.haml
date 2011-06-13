@@ -3,7 +3,7 @@
 %form{ :name => 'quiz_results', :action => "/quizzes/#{@quiz.number}", :method => 'post' }
   - @quiz.each_id_problem_and_index do |id, problem, index|
     %h3= index
-    %h2= problem.question
+    %h2~ markdown without_leading_whitepace(problem.question), :layout => false
     
     - case problem
     

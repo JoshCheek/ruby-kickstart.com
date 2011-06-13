@@ -32,6 +32,10 @@ helpers do
     ERB::Util.h *args
   end
   
+  def without_leading_whitepace(string)
+    string.gsub(/^        /,'')
+  end
+  
 end
 
 

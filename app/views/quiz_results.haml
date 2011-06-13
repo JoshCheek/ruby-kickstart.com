@@ -2,7 +2,7 @@
 
 - @quiz_taken.each_problem_with_solution_and_index do |problem, solution, index|
   %h3= index
-  %h2= markdown problem.question, :layout => false
+  %h2~ markdown without_leading_whitepace(problem.question), :layout => false
   
   - case problem
   
