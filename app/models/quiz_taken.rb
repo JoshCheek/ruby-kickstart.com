@@ -47,7 +47,6 @@ class QuizTaken < ActiveRecord::Base
     correct = total = 0
     solutions.each do |solution|
       numerator, denominator = solution.score
-      puts "QUIZTAKEN: #{solution.score.inspect} from #{solution.inspect}"
       correct += numerator
       total += denominator
     end
