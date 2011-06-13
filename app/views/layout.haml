@@ -32,10 +32,7 @@
           
       - else
         Login with
-        - if [:development, :test].include? Sinatra::Application.environment
-          %a{ :href => '/auth/twitter'  } Twitter
-        -else
-          %a{ :href => '/auth/facebook' } Facebook
+        %a{ :href => '/auth/facebook' } Facebook
         to take the quizzes!
         |
         %a{ :href => "/about" } About

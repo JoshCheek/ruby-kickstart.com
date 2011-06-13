@@ -41,7 +41,7 @@ end
 
 configure :development, :test do
   OmniAuth.config.test_mode = true
-  OmniAuth.config.add_mock(:twitter, {:uid => '12345'})
+  OmniAuth.config.add_mock(:facebook, {:uid => '12345'})
 end
 
 
@@ -104,7 +104,7 @@ end
    /log_in/?  /log-in/?  /login/?
    /sign_up/? /sign-up/? /signup/?].each do |path|
   get path do
-    redirect '/auth/twitter'
+    redirect '/auth/facebook'
   end
 end
 
