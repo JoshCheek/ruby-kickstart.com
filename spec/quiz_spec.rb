@@ -21,7 +21,7 @@ describe Quiz do
         its(:name) { should == 'Example Problem' }
         its(:inspect) { should == "<Quiz:Example Problem>" }
         it { should == Quiz.find_by_number(5) }
-        it { should have(3).problems }
+        it { should have(4).problems }
         it 'should yield all problems to each_problem' do
           problems = Array.new
           subject.each_problem { |problem| problems << problem }
@@ -76,6 +76,14 @@ describe Quiz do
         it { should be_instance_of QuizPredicateProblem }
         its(:question) { should == 'do vegetarians rock?' }
         its(:predicate) { should == true }
+      end
+      
+      describe 'many_to_many problem' do
+        subject { Quiz.find_by_number(5).problems[3] }
+        it { should be_instance_of QuizManyToManyProblem }
+        its(:question)  { should == "Many to many question." }
+        its(:question_set) { should == %w[a b c] }
+        its(:solution_set) { should == %w[i x j y k] }
       end
     
       context 'when adding another quiz for the same number' do

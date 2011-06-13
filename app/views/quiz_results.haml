@@ -2,21 +2,20 @@
 
 - @quiz_taken.each_problem_with_solution_and_index do |problem, solution, index|
   %h3= index
-  %h2= problem.question
+  %h2~ markdown without_leading_whitepace(problem.question), :layout => false
   
   - case problem
   
   
   - when QuizMultipleChoiceProblem
     %ul
-      - problem.quiz_options.each do |quiz_option|
-        - id = quiz_option.id
-        - css_class = if id == problem.solution_id then :correct elsif id.to_s == solution.answer then :incorrect end
+      - problem.options.each do |quiz_option|
+        - css_class = if problem.correct?(quiz_option) then :correct elsif solution.guessed?(quiz_option) then :incorrect end
         %li{ :class => css_class }
           %input{ :type       =>  "radio",
-                  :checked    =>  (id.to_s == solution.answer),
+                  :checked    =>  problem.correct?(quiz_option),
                   :disabled   =>  true }
-            = quiz_option.body
+            = quiz_option
             
             
   - when QuizMatchAnswerProblem
@@ -42,7 +41,20 @@
                 :checked  => !solution.answer,
                 :disabled => true }
           false
-          
+  
+  
+  - when QuizManyToManyProblem
+    %ul
+      - problem.question_set.each do |question|
+        %li
+          = question
+          %select{ :class => (problem.guessed_correct?(question, solution.for(question)) ? :correct : :incorrect ) }
+            - problem.solution_set.each do |potential_solution|
+              %option{  :value     =>  potential_solution,
+                        :disabled  =>  true,
+                        :selected  =>  solution.guessed?(question, potential_solution) }
+                = potential_solution
+  
     
   - else
     = raise "don't know how to ask #{problem.inspect}"

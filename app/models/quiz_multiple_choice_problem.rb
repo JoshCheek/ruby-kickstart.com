@@ -1,21 +1,31 @@
 class QuizMultipleChoiceProblem < ActiveRecord::Base
 
-  has_many    :quiz_options , :dependent => :destroy
   has_many    :quiz_problems , :as => :problemable
   has_many    :quizzes , :through => :quiz_problems
-  belongs_to  :solution , :class_name => 'QuizOption', :autosave => true
    
   def set_question(question)
     self.question = question
   end
     
-  def add_option(body='', options={})
-    option = quiz_options.build :body => body
-    self.solution = option if options[:solution]
+  def add_option(body='', method_options={})
+    options << body
+    self.solution = body if method_options[:solution]
   end
   
   def options
-    quiz_options.map(&:body)
+    @options ||= if new_record?
+      []
+    else
+      YAML.load serialized_options
+    end
+  end
+  
+  def correct?(answer)
+    answer == solution
+  end
+  
+  before_save do
+    self.serialized_options = YAML.dump options
   end
   
 end

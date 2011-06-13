@@ -1,9 +1,14 @@
 require 'bundler/setup'
 require 'yaml'
+require 'coderay'
+require 'kramdown'
 require 'sinatra'
 require 'active_record'
 require "active_record/acts/list.rb"
 require 'omniauth'
+require 'erb'
+
+Tilt.prefer(Tilt::KramdownTemplate)
 
 $root = File.expand_path(File.dirname __FILE__)
 $: << $root
@@ -21,3 +26,7 @@ end
 
 set :views, File.dirname(__FILE__) + '/app/views'
 
+configure :development, :test do
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:facebook, {:uid => '12345'})
+end

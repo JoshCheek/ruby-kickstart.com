@@ -14,7 +14,15 @@ class QuizMultipleChoiceSolution < ActiveRecord::Base
   end
 
   def correct?
-    problem.solution_id.to_s == answer
+    problem.correct? answer
+  end
+
+  def score
+    return (correct? ? 1 : 0), 1
+  end
+  
+  def guessed?(guess)
+    guess == answer
   end
 
 end

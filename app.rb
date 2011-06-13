@@ -1,5 +1,5 @@
 require File.join(File.dirname(__FILE__),'bootstrap')
-require 'erb'
+
 
 helpers do
   
@@ -28,11 +28,16 @@ helpers do
     end
   end
   
-  def h *args
+  def h(*args)
     ERB::Util.h *args
   end
   
+  def without_leading_whitepace(string)
+    string.gsub(/^        /,'')
+  end
+  
 end
+
 
 before do
   @quizzes = Quiz.all :order => :number
@@ -93,7 +98,7 @@ end
    /log_in/?  /log-in/?  /login/?
    /sign_up/? /sign-up/? /signup/?].each do |path|
   get path do
-    redirect '/auth/twitter'
+    redirect '/auth/facebook'
   end
 end
 

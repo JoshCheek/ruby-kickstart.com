@@ -8,12 +8,15 @@ describe QuizSolution do
       problem 'can you see this?', :options => ['yes', 'no'], :solution => 0
       problem 'what is an object?', :match => [/data/i, /methods/i]
       problem 'Hamburger is good.', :predicate => false
+      problem "Match em up" , :mappings => { '1 + 1' => '2', '2 + 2' => '3' }, :presentation_order => %w(1 2 3 4 5)
     end
     
     define_singleton_method :valid_solutions do
       { @quiz.quiz_problems[0].id => 0,
         @quiz.quiz_problems[1].id => "data and methods",
-        @quiz.quiz_problems[2].id => false }
+        @quiz.quiz_problems[2].id => false,
+        @quiz.quiz_problems[3].id => { '1 + 1' => '2', '2 + 2' => '3' },
+      }
     end
     
     @user = User.create :provider => 'provider',

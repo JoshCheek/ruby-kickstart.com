@@ -26,6 +26,8 @@ class QuizSolution < ActiveRecord::Base
       QuizMultipleChoiceSolution.new
     when QuizPredicateProblem
       QuizPredicateSolution.new
+    when QuizManyToManyProblem
+      QuizManyToManySolution.new
     else
       raise "unexpected error :/"
     end
