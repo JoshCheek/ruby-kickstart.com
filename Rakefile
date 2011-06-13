@@ -69,8 +69,8 @@ MigratorTasks.new do |t|
 end
 
 namespace :db do
-  desc 'wipe the db out and repopulate from scratch -- DANGEROUS!'
-  task :reset => [ :dangerous!, 'db:drop', 'db:migrate', 'db:populate' ]
+  desc 'wipe the db out -- DANGEROUS!'
+  task :reset => [ :dangerous!, 'db:drop', 'db:migrate' ]
   
   desc 'populate the quizzes into the db'
   task :populate => :bootstrap
