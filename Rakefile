@@ -123,7 +123,7 @@ namespace :db do
   desc 'wipe the db out -- DANGEROUS!'
   task :reset => [ :dangerous!, 'db:drop', 'db:migrate' ]
   
-  desc "Populate the quizzes into the db. Don't use while also doing a reset, that will just fuck everything up due to psych vs yaml bullshit."
+  desc "Populate the quizzes into the db."
   task :populate => :bootstrap
 end
 
