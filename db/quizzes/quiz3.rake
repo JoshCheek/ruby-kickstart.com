@@ -35,8 +35,8 @@ namespace :db do
       PROBLEM
       problem 'If you are interested in a sequential list of objects, what data structure should you use?', :solution => 2, :options => %w[Hash String Array Set]
       problem 'How would you get an object that would always tell you the current time?', :solution => 2, :options => [
-        'current_time = def time; Time.now; end',
         'current_time = Time.now',
+        'current_time = Proc.new(Time.now)',
         'current_time = Proc.new { Time.now }',
       ]
       problem <<-PROBLEM, :predicate => false

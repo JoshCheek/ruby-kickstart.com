@@ -12,7 +12,6 @@ namespace :db do
       PROBLEM
       problem "This operator will assing a value, unless one has already been assigned.", :solution => 3, :options => %w[&&= && & ||= || |]
       problem "What does a range from 1 through 5 look like?", :match => /\b1\s*\.\.(\s*5|\.\s*6)\b/
-      problem "Directory is a fancy word for folder.", :predicate => true
       add_problem :many_to_many do
         set_question <<-PROBLEM
           What are each of the following used for?
@@ -33,6 +32,7 @@ namespace :db do
           'Iterating over each line in the file.',
         ].sort
       end
+      problem "Directory is a fancy word for folder.", :predicate => true
       problem "Use `File.dirname __FILE__` to", :solution => 1, :options => [
         'Get the working directory.',
         "Get the current file's directory.",
@@ -46,11 +46,11 @@ namespace :db do
         '`include "mathn"`',
       ]
       problem "If you have two files, `filea.rb` and `fileb.rb` in the same directory, " \
-              "how would `filea.rb` load `fileb.rb`?", :solution => 4, :options => [
+              "how would `filea.rb` load `fileb.rb`?", :solution => 2, :options => [
         '`require "fileb"`',
         '`require "fileb.rb"`',
         '`require File.dirname(__FILE__) + "/fileb"`',
-        '`require File.dirname(__FILE__) + "/fileb".rb`',
+        '`require File.dirname(__FILE__) + "/fileb.rb"`',
       ]
       problem "How would you define class A, which inherits from class B?", :match => /\bclass\s+A\s*<\s*B\b/
       problem "In the previous problem, which is the subclass and which is the superclass?", :mappings => { 'A' => 'subclass', 'B' => 'superclass' }, :presentation_order => %w[subclass superclass]
@@ -67,7 +67,7 @@ namespace :db do
         '`raise "exception"`',
       ]
       problem "How do you prevent an exception from killing your program?", :solution => 1, :options => [
-        "You catch it",
+        "User try/catch",
         "Use begin/rescue/end",
         "Don't call code that could raise an exception.",
       ]
