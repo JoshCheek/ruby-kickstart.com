@@ -16,7 +16,7 @@ class QuizMultipleChoiceProblem < ActiveRecord::Base
     @options ||= if new_record?
       []
     else
-      Marshal.load serialized_options
+      YAML.load serialized_options
     end
   end
   
@@ -25,7 +25,7 @@ class QuizMultipleChoiceProblem < ActiveRecord::Base
   end
   
   before_save do
-    self.serialized_options = Marshal.dump options
+    self.serialized_options = YAML.dump options
   end
   
 end

@@ -2,7 +2,7 @@ class QuizManyToManySolution < ActiveRecord::Base
     
   has_one :quiz_solution, :as => :solutionable
   
-  before_save { self.serialized_solution = Marshal.dump @answers }
+  before_save { self.serialized_solution = YAML.dump answers }
   
   def quiz_problem
     quiz_solution.quiz_problem
@@ -11,15 +11,15 @@ class QuizManyToManySolution < ActiveRecord::Base
   def problem
     quiz_problem.problemable
   end
-  
-  attr_accessor :answers
-  
+    
   def solve(answers)
     self.answers = answers
   end
   
+  attr_writer :answers
+  
   def answers
-    @answers ||= Marshal.load serialized_solution
+    @answers ||= YAML.load serialized_solution
   end
   
   def for(question)

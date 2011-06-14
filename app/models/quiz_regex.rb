@@ -4,11 +4,11 @@ class QuizRegex < ActiveRecord::Base
   
   def regex=(regex)
     @regex = regex
-    self.content = Marshal.dump regex
+    self.content = YAML.dump regex
   end
   
   def regex
-    @regex ||= Marshal.load(content)
+    @regex ||= YAML.load(content)
   end
   
 end

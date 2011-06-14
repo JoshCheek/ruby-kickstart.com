@@ -52,12 +52,12 @@ class QuizManyToManyProblem < ActiveRecord::Base
     @subproblems = if new_record?
       Subproblems.new
     else
-      Marshal.load(serialized_data)
+      YAML.load(serialized_data)
     end
   end
   
   before_save do
-    self.serialized_data = Marshal.dump subproblems
+    self.serialized_data = YAML.dump subproblems
   end
   
   attr_accessor :subproblems
