@@ -1,5 +1,5 @@
 begin
-  Bundler
+  raise unless defined? Bundler
 rescue
   if 'no' != ENV['USE_BUNDLER']
     $stderr.puts "Looks like you're running this without having Bundler loaded."
