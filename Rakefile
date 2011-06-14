@@ -54,6 +54,47 @@ task :et do
 end
 
 
+# ==========  Environment Vars & Maintenance Mode  ==========
+task :env => 'env:list' # because namespaces don't have defaults
+namespace :env do
+  
+  desc "Lists current ENV vars on Heroku"
+  task :list do
+    sh 'bin/heroku config'
+  end
+  
+  desc 'Add ENV var to Heroku'
+  task :add do
+    key = ENV['key']
+    value = ENV['value']
+    raise "expected key=name_of_env_var" unless key
+    raise "expected val=value_of_env_var" unless value
+    sh "bin/heroku config:add #{key.inspect}=#{value.inspect}"
+  end
+  
+  desc 'Remove ENV var from Heroku'
+  task :remove do
+    key = ENV['key']
+    raise "expected key=name_of_env_var" unless key
+    sh "bin/heroku config:remove #{key.inspect}"
+  end
+  
+  namespace :maint do
+    desc 'Put app into maintenance mode'  
+    task :on do
+      ENV['key'] = 'DOING_MAINTENANCE'
+      ENV['value'] = 'true'
+      Rake::Task['env:add'].invoke
+    end
+    
+    desc 'Take app out of maintenance mode'
+    task :off do
+      ENV['key'] = 'DOING_MAINTENANCE'
+      Rake::Task['env:remove'].invoke
+    end
+  end
+end
+
 
 # ==========  Database  ==========
 require 'tasks/standalone_migrations'
