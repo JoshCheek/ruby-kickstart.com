@@ -1,11 +1,14 @@
-# This is a poor man's test to make sure that we're in the Bundler sandbox
 begin
-  Psych # Bundler requires yaml, which defines Psych.
+  Bundler
 rescue
-  puts "Looks like you're running this without having Bundler loaded."
-  puts "Try again with `bundle exec rake ...`"
-  puts "or check out https://github.com/mpapis/rubygems-bundler"
-  exit 1
+  if 'no' != ENV['USE_BUNDLER']
+    $stderr.puts "Looks like you're running this without having Bundler loaded."
+    $stderr.puts "Try again with `bundle exec rake ...`"
+    $stderr.puts "or check out https://github.com/mpapis/rubygems-bundler"
+    exit 1
+  end
+  $stderr.puts  "\e[33mYou aren't using Bundler, but it looks intentional, " \
+                "so not not going to kill the app.\e[0m"
 end
 
 # ==========  Helpers  ==========
@@ -68,9 +71,14 @@ end
 task :env => 'env:list' # because namespaces don't have defaults
 namespace :env do
   
+  def heroku(args)
+    raise "need to invoke with USE_BUNDLER=no" unless 'no' == ENV['USE_BUNDLER']
+    sh "heroku #{args}"
+  end
+  
   desc "Lists current ENV vars on Heroku"
   task :list do
-    sh 'bin/heroku config'
+    heroku 'config'
   end
   
   desc 'Add ENV var to Heroku'
@@ -79,14 +87,14 @@ namespace :env do
     value = ENV['value']
     raise "expected key=name_of_env_var" unless key
     raise "expected val=value_of_env_var" unless value
-    sh "bin/heroku config:add #{key.inspect}=#{value.inspect}"
+    heroku "config:add #{key.inspect}=#{value.inspect}"
   end
   
   desc 'Remove ENV var from Heroku'
   task :remove do
     key = ENV['key']
     raise "expected key=name_of_env_var" unless key
-    sh "bin/heroku config:remove #{key.inspect}"
+    heroku "config:remove #{key.inspect}"
   end
   
   namespace :maint do
