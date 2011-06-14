@@ -13,11 +13,14 @@ helpers do
     !!current_user
   end
   
+  def quick_access?
+    :development == settings.environment && 'true' == ENV['QUICK_ACCESS']
+  end
+  
   def restricted(message, landing_page='/')
-    unless logged_in?
-      session[:error] = message
-      redirect landing_page
-    end
+    return if logged_in? || quick_access?
+    session[:error] = message
+    redirect landing_page
   end
   
   def messages
