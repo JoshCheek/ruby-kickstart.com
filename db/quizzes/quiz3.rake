@@ -57,7 +57,7 @@ namespace :db do
             end
             notify
       PROBLEM
-      problem 'How do methods receive blocks?', :solution => 2, :options => ['like any other parameter', 'by placing an *asterisk in front of the last parameter', 'by placing an &amp;ampersand in front of the last parameter']
+      problem 'How do methods receive blocks?', :solution => 2, :options => ['like any other parameter', 'by placing an *asterisk in front of the last parameter', 'by placing an &ampersand in front of the last parameter']
       problem 'In the code `method { ... }`, the { ... } is placed into a special block slot for the method.', :predicate => true
       problem 'Use `{ ... }` to pass', :solution => 0, :options => ['inline blocks', 'multiline blocks']
       problem 'Use `do ... end` to pass', :solution => 1, :options => ['inline blocks', 'multiline blocks']
@@ -82,11 +82,11 @@ namespace :db do
             
               caller { }
         PROBLEM
-        subproblem '(a)', '&amp;block'
+        subproblem '(a)', '&block'
         subproblem '(b)', 'block'
         subproblem '(c)', 'block.call'
         subproblem '(d)', 'block.call'
-        presentation_order %w[block block.call &amp;block block()]
+        presentation_order %w[block block.call &block block()]
       end
       problem <<-PROBLEM, :mappings => { '(a)' => 'ordinal', '(b)' => 'optional', '(c)' => 'variable length', '(d)' => 'block' }, :presentation_order => %w[ordinal optional variable\ length block].sort
         Associate the parameter type with the signature.
