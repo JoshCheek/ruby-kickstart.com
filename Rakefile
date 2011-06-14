@@ -1,3 +1,13 @@
+# This is a poor man's test to make sure that we're in the Bundler sandbox
+begin
+  Psych # Bundler requires yaml, which defines Psych.
+rescue
+  puts "Looks like you're running this without having Bundler loaded."
+  puts "Try again with `bundle exec rake ...`"
+  puts "or check out https://github.com/mpapis/rubygems-bundler"
+  exit 1
+end
+
 # ==========  Helpers  ==========
 
 task :bootstrap do
@@ -113,7 +123,7 @@ namespace :db do
   desc 'wipe the db out -- DANGEROUS!'
   task :reset => [ :dangerous!, 'db:drop', 'db:migrate' ]
   
-  desc 'populate the quizzes into the db'
+  desc "Populate the quizzes into the db. Don't use while also doing a reset, that will just fuck everything up due to psych vs yaml bullshit."
   task :populate => :bootstrap
 end
 
