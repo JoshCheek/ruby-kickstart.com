@@ -5,54 +5,60 @@
 // then totally let me know the right way to do this.
 
 
-// presently, radio groups are the only form type that we validate
-var radioGroups = {};
+// =====  toValidate  =====
+// an array of quizQuestions that need to be validated
+var toValidate = [];
 
-radioGroups.areAll = function(predicate) {
+toValidate.areAll = function(predicate) {
   var allTrue = true;
-  jQuery.each(radioGroups, function(groupName, radioGroup) {
-    if((radioGroup instanceof RadioGroup) && !predicate(radioGroup))
+  jQuery.each(this, function(index, quizQuestion) {
+    if(!predicate(quizQuestion))
       allTrue = false;
   });
   return allTrue;
 };
 
-var RadioGroup = function() {
-  this.radios = jQuery([]);
-  this.isValid = false;
+toValidate.isValid = function() {
+  return toValidate.areAll(function(quizQuestion) {
+    return quizQuestion.isValid;
+  })
 };
 
-RadioGroup.prototype.add = function(radio) {
+
+// =====  RadioGroup  =====
+// currently the only kind of quizQuestion
+var RadioGroup = function($div) {
+  this.div      =   $div;
+  this.radios   =   jQuery([]);
+  this.isValid  =   false;
+  
   var that = this;
-  this.radios.push(radio);
-  radio.click(function() { that.isValid = true; });
+  jQuery('input[type="radio"]', $div).each( function(index, radio) {
+    that.add(jQuery(radio));
+  });
 };
 
+RadioGroup.prototype.add = function($radio) {
+  var that = this;
+  this.radios.push($radio);
+  $radio.click(function() { that.isValid = true; });
+};
+
+// =====  Initialization Code  =====
 var formInitialize = function(form) {
-  // create the RadioGroups
-  jQuery('input[type="radio"]', form).each( function(index, element) {
-    element = jQuery(element);
-    var name = element.attr('name');
-    radioGroups[name] || (radioGroups[name] = new RadioGroup());
-    radioGroups[name].add(element);
+  jQuery('.quizPredicateProblem, .quizMultipleChoiceProblem').each( function(index, div) {
+    $div = jQuery(div);
+    toValidate.push(new RadioGroup($div));
   });
-  
-  // allow radioGroups to know if all their contents are valid
-  radioGroups.isValid = function() {
-    return radioGroups.areAll(function(radioGroup) {
-      return radioGroup.isValid;
-    })
-  };
-  
+      
   // callback for validation before submission
   form.submit(function(event) {
-    if(!radioGroups.isValid()) {
-      event.preventDefault();
-    }
-    return true;
+    if(!toValidate.isValid()) 
+      event.preventDefault(); 
   });
 };
 
 jQuery(function(){
   formInitialize(jQuery('form'));
 });
+

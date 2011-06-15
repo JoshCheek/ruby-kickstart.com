@@ -9,36 +9,40 @@
     
     
     - when QuizMultipleChoiceProblem
-      %ul
-        - problem.options.each do |quiz_option|
-          %li
-            %input{ :type => "radio", :name => "quiz_results[#{id}]", :value => quiz_option }
-              = quiz_option
+      .quizMultipleChoiceProblem
+        %ul
+          - problem.options.each do |quiz_option|
+            %li
+              %input{ :type => "radio", :name => "quiz_results[#{id}]", :value => quiz_option }
+                = quiz_option
               
               
     - when QuizMatchAnswerProblem
-      %input{ :type => "text", :name => "quiz_results[#{id}]" }
+      .quizMatchAnswerProblem
+        %input{ :type => "text", :name => "quiz_results[#{id}]" }
     
     
     - when QuizPredicateProblem
-      %ul
-        %li
-          %input{ :type => 'radio', :name => "quiz_results[#{id}]", :value => 1  }
-            true
-        %li
-          %input{ :type => 'radio', :name => "quiz_results[#{id}]", :value => 0 }
-            false
+      .quizPredicateProblem
+        %ul
+          %li
+            %input{ :type => 'radio', :name => "quiz_results[#{id}]", :value => 1  }
+              true
+          %li
+            %input{ :type => 'radio', :name => "quiz_results[#{id}]", :value => 0 }
+              false
     
     
     - when QuizManyToManyProblem
-      %ul
-        - problem.question_set.each do |question|
-          %li
-            = question
-            %select{ :name => "quiz_results[#{id}][#{question}]" }
-              -problem.solution_set.each do |potential_solution|
-                %option{ :value => potential_solution }
-                  = potential_solution
+      .quizManyToManyProblem
+        %ul
+          - problem.question_set.each do |question|
+            %li
+              = question
+              %select{ :name => "quiz_results[#{id}][#{question}]" }
+                -problem.solution_set.each do |potential_solution|
+                  %option{ :value => potential_solution }
+                    = potential_solution
     
     
     - else
