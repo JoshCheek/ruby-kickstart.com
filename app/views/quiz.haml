@@ -1,6 +1,6 @@
 %h1= @quiz.name
 
-%form{ :name => 'quiz_results', :action => "/quizzes/#{@quiz.number}", :method => 'post' }
+%form{ :name => 'quiz', :action => "/quizzes/#{@quiz.number}", :method => 'post' }
   - @quiz.each_id_problem_and_index do |id, problem, index|
     %h3= index
     %h2~ markdown without_leading_whitepace(problem.question), :layout => false
