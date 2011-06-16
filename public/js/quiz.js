@@ -20,7 +20,7 @@ quizQuestions.areAll = function(predicate) {
 
 quizQuestions.isValid = function() {
   return quizQuestions.areAll(function(quizQuestion) {
-    return quizQuestion.isValid;
+    return quizQuestion.isValid();
   })
 };
 
@@ -32,7 +32,7 @@ quizQuestions.markInvalid = function() {
 
 quizQuestions.firstInvalid = function() {
   return jQuery.grep(this, function(quizQuestion) {
-    return !quizQuestion.isValid;
+    return !quizQuestion.isValid();
   })[0];
 };
 
@@ -42,10 +42,9 @@ quizQuestions.firstInvalid = function() {
 var RadioGroup = function($div) {
   this.div      =   $div;
   this.radios   =   jQuery([]);
-  this.isValid  =   false;
   
   var that = this;
-  jQuery('input[type="radio"]', $div).each( function(index, radio) {
+  jQuery('input[type="radio"]', $div).each(function(index, radio) {
     that.add(jQuery(radio));
   });
 };
@@ -54,18 +53,26 @@ RadioGroup.prototype.add = function($radio) {
   var that = this;
   this.radios.push($radio);
   $radio.click(function() { 
-    that.isValid = true; 
     that.div.removeClass("invalid");
   });
 };
 
 RadioGroup.prototype.markIfInvalid = function() {
-  if(this.isValid) return;
+  if(this.isValid()) return;
   this.div.addClass("invalid");
 };
 
 RadioGroup.prototype.top = function() {
   return this.div.offset().top;
+}
+
+RadioGroup.prototype.isValid = function() {
+  var hasChecked = false;
+  jQuery.each(this.radios, function(index, $radio) {
+    if("checked" == $radio.attr("checked")) 
+      hasChecked = true;
+  });
+  return hasChecked;
 }
 
 // =====  Invalid Quiz Handling  =====
