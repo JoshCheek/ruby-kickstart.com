@@ -75,12 +75,6 @@ RadioGroup.prototype.isValid = function() {
   return hasChecked;
 }
 
-// =====  Invalid Quiz Handling  =====
-var notifyUserOfInvalidQuiz = function() {
-  quizQuestions.markInvalid();
-  alert("Quiz questions that must be answered have been marked.");
-};
-
 // =====  Initialization Code  =====
 var formInitialize = function(form) {
   jQuery('.quizPredicateProblem, .quizMultipleChoiceProblem').each( function(index, div) {
