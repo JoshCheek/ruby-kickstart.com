@@ -24,6 +24,13 @@ toValidate.isValid = function() {
   })
 };
 
+toValidate.markInvalid = function() {
+  jQuery.each(this, function(index, quizQuestion) {
+    quizQuestion.markIfInvalid();
+  });
+};
+
+
 
 // =====  RadioGroup  =====
 // currently the only kind of quizQuestion
@@ -41,7 +48,21 @@ var RadioGroup = function($div) {
 RadioGroup.prototype.add = function($radio) {
   var that = this;
   this.radios.push($radio);
-  $radio.click(function() { that.isValid = true; });
+  $radio.click(function() { 
+    that.isValid = true; 
+    that.div.removeClass("invalid");
+  });
+};
+
+RadioGroup.prototype.markIfInvalid = function() {
+  if(this.isValid) return;
+  this.div.addClass("invalid");
+};
+
+// =====  Invalid Quiz Handling  =====
+var notifyUserOfInvalidQuiz = function() {
+  toValidate.markInvalid();
+  alert("Quiz questions that must be answered have been marked.");
 };
 
 // =====  Initialization Code  =====
@@ -53,8 +74,10 @@ var formInitialize = function(form) {
       
   // callback for validation before submission
   form.submit(function(event) {
-    if(!toValidate.isValid()) 
-      event.preventDefault(); 
+    if(!toValidate.isValid()) {
+      event.preventDefault();
+      notifyUserOfInvalidQuiz();
+    }
   });
 };
 
