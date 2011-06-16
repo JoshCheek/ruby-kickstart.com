@@ -24,7 +24,7 @@ quizQuestions.isValid = function() {
   })
 };
 
-quizQuestions.markInvalid = function() {
+quizQuestions.markInvalids = function() {
   jQuery.each(this, function(index, quizQuestion) {
     quizQuestion.markIfInvalid();
   });
@@ -86,7 +86,7 @@ var formInitialize = function(form) {
   // mark invalid quizQuestions, scroll to first invalid.
   form.submit(function(event) {
     if(!quizQuestions.isValid()) {
-      quizQuestions.markInvalid();
+      quizQuestions.markInvalids();
       event.preventDefault();
       var firstInvalid = quizQuestions.firstInvalid();
       jQuery(document).scrollTop(firstInvalid.top());
