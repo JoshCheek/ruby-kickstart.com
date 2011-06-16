@@ -95,6 +95,6 @@ var formInitialize = function(form) {
 };
 
 jQuery(function(){
-  formInitialize(jQuery('form'));
+  formInitialize(jQuery('form[name="quiz"]'));
 });
 
