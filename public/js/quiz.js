@@ -5,11 +5,11 @@
 // then totally let me know the right way to do this.
 
 
-// =====  toValidate  =====
+// =====  quizQuestions  =====
 // an array of quizQuestions that need to be validated
-var toValidate = [];
+var quizQuestions = [];
 
-toValidate.areAll = function(predicate) {
+quizQuestions.areAll = function(predicate) {
   var allTrue = true;
   jQuery.each(this, function(index, quizQuestion) {
     if(!predicate(quizQuestion))
@@ -18,19 +18,19 @@ toValidate.areAll = function(predicate) {
   return allTrue;
 };
 
-toValidate.isValid = function() {
-  return toValidate.areAll(function(quizQuestion) {
+quizQuestions.isValid = function() {
+  return quizQuestions.areAll(function(quizQuestion) {
     return quizQuestion.isValid;
   })
 };
 
-toValidate.markInvalid = function() {
+quizQuestions.markInvalid = function() {
   jQuery.each(this, function(index, quizQuestion) {
     quizQuestion.markIfInvalid();
   });
 };
 
-toValidate.firstInvalid = function() {
+quizQuestions.firstInvalid = function() {
   return jQuery.grep(this, function(quizQuestion) {
     return !quizQuestion.isValid;
   })[0];
@@ -70,7 +70,7 @@ RadioGroup.prototype.top = function() {
 
 // =====  Invalid Quiz Handling  =====
 var notifyUserOfInvalidQuiz = function() {
-  toValidate.markInvalid();
+  quizQuestions.markInvalid();
   alert("Quiz questions that must be answered have been marked.");
 };
 
@@ -78,16 +78,16 @@ var notifyUserOfInvalidQuiz = function() {
 var formInitialize = function(form) {
   jQuery('.quizPredicateProblem, .quizMultipleChoiceProblem').each( function(index, div) {
     $div = jQuery(div);
-    toValidate.push(new RadioGroup($div));
+    quizQuestions.push(new RadioGroup($div));
   });
       
   // callback for validation before submission
   // mark invalid quizQuestions, scroll to first invalid.
   form.submit(function(event) {
-    if(!toValidate.isValid()) {
-      toValidate.markInvalid();
+    if(!quizQuestions.isValid()) {
+      quizQuestions.markInvalid();
       event.preventDefault();
-      var firstInvalid = toValidate.firstInvalid();
+      var firstInvalid = quizQuestions.firstInvalid();
       jQuery(document).scrollTop(firstInvalid.top());
     }
   });
