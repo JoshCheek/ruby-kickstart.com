@@ -2,14 +2,14 @@
 
 %form{ :name => 'quiz', :action => "/quizzes/#{@quiz.number}", :method => 'post' }
   - @quiz.each_id_problem_and_index do |id, problem, index|
-    %h3= index
-    %h2~ markdown without_leading_whitepace(problem.question), :layout => false
+    %div{ :class => problem.class.to_s.sub(/^./) { |char| char.downcase } }
+      %h3= index
+      %h2~ markdown without_leading_whitepace(problem.question), :layout => false
     
-    - case problem
+      - case problem
     
     
-    - when QuizMultipleChoiceProblem
-      .quizMultipleChoiceProblem
+      - when QuizMultipleChoiceProblem
         %ul
           - problem.options.each do |quiz_option|
             %li
@@ -17,13 +17,11 @@
                 = quiz_option
               
               
-    - when QuizMatchAnswerProblem
-      .quizMatchAnswerProblem
+      - when QuizMatchAnswerProblem
         %input{ :type => "text", :name => "quiz_results[#{id}]" }
     
     
-    - when QuizPredicateProblem
-      .quizPredicateProblem
+      - when QuizPredicateProblem
         %ul
           %li
             %input{ :type => 'radio', :name => "quiz_results[#{id}]", :value => 1  }
@@ -33,8 +31,7 @@
               false
     
     
-    - when QuizManyToManyProblem
-      .quizManyToManyProblem
+      - when QuizManyToManyProblem
         %ul
           - problem.question_set.each do |question|
             %li
@@ -45,7 +42,7 @@
                     = potential_solution
     
     
-    - else
-      - raise "Don't know how to ask #{problem.inspect}"
+      - else
+        - raise "Don't know how to ask #{problem.inspect}"
       
   %input{ :type => 'submit', :value => 'submit' }

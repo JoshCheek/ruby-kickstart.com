@@ -30,6 +30,11 @@ toValidate.markInvalid = function() {
   });
 };
 
+toValidate.firstInvalid = function() {
+  return jQuery.grep(this, function(quizQuestion) {
+    return !quizQuestion.isValid;
+  })[0];
+};
 
 
 // =====  RadioGroup  =====
@@ -59,6 +64,10 @@ RadioGroup.prototype.markIfInvalid = function() {
   this.div.addClass("invalid");
 };
 
+RadioGroup.prototype.top = function() {
+  return this.div.offset().top;
+}
+
 // =====  Invalid Quiz Handling  =====
 var notifyUserOfInvalidQuiz = function() {
   toValidate.markInvalid();
@@ -73,10 +82,13 @@ var formInitialize = function(form) {
   });
       
   // callback for validation before submission
+  // mark invalid quizQuestions, scroll to first invalid.
   form.submit(function(event) {
     if(!toValidate.isValid()) {
+      toValidate.markInvalid();
       event.preventDefault();
-      notifyUserOfInvalidQuiz();
+      var firstInvalid = toValidate.firstInvalid();
+      jQuery(document).scrollTop(firstInvalid.top());
     }
   });
 };
