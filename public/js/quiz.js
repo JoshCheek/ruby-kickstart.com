@@ -1,32 +1,18 @@
-// I don't really know JavaScript. A lot of this code makes
-// me think "What the fuck, JavaScript / jQuery?", I'll try
-// to comment where this is, and why. Maybe show a snippet
-// of how I'd do it in Ruby. If you know jQuery well, then
-// maybe take a look and let me know if there's a better way
-// to do this stuff. 
+// I am a native Ruby speaker, but still a foreigner to JS.
+// If you look through this and think there is something that
+// could be better, let me know.
+
 
 
 // =====  quizQuestions  =====
 // an array of quizQuestions that need to be validated
 var quizQuestions = [];
 
-// Issues: Okay, I am setting a flag! OMG, I can't remember
-// the last time I set a flag :( I want to find the first element
-// where my function is true, but can't figure out how to do it.
-// In Ruby I wouldn't even have to write this method, b/c it
-// already exists http://ruby-doc.org/core/classes/Enumerable.html#M001499
-// but it would basically look like:
-//    def quiz_questions.all?
-//      each { |quiz_question| return false unless yield(quiz_question) }
-//      true
-//    end
 quizQuestions.areAll = function(predicate) {
-  var allTrue = true;
-  jQuery.each(this, function(index, quizQuestion) {
-    if(!predicate(quizQuestion))
-      allTrue = false;
-  });
-  return allTrue;
+  for(index in this)
+    if(!predicate(this[index])) 
+      return false;
+  return true;
 };
 
 quizQuestions.isValid = function() {
@@ -35,23 +21,14 @@ quizQuestions.isValid = function() {
   })
 };
 
+// returns first invalid, or null
 quizQuestions.markInvalids = function() {
+  var indexOfFirst = null;
   jQuery.each(this, function(index, quizQuestion) {
-    quizQuestion.markIfInvalid();
+    if( quizQuestion.markIfInvalid() && indexOfFirst == null )
+      indexOfFirst = index;
   });
-};
-
-// Here I just want the first one that matches my criteria
-// but I don't know how to find it, so instead, I get *all*
-// that match my criteia, then return the first one.
-// In Ruby this would be
-// def quiz_questions.first_invalid
-//   find { |quiz_question| !quiz_question.valid? }
-// end
-quizQuestions.firstInvalid = function() {
-  return jQuery.grep(this, function(quizQuestion) {
-    return !quizQuestion.isValid();
-  })[0];
+  return this[indexOfFirst];
 };
 
 
@@ -75,22 +52,24 @@ RadioGroup.prototype.add = function($radio) {
   });
 };
 
+// returns true if it marked itself invalid
 RadioGroup.prototype.markIfInvalid = function() {
-  if(this.isValid()) return;
+  if(this.isValid()) return false;
   this.div.addClass("invalid");
+  return true;
 };
 
 RadioGroup.prototype.top = function() {
   return this.div.offset().top;
 }
 
-// Another stupid flag thing. I figured out that I can return false
-// to break out of the loop so that I at least don't iterate over
-// the whole array, but it adds another 2 lines so I'm not sure it's
-// worth the complexity it adds.
+// Here I have to use a flag to track whether I've seen it yet or not, I
+// really hate that, but can't think of any other way. 
 // 
 // Also, the "checked" == $radio.attr("checked") is gross. I figured
 // out that I can do $radio[0].checked, but that seems really unintuitive
+// 
+// If any JS gurus read this, please, show me the right way to do it!
 RadioGroup.prototype.isValid = function() {
   var hasChecked = false;
   jQuery.each(this.radios, function(index, $radio) {
@@ -113,9 +92,8 @@ var formInitialize = function(form) {
   // mark invalid quizQuestions, scroll to first invalid.
   form.submit(function(event) {
     if(!quizQuestions.isValid()) {
-      quizQuestions.markInvalids();
       event.preventDefault();
-      var firstInvalid = quizQuestions.firstInvalid();
+      var firstInvalid = quizQuestions.markInvalids();
       jQuery(document).scrollTop(firstInvalid.top());
     }
   });
