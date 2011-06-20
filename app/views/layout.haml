@@ -18,34 +18,78 @@
     %script{ :src => 'http://code.jquery.com/jquery-1.6.1.js', :type => 'text/javascript' }
     %script{ :src => '/js/quiz.js', :type => 'text/javascript' }
     
-  %body
-    - messages.each do |type, message|
-      %div{ :class => type }= message
+    
+    %link{ :rel => "stylesheet", :href => "/murano/css/reset.css"               , :type => "text/css", :media => "screen", :title => "default", :charset => "utf-8" }
+    %link{ :rel => "stylesheet", :href => "/murano/css/text.css"                , :type => "text/css", :media => "screen", :title => "default", :charset => "utf-8" }
+    %link{ :rel => "stylesheet", :href => "/murano/css/custom.css"              , :type => "text/css", :media => "screen", :title => "default", :charset => "utf-8" }
+    %link{ :rel => "stylesheet", :href => "/murano/css/xGrid.css"               , :type => "text/css", :media => "screen", :title => "default", :charset => "utf-8" }
+    %link{ :rel => "stylesheet", :href => "/murano/css/uniform.default.css"     , :type => "text/css", :media => "screen", :title => "default", :charset => "utf-8" }
+    %link{ :rel => "stylesheet", :href => "/murano/css/jquery.lightbox-0.5.css" , :type => "text/css", :media => "screen", :title => "default", :charset => "utf-8" }
+    %link{ :rel => "stylesheet", :href => "/murano/css/jquery.visualize.css"    , :type => "text/css", :media => "screen", :title => "default", :charset => "utf-8" }
+  	
+    
+    
+    / Probably go with one of these in the end
+    / %link{ :rel => "stylesheet", :href => "/murano/themes/orange/css/orange.css" , :type => "text/css", :media => "screen", :charset => "utf-8", :class => "styleswitch", :id => "styleswitch" }
+    / %link{ :rel => "stylesheet", :href => "/murano/themes/maroon/css/maroon.css" , :type => "text/css", :media => "screen", :charset => "utf-8", :class => "styleswitch", :id => "styleswitch" }
+    %link{ :rel => "stylesheet", :href => "/murano/themes/blue/css/blue.css"     , :type => "text/css", :media => "screen", :charset => "utf-8", :class => "styleswitch", :id => "styleswitch" }
 
-    %p
-      - if doing_maintenance?
-        Currently doing maintenance, quizzes will be back up when done.
+    / Probably delete these in the end
+    / %link{ :rel => "stylesheet", :href => "/murano/themes/black/css/black.css"   , :type => "text/css", :media => "screen", :charset => "utf-8", :class => "styleswitch", :id => "styleswitch" }
+    / %link{ :rel => "stylesheet", :href => "/murano/themes/brown/css/brown.css"   , :type => "text/css", :media => "screen", :charset => "utf-8", :class => "styleswitch", :id => "styleswitch" }
+    / %link{ :rel => "stylesheet", :href => "/murano/themes/green/css/green.css"   , :type => "text/css", :media => "screen", :charset => "utf-8", :class => "styleswitch", :id => "styleswitch" }
+    / %link{ :rel => "stylesheet", :href => "/murano/themes/grey/css/grey.css"     , :type => "text/css", :media => "screen", :charset => "utf-8", :class => "styleswitch", :id => "styleswitch" }
+    / %link{ :rel => "stylesheet", :href => "/murano/themes/navy/css/navy.css"     , :type => "text/css", :media => "screen", :charset => "utf-8", :class => "styleswitch", :id => "styleswitch" }
+    / %link{ :rel => "stylesheet", :href => "/murano/themes/purple/css/purple.css" , :type => "text/css", :media => "screen", :charset => "utf-8", :class => "styleswitch", :id => "styleswitch" }
+    / %link{ :rel => "stylesheet", :href => "/murano/themes/red/css/red.css"       , :type => "text/css", :media => "screen", :charset => "utf-8", :class => "styleswitch", :id => "styleswitch" }
+    / %link{ :rel => "stylesheet", :href => "/murano/themes/yellow/css/yellow.css" , :type => "text/css", :media => "screen", :charset => "utf-8", :class => "styleswitch", :id => "styleswitch" }
+    
+    /[if IE 8]
+      %link{ :rel => "stylesheet", :href => "/murano/css/ie8.css", :type => "text/css", :media => "screen", :title => "default", :charset => "utf-8" }
+      
+    /[if IE 7]
+      %link{ :rel => "stylesheet", :href => "/murano/css/ie7.css", :type => "text/css", :media => "screen", :title => "default", :charset => "utf-8" }
+
+  	
+  %body
+
+    #topMenu.clearfix
+      %p
+        - if doing_maintenance?
+          Currently doing maintenance, quizzes will be back up when done.
         
-      - elsif current_user
-        %a{ :href => '/' } Home
-        |
-        %a{ :href => '/quiz_results' } My Results
-        |
-        - @quizzes.each do |quiz|
-          %a{ :href => "/quizzes/#{quiz.number}" }= "Take #{quiz.name}"
+        - elsif current_user
+          %a{ :href => '/' } Home
           |
-        %a{ :href => "/about" } About
-        |
-        %a{ :href => '/logout' }
-          Logout
-          = current_user.name
+          %a{ :href => '/quiz_results' } My Results
+          |
+          - @quizzes.each do |quiz|
+            %a{ :href => "/quizzes/#{quiz.number}" }= "Take #{quiz.name}"
+            |
+          %a{ :href => "/about" } About
+          |
+          %a{ :href => '/logout' }
+            Logout
+            = current_user.name
 
           
-      - else
-        Login with
-        %a{ :href => '/auth/facebook' } Facebook
-        to take the quizzes!
-        |
-        %a{ :href => "/about" } About
-      
-    ~ yield if block_given?
+        - else
+          Login with
+          %a{ :href => '/auth/facebook' } Facebook
+          to take the quizzes!
+          |
+          %a{ :href => "/about" } About
+
+    #page
+      .pad
+      #header
+        / 
+          %h1#title
+            %a{ :href => 'http://ruby-kickstart.com' } Ruby Kickstart
+      #body
+        - messages.each do |type, message|
+          .message.message-closable{ :class => "message-#{type}" }
+            = message
+            %span X
+        ~ yield if block_given?
+      #footer
