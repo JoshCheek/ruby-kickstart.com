@@ -1,0 +1,21 @@
+body { background: #FC0 url(../images/bg.png) no-repeat top center; }
+
+a { color: #358; }
+
+#header h1#title, #login h1#title { background-image: url(../../../images/murano-title-dark.png); }
+
+#megadropdown li a { color: #111 !important; text-shadow: 1px 1px #CCC !important; }
+
+#body, #login-body { -moz-box-shadow: 1px 1px 10px #917400; -webkit-box-shadow: 1px 1px 10px #917400; }
+
+.pg a.current { color: #111; border: 1px solid #CCC; background-color: #FC0; }
+
+button,
+button span { background: transparent url(../images/button_sprite.png) no-repeat; }
+
+button span,
+button .btn-pri span { color: #111; }
+
+#footer, #footer a { color: #111; }
+
+.subNav { border-bottom-color: #FC0; }

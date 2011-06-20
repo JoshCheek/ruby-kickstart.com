@@ -1,0 +1,10 @@
+body { background: #371C00 url(../images/bg.png) no-repeat top center; }
+
+a { color: #371C00; }
+
+.pg a.current { color: #FFF; border: 1px solid #CCC; background-color: #371C00; }
+
+button,
+button span { background: transparent url(../images/button_sprite.png) no-repeat; }
+
+button.btn-sec span { color: #371C00; }

@@ -1,0 +1,14 @@
+body { background: #77B32F url(../images/bg.png) no-repeat top center; }
+
+a { color: #44651B; }
+
+.pg a.current { color: #FFF; border: 1px solid #CCC; background-color: #44651B; }
+
+#body, #login-body { -moz-box-shadow: 1px 1px 10px #44651B; -webkit-box-shadow: 1px 1px 10px #44651B; }
+
+button,
+button span { background: transparent url(../images/button_sprite.png) no-repeat; }
+
+button.btn-sec span { color: #44651B; }
+
+.subNav { border-bottom-color: #77B32F; }

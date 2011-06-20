@@ -1,0 +1,12 @@
+body { background: #002142 url(../images/bg.png) no-repeat top center; }
+
+a { color: #002142; }
+
+.pg a.current { color: #FFF; border: 1px solid #CCC; background-color: #002142; }
+
+button,
+button span { background: transparent url(../images/button_sprite.png) no-repeat; }
+
+button.btn-sec span { color: #002142; }
+
+.subNav { border-bottom-color: #002142; }

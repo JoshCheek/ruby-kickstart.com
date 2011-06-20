@@ -1,0 +1,16 @@
+.layout-fluid #header .pad { padding-left: 0;}
+
+
+
+.layout-fluid #header .pad { width: 95%; margin: 0 auto !important; }
+
+.layout-fluid #header #info { right: 0; }
+
+.subNav { padding-bottom: 2em; }
+
+.sub_nav h3 { font-size: 14px; font-weight: bold; margin: .25em 0 1em 0; }
+
+.sub_nav ul,
+.sub_nav li { margin-top: 0 !important; }
+
+#login-body form { padding: 0 0 15px !important;}
