@@ -1,7 +1,9 @@
 Website for [ruby-kickstart.com](http://ruby-kickstart.com)
 
 
-This code is under the MIT license:
+The code in public/murano is under its own license given in that directory.
+
+Everything else in this project is under the MIT license:
 
 ---------------------------------------
 
