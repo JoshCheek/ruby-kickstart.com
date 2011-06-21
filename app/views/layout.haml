@@ -51,7 +51,7 @@
       %link{ :rel => "stylesheet", :href => "/murano/css/ie7.css", :type => "text/css", :media => "screen", :title => "default", :charset => "utf-8" }
 
   	
-  %body
+  %body.layout-fixed
 
     #topMenu.clearfix
       %p
@@ -83,9 +83,8 @@
     #page
       .pad
       #header
-        / 
-          %h1#title
-            %a{ :href => 'http://ruby-kickstart.com' } Ruby Kickstart
+        %h1#title
+          %a{ :href => 'http://ruby-kickstart.com' } Ruby Kickstart
       #body
         - messages.each do |type, message|
           .message.message-closable{ :class => "message-#{type}" }
