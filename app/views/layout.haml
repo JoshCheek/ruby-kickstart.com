@@ -59,26 +59,29 @@
           Currently doing maintenance, quizzes will be back up when done.
         
         - elsif current_user
-          %a{ :href => '/' } Home
-          |
-          %a{ :href => '/quiz_results' } My Results
-          |
-          - @quizzes.each do |quiz|
-            %a{ :href => "/quizzes/#{quiz.number}" }= "Take #{quiz.name}"
+          .left
+            %a{ :href => '/quiz_results' } Quiz Results
             |
-          %a{ :href => "/about" } About
-          |
-          %a{ :href => '/logout' }
-            Logout
-            = current_user.name
+            - @quizzes.each do |quiz|
+              %a{ :href => "/quizzes/#{quiz.number}" }= "Take #{quiz.name}"
+              |
+          .right
+            %a{ :href => '/' } Home
+            |
+            %a{ :href => "/about" } About
+            |
+            %a{ :href => '/logout' }
+              Logout
+              = current_user.name
 
           
         - else
-          Login with
-          %a{ :href => '/auth/facebook' } Facebook
-          to take the quizzes!
-          |
-          %a{ :href => "/about" } About
+          .right
+            Login with
+            %a{ :href => '/auth/facebook' } Facebook
+            to take the quizzes!
+            |
+            %a{ :href => "/about" } About
 
     #page
       .pad
