@@ -1,0 +1,8 @@
+#body {
+  padding: 30px;
+  
+  /* To override the top left corner being sharp */
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+}
