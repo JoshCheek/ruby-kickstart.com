@@ -1,0 +1,21 @@
+This applies to the current directory (murano) and all subdirectories and files
+contained within them, except for files which state otherwise within them.
+
+I bought this off of Theme Forest (http://themeforest.net/item/murano-admin/106224)
+I do not own it, and as such, it is not under the MIT License that the rest of the
+material is under.
+
+It is unclear to me what license it is under or what I should put here, I've contacted
+the author to ask, but he hasn't gotten back to me. All private data has been kept
+out of the repo, so the only things available are things that must be served publicly
+in order to use the theme.
+
+If you use the source of this site for your own project, you will have to either
+buy the theme yourself, or remove all of the code contained in this dir.
+
+If I am in any way using this material in a way that violates my rights of the actual
+owner (either Theme Forest, or rodcreative.com), then inform me (josh.cheek@gmail.com)
+and I will remedy the situation immediately.
+
+Alternatively, if anyone reads this and would like to offer me a design under the
+appropriate F/OSS license, I would be very appreciative.
