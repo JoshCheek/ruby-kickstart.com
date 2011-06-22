@@ -1,15 +1,4 @@
-begin
-  raise unless defined? Bundler
-rescue
-  if 'no' != ENV['USE_BUNDLER']
-    $stderr.puts "Looks like you're running this without having Bundler loaded."
-    $stderr.puts "Try again with `bundle exec rake ...`"
-    $stderr.puts "or check out https://github.com/mpapis/rubygems-bundler"
-    exit 1
-  end
-  $stderr.puts  "\e[33mYou aren't using Bundler, but it looks intentional, " \
-                "so not not going to kill the app.\e[0m"
-end
+require 'bundler/bouncer'
 
 # ==========  Helpers  ==========
 

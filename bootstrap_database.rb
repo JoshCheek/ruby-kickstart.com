@@ -1,4 +1,4 @@
-require 'bundler/setup'
+require 'bundler/bouncer'
 require 'active_record'
 
 env = ENV['DB'] || ENV['RACK_ENV'] || ENV['MERB_ENV'] || ENV['RAILS_ENV'] || 'development'

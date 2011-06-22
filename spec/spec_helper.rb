@@ -1,3 +1,5 @@
+require 'bundler/bouncer'
+
 # set proper env
 ENV['DB'] = ENV["RACK_ENV"] = ENV['MERB_ENV'] = ENV['RAILS_ENV'] = 'test'
 

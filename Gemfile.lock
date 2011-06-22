@@ -20,6 +20,7 @@ GEM
     addressable (2.2.4)
     arel (2.0.10)
     builder (2.1.2)
+    bundler-bouncer (0.1.2)
     coderay (0.9.8)
     cucumber (0.10.3)
       builder (>= 2.1.2)
@@ -140,6 +141,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord (= 3.0.7)
   acts_as_list (= 1)!
+  bundler-bouncer (~> 0.1.2)
   coderay (~> 0.9.7)
   cucumber (~> 0.10.3)
   haml (= 3.1.1)
