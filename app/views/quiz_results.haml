@@ -10,32 +10,32 @@
       %ul
         - problem.options.each do |quiz_option|
           - css_class = if problem.correct?(quiz_option) then "correct quizAnswer" elsif solution.guessed?(quiz_option) then "incorrect quizAnswer" end
-          %li.radio{ :class => css_class }
-            %input{ :type       =>  "radio",
-                    :checked    =>  problem.correct?(quiz_option),
-                    :disabled   =>  true }
+          %li.quizQuestion.radio{ :class => css_class }
+            %input.quizQuestion{  :type       =>  "radio",
+                                  :checked    =>  problem.correct?(quiz_option),
+                                  :disabled   =>  true }
               = quiz_option
             
             
     - when QuizMatchAnswerProblem
       - css_class = (solution.correct? ? :correct : :incorrect)
-      %input{ :type     => "text", 
-              :name     => "quiz_results[#{problem.id}]", 
-              :value    => solution.answer, 
-              :disabled => true,
-              :class    => css_class }
+      %input.quizQuestion{  :type     => "text", 
+                            :name     => "quiz_results[#{problem.id}]", 
+                            :value    => solution.answer, 
+                            :disabled => true,
+                            :class    => css_class }
       - if css_class == :incorrect
         = solution.failure_explanation
   
   
     - when QuizPredicateProblem
       %ul
-        %li.radio{ :class => (problem.predicate ? "correct quizAnswer" : solution.answer ? "incorrect quizAnswer" : '' ) }
+        %li.radio.quizQuestion{ :class => (problem.predicate ? "correct quizAnswer" : solution.answer ? "incorrect quizAnswer" : '' ) }
           %input{ :type     => "radio",
                   :checked  => solution.answer,
                   :disabled => true }
             true
-        %li.radio{ :class => (!problem.predicate ? "correct quizAnswer" : !solution.answer ? "incorrect quizAnswer" : '' ) }
+        %li.radio.quizQuestion{ :class => (!problem.predicate ? "correct quizAnswer" : !solution.answer ? "incorrect quizAnswer" : '' ) }
           %input{ :type     => "radio",
                   :checked  => !solution.answer,
                   :disabled => true }
@@ -45,7 +45,7 @@
     - when QuizManyToManyProblem
       %ul
         - problem.question_set.each do |question|
-          %li.radio
+          %li.quizQuestion.radio
             = question
             %select{ :class => (problem.guessed_correct?(question, solution.for(question)) ? "correct quizAnswer" : "incorrect quizAnswer" ) }
               - problem.solution_set.each do |potential_solution|

@@ -10,7 +10,7 @@
       - when QuizMultipleChoiceProblem
         %ul
           - problem.options.each do |quiz_option|
-            %li.radio
+            %li.radio.quizQuestion
               %input{ :type => "radio", :name => "quiz_results[#{id}]", :value => quiz_option }
                 = quiz_option
               
@@ -21,10 +21,10 @@
     
       - when QuizPredicateProblem
         %ul
-          %li.radio
+          %li.radio.quizQuestion
             %input{ :type => 'radio', :name => "quiz_results[#{id}]", :value => 1  }
               true
-          %li.radio
+          %li.radio.quizQuestion
             %input{ :type => 'radio', :name => "quiz_results[#{id}]", :value => 0 }
               false
     
@@ -32,7 +32,7 @@
       - when QuizManyToManyProblem
         %ul
           - problem.question_set.each do |question|
-            %li.radio
+            %li.radio.quizQuestion
               = question
               %select{ :name => "quiz_results[#{id}][#{question}]" }
                 -problem.solution_set.each do |potential_solution|
