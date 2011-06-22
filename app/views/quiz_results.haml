@@ -9,7 +9,7 @@
     %ul
       - problem.options.each do |quiz_option|
         - css_class = if problem.correct?(quiz_option) then :correct elsif solution.guessed?(quiz_option) then :incorrect end
-        %li{ :class => css_class }
+        %li.radio{ :class => css_class }
           %input{ :type       =>  "radio",
                   :checked    =>  problem.correct?(quiz_option),
                   :disabled   =>  true }
@@ -29,12 +29,12 @@
   
   - when QuizPredicateProblem
     %ul
-      %li{ :class => (problem.predicate ? :correct : solution.answer ? :incorrect : '' ) }
+      %li.radio{ :class => (problem.predicate ? :correct : solution.answer ? :incorrect : '' ) }
         %input{ :type     => "radio",
                 :checked  => solution.answer,
                 :disabled => true }
           true
-      %li{ :class => (!problem.predicate ? :correct : !solution.answer ? :incorrect : '' ) }
+      %li.radio{ :class => (!problem.predicate ? :correct : !solution.answer ? :incorrect : '' ) }
         %input{ :type     => "radio",
                 :checked  => !solution.answer,
                 :disabled => true }
@@ -44,7 +44,7 @@
   - when QuizManyToManyProblem
     %ul
       - problem.question_set.each do |question|
-        %li
+        %li.radio
           = question
           %select{ :class => (problem.guessed_correct?(question, solution.for(question)) ? :correct : :incorrect ) }
             - problem.solution_set.each do |potential_solution|

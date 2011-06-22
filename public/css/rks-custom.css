@@ -30,3 +30,6 @@
 .invalid             { background-color: #FFFCD3; }
 code                 { background-color: #CCC;    }
 
+li.radio {
+  list-style: none;
+}
