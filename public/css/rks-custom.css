@@ -43,3 +43,9 @@ li.radio {
   border-radius:          8px;
   -moz-border-radius:     8px;
 }
+
+.quizAnswer {
+  -webkit-border-radius:  4px;
+  border-radius:          4px;
+  -moz-border-radius:     4px;  
+}

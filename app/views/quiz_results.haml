@@ -9,7 +9,7 @@
     - when QuizMultipleChoiceProblem
       %ul
         - problem.options.each do |quiz_option|
-          - css_class = if problem.correct?(quiz_option) then :correct elsif solution.guessed?(quiz_option) then :incorrect end
+          - css_class = if problem.correct?(quiz_option) then "correct quizAnswer" elsif solution.guessed?(quiz_option) then "incorrect quizAnswer" end
           %li.radio{ :class => css_class }
             %input{ :type       =>  "radio",
                     :checked    =>  problem.correct?(quiz_option),
@@ -30,12 +30,12 @@
   
     - when QuizPredicateProblem
       %ul
-        %li.radio{ :class => (problem.predicate ? :correct : solution.answer ? :incorrect : '' ) }
+        %li.radio{ :class => (problem.predicate ? "correct quizAnswer" : solution.answer ? "incorrect quizAnswer" : '' ) }
           %input{ :type     => "radio",
                   :checked  => solution.answer,
                   :disabled => true }
             true
-        %li.radio{ :class => (!problem.predicate ? :correct : !solution.answer ? :incorrect : '' ) }
+        %li.radio{ :class => (!problem.predicate ? "correct quizAnswer" : !solution.answer ? "incorrect quizAnswer" : '' ) }
           %input{ :type     => "radio",
                   :checked  => !solution.answer,
                   :disabled => true }
@@ -47,7 +47,7 @@
         - problem.question_set.each do |question|
           %li.radio
             = question
-            %select{ :class => (problem.guessed_correct?(question, solution.for(question)) ? :correct : :incorrect ) }
+            %select{ :class => (problem.guessed_correct?(question, solution.for(question)) ? "correct quizAnswer" : "incorrect quizAnswer" ) }
               - problem.solution_set.each do |potential_solution|
                 %option{  :value     =>  potential_solution,
                           :disabled  =>  true,
