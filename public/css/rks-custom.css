@@ -51,5 +51,12 @@ li.radio {
 }
 
 .quizQuestion {
- padding: 10px; 
+ padding: 10px;
+}
+
+.rounded {
+  -webkit-border-radius:  4px;
+  border-radius:          4px;
+  -moz-border-radius:     4px; 
+}
 }

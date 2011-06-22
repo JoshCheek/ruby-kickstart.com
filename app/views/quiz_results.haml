@@ -19,11 +19,11 @@
             
     - when QuizMatchAnswerProblem
       - css_class = (solution.correct? ? :correct : :incorrect)
-      %input.quizQuestion{  :type     => "text", 
-                            :name     => "quiz_results[#{problem.id}]", 
-                            :value    => solution.answer, 
-                            :disabled => true,
-                            :class    => css_class }
+      %input.quizQuestion.rounded{  :type     => "text", 
+                                    :name     => "quiz_results[#{problem.id}]", 
+                                    :value    => solution.answer, 
+                                    :disabled => true,
+                                    :class    => css_class }
       - if css_class == :incorrect
         = solution.failure_explanation
   
