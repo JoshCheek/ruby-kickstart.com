@@ -24,3 +24,9 @@
   text-shadow: 1px 1px black;
   width: 100%;
 }
+
+.correct             { background-color: #E5F993; }
+.incorrect, .error   { background-color: #F6B9B9; }
+.invalid             { background-color: #FFFCD3; }
+code                 { background-color: #CCC;    }
+
