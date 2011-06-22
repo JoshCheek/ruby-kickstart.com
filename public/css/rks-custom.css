@@ -63,3 +63,14 @@ code {
   background-color: #CCC;
   padding: 5px;
 }
+
+.quizProblem h3 {
+  font-size:              xx-small;
+  color:                  #FFF;
+  padding:                5px 8px;
+  position:               absolute;
+  right:                  45px;
+  -webkit-border-radius:  20px;
+  border-radius:          20px;
+  -moz-border-radius:     20px;  
+}
