@@ -33,3 +33,13 @@ code                 { background-color: #CCC;    }
 li.radio {
   list-style: none;
 }
+
+.quizProblem {
+  margin-bottom:          40px;
+/*  border: 1px solid black;*/
+  background-color:       #98c7f3;
+  padding:                20px;
+  -webkit-border-radius:  8px;
+  border-radius:          8px;
+  -moz-border-radius:     8px;
+}

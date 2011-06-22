@@ -1,6 +1,6 @@
 %form{ :name => 'quiz', :action => "/quizzes/#{@quiz.number}", :method => 'post' }
   - @quiz.each_id_problem_and_index do |id, problem, index|
-    %div{ :class => problem.class.to_s.sub(/^./) { |char| char.downcase } }
+    %div.quizProblem{ :class => problem.class.to_s.sub(/^./) { |char| char.downcase } }
       %h3= index
       %h2~ markdown without_leading_whitepace(problem.question), :layout => false
     
