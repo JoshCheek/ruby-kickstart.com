@@ -10,3 +10,15 @@
 #topMenu div.left {
   width: auto;
 }
+
+#header h1#title {
+  line-height: 100%;
+}
+
+#header h1#title a {
+  display: block;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: 1px 1px black;
+}
