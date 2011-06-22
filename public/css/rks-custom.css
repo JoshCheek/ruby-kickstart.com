@@ -28,7 +28,6 @@
 .correct             { background-color: #E5F993;             }
 .incorrect, .error   { background-color: #F6B9B9;             }
 .invalid             { background-color: #FFFCD3 !important;  }
-code                 { background-color: #CCC;                }
 
 li.radio {
   list-style: none;
@@ -59,4 +58,8 @@ li.radio {
   border-radius:          4px;
   -moz-border-radius:     4px; 
 }
+
+code { 
+  background-color: #CCC;
+  padding: 5px;
 }
