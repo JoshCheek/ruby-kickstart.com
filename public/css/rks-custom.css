@@ -13,6 +13,7 @@
 
 #header h1#title {
   line-height: 100%;
+  width: 100%;
 }
 
 #header h1#title a {
@@ -21,4 +22,5 @@
   font-weight: bold;
   text-decoration: none;
   text-shadow: 1px 1px black;
+  width: 100%;
 }

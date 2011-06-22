@@ -1,5 +1,3 @@
-%h1= @quiz.name
-
 %form{ :name => 'quiz', :action => "/quizzes/#{@quiz.number}", :method => 'post' }
   - @quiz.each_id_problem_and_index do |id, problem, index|
     %div{ :class => problem.class.to_s.sub(/^./) { |char| char.downcase } }

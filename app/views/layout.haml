@@ -87,7 +87,7 @@
       .pad
       #header
         %h1#title
-          %a{ :href => 'http://ruby-kickstart.com' } Ruby Kickstart
+          %a{ :href => 'http://ruby-kickstart.com' }= @title || 'Ruby Kickstart'
       #body
         - messages.each do |type, message|
           .message.message-closable{ :class => "message-#{type}" }

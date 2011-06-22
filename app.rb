@@ -55,6 +55,7 @@ get '/' do
 end
 
 get '/about' do
+  @title = 'About Ruby Kickstart'
   haml :about
 end
  
@@ -62,6 +63,7 @@ end
 get '/quizzes/:quiz_number' do
   restricted 'You must be logged in to take quizzes.'
   @quiz = Quiz.find_by_number params[:quiz_number]
+  @title = @quiz.name
   haml :quiz
 end
 
@@ -77,6 +79,7 @@ end
 get '/quiz_results' do
   restricted 'You must be logged in to view your quizzes.'
   @quiz_takens = current_user.quiz_takens
+  @title = 'Quiz Results'
   haml :quizzes
 end
 
@@ -87,6 +90,7 @@ get '/quiz_results/:quiz_id' do
     session[:error] = "You can only view your own quizzes."
     redirect '/quiz_results'
   end
+  @title = @quiz_taken.name
   haml :quiz_results
 end
 
