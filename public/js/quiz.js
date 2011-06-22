@@ -9,7 +9,7 @@
 var quizQuestions = [];
 
 quizQuestions.areAll = function(predicate) {
-  for(index in this)
+  for(var index=0; index < this.length; ++index)
     if(!predicate(this[index])) 
       return false;
   return true;
