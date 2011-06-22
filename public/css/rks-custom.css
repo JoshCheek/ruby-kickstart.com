@@ -78,3 +78,9 @@ code {
 .quizProblem.invalid h3 {
   color:                  #000;
 }
+
+#body p {
+  font-size:              large;
+  font-weight:            bold;
+  line-height:            1.4em;
+}
