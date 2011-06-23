@@ -4,3 +4,5 @@
       %a{ :href => "/quiz_results/#{quiz_taken.id}" }
         =quiz_taken.name
       = quiz_taken.summary
+      Taken on
+      = quiz_taken.created_at.strftime '%e %b %Y'
