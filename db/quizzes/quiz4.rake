@@ -10,7 +10,7 @@ namespace :db do
         (d) If the left hand side is false, return the right hand side<br />
         (b) If the left hand side is false, return the left hand side<br />
       PROBLEM
-      problem "This operator will assing a value, unless one has already been assigned.", :solution => 3, :options => ["`&&=`{: lang='ruby'}", "`&&`{: lang='ruby'}", "`&`{: lang='ruby'}", "`||=`{: lang='ruby'}", "`||`{: lang='ruby'}", "`|`{: lang='ruby'}"]
+      problem "This operator will assign a value, unless one has already been assigned.", :solution => 3, :options => ["`&&=`{: lang='ruby'}", "`&&`{: lang='ruby'}", "`&`{: lang='ruby'}", "`||=`{: lang='ruby'}", "`||`{: lang='ruby'}", "`|`{: lang='ruby'}"]
       problem "What does a range from 1 through 5 look like?", :match => /\b1\s*\.\.(\s*5|\.\s*6)\b/
       add_problem :many_to_many do
         set_question <<-PROBLEM
