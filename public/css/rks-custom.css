@@ -25,7 +25,7 @@
   width: 100%;
 }
 
-.correct             { background-color: #E5F993;             }
+.correct             { background-color: #daec90;             }
 .incorrect, .error   { background-color: #F6B9B9;             }
 .invalid             { background-color: #FFFCD3 !important;  }
 
@@ -59,9 +59,17 @@ li.radio {
   -moz-border-radius:     4px; 
 }
 
-code { 
-  background-color: #CCC;
-  padding: 5px;
+code, .code, .radio code { 
+  background-color: #c9dff3;
+  padding: 2px 5px;
+}
+
+.radio.correct code {
+  background-color: #effac5;
+}
+
+.radio.incorrect code {
+  background-color: #f5dcdc;  
 }
 
 .quizProblem h3 {

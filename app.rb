@@ -44,6 +44,10 @@ helpers do
     'true' == ENV['DOING_MAINTENANCE']
   end
   
+  def inline_markdown(text)
+    markdown(text, :layout => false).sub(/^\s*<p\s*>/,'').sub(/<\/p\s*>\s*$/,'')
+  end
+  
 end
 
 

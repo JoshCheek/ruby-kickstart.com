@@ -34,7 +34,7 @@ class QuizMatchAnswerSolution < ActiveRecord::Base
       next if regex =~ answer
       regexes << regex.inspect
     end
-    "Expected to match #{regexes.join ', '}, but didn't."
+    "Expected to match `#{regexes.join ', '}`{: lang='ruby'}, but didn't."
   end
   
 end

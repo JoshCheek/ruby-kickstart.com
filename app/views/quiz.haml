@@ -12,7 +12,7 @@
           - problem.options.each do |quiz_option|
             %li.radio.quizQuestion
               %input{ :type => "radio", :name => "quiz_results[#{id}]", :value => quiz_option }
-                = quiz_option
+                = inline_markdown quiz_option
               
               
       - when QuizMatchAnswerProblem
@@ -33,11 +33,11 @@
         %ul
           - problem.question_set.each do |question|
             %li.radio.quizQuestion
-              = question
+              = inline_markdown question
               %select{ :name => "quiz_results[#{id}][#{question}]" }
                 -problem.solution_set.each do |potential_solution|
                   %option{ :value => potential_solution }
-                    = potential_solution
+                    = inline_markdown potential_solution
     
     
       - else
