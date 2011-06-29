@@ -3,7 +3,7 @@ require 'coderay'
 require 'kramdown'
 require 'sinatra'
 require 'active_record'
-require "active_record/acts/list.rb"
+require "active_record/acts/list"
 require 'omniauth'
 require 'erb'
 
