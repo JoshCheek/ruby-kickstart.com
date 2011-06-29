@@ -6,6 +6,7 @@ namespace :db do
         set_question <<-PROBLEM
           List what each returns.
           
+          {: lang='ruby'}
               :abc.class      # => (a)
               "abc".class     # => (b)
               'abc'.class     # => (c)
@@ -23,25 +24,27 @@ namespace :db do
         subproblem '(g)', 'Hash'
         presentation_order %w(Symbol String Fixnum Class Array Hash).sort
       end
-      problem "`:abc.object_id == :abc.object_id`", :predicate => true
-      problem "`'abc'.object_id == 'abc'.object_id`", :predicate => false
+      problem "`:abc.object_id == :abc.object_id`{: lang='ruby'}", :predicate => true
+      problem "`'abc'.object_id == 'abc'.object_id`{: lang='ruby'}", :predicate => false
       problem <<-PROBLEM, :mappings => { '(a)' => ':ghi', '(b)' => 'nil', '(c)' => '789' }, :presentation_order => %w[:abc :def :ghi 123 456 789 nil]
         Select the values of a, b, and c that make the code accurate
-      
+        
+        {: lang='ruby'}
             hash = { :abc => 123, :def => 456, :ghi => 789 }
             hash[(a)]   # => 789
             hash[456]   # => (b)
             hash[:ghi]  # => (c)
       PROBLEM
-      problem 'If you are interested in a sequential list of objects, what data structure should you use?', :solution => 2, :options => %w[Hash String Array Set]
+      problem 'If you are interested in a sequential list of objects, what data structure should you use?', :solution => 2, :options => ["`Hash`{: lang='ruby'}", "`String`{: lang='ruby'}", "`Array`{: lang='ruby'}", "`Set`{: lang='ruby'}"]
       problem 'How would you get an object that would always tell you the current time?', :solution => 2, :options => [
-        'current_time = Time.now',
-        'current_time = Proc.new(Time.now)',
-        'current_time = Proc.new { Time.now }',
+        "`current_time = Time.now`{: lang='ruby'}",
+        "`current_time = Proc.new(Time.now)`{: lang='ruby'}",
+        "`current_time = Proc.new { Time.now }`{: lang='ruby'}",
       ]
       problem <<-PROBLEM, :predicate => false
         This will raise an error.
-
+        
+        {: lang='ruby'}
             user = 'Sally'
             notify = Proc.new do
               "The current user is \#{user}"
@@ -51,6 +54,7 @@ namespace :db do
       problem <<-PROBLEM, :predicate => true
         This will raise an error.
         
+        {: lang='ruby'}
             user = 'Sally'
             def notify
               "The current user is \#{user}"
@@ -58,15 +62,16 @@ namespace :db do
             notify
       PROBLEM
       problem 'How do methods receive blocks?', :solution => 2, :options => ['like any other parameter', 'by placing an *asterisk in front of the last parameter', 'by placing an &ampersand in front of the last parameter']
-      problem 'In the code `method { ... }`, the { ... } is placed into a special block slot for the method.', :predicate => true
+      problem "In the code `method { ... }`{: lang='ruby'}, the { ... } is placed into a special block slot for the method.", :predicate => true
       problem 'Use `{ ... }` to pass', :solution => 0, :options => ['inline blocks', 'multiline blocks']
-      problem 'Use `do ... end` to pass', :solution => 1, :options => ['inline blocks', 'multiline blocks']
-      problem 'In the method declaration `def method(&block)`, the block variable is set to an empty Proc, if method is invoked without a block.', :predicate => false
+      problem "Use `do ... end`{: lang='ruby'} to pass", :solution => 1, :options => ['inline blocks', 'multiline blocks']
+      problem "In the method declaration `def method(&block)`{: lang='ruby'}, the block variable is set to an empty Proc, if method is invoked without a block.", :predicate => false
       problem 'Blocks can be stored in instance variables and then executed when something interesting happens.', :predicate => true
       add_problem :many_to_many do
         set_question <<-PROBLEM
-          For a and b, how would you pass the block, given the signatures of `receiver1` and `receiver2`? For c and d, how would you invoke them?
+          For a and b, how would you pass the block, given the signatures of `receiver1`{: lang='ruby'} and `receiver2`{: lang='ruby'}? For c and d, how would you invoke them?
         
+          {: lang='ruby'}
               def caller(&block)
                 receiver1 (a)
                 receiver2 (b)
@@ -91,6 +96,7 @@ namespace :db do
       problem <<-PROBLEM, :mappings => { '(a)' => 'ordinal', '(b)' => 'optional', '(c)' => 'variable length', '(d)' => 'block' }, :presentation_order => %w[ordinal optional variable\ length block].sort
         Associate the parameter type with the signature.
         
+        {: lang='ruby'}
             # (a)
             def meth(param)
             end
