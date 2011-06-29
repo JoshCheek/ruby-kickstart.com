@@ -48,7 +48,13 @@ end
 
 
 before do
-  @quizzes = Quiz.all :order => :number
+  @quizzes = [
+    Quiz.find_latest(1),
+    Quiz.find_latest(2),
+    Quiz.find_latest(3),
+    Quiz.find_latest(4),
+    Quiz.find_latest(5),
+  ].compact
 end
 
 get '/' do
@@ -63,14 +69,14 @@ end
   
 get '/quizzes/:quiz_number' do
   restricted 'You must be logged in to take quizzes.'
-  @quiz = Quiz.find_by_number params[:quiz_number]
+  @quiz = Quiz.find_latest params[:quiz_number]
   @title = @quiz.name
   haml :quiz
 end
 
 post '/quizzes/:quiz_number' do  
   restricted 'You must be logged in to submit quizzes'
-  quiz = Quiz.find_by_number params[:quiz_number]
+  quiz = Quiz.find_latest params[:quiz_number]
   quiz_taken = QuizTaken.new :quiz => quiz, :user => current_user
   quiz_taken.apply_solutions params[:quiz_results]
   raise "something went wrong with the quiz submission :/" if quiz_taken.new_record?

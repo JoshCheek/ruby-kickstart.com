@@ -87,9 +87,14 @@ describe Quiz do
       end
     
       context 'when adding another quiz for the same number' do
-        subject { Quiz.add 5 , 'duplicate quiz number' }
-        specify { Quiz.count.should == 1 }
-        it { should be_new_record }
+        let(:version1) { Quiz.add(12, 'v1') { problem 't/f?', :predicate => true } }
+        let(:version2) { Quiz.add(12, 'v2') { problem 'true/false?', :predicate => true } }
+        before { clean_db; version1; version2 }
+        specify { Quiz.all.size.should == 2 }
+        specify { version1.version.should be 1 }
+        specify { version2.version.should be 2 }
+        specify { Quiz.find_latest(12).should == version2 }
+        specify { Quiz.find_latest(13).should_not be }
       end
       
     end
@@ -110,7 +115,7 @@ describe Quiz do
       end    
     end
   end
-  
+    
 end
 
 

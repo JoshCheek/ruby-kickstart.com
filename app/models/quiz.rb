@@ -1,13 +1,19 @@
 class Quiz < ActiveRecord::Base
   
   def self.add(number, name, &block)
-    quiz = Quiz.create :name => name , :number => number
+    old_quiz = Quiz.find_latest number
+    version = old_quiz && old_quiz.version.next || 1
+    quiz = Quiz.create :name => name, :number => number, :version => version
     quiz.instance_eval &block if block
     quiz
   end
   
+  def self.find_latest(number)
+    find_all_by_number(number).last
+  end
+  
   has_many :quiz_problems, :order => :position
-  validates_uniqueness_of :number
+  validates_uniqueness_of :version, :scope => :number
   
   def add_problem(type, &block)
     problem_class = case type
