@@ -64,6 +64,8 @@ code, .code, .radio code {
   padding: 2px 5px;
 }
 
+.CodeRay .code { padding: 2px 20px;}
+
 .radio.correct code {
   background-color: #effac5;
 }
