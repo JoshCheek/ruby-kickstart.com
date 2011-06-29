@@ -85,6 +85,5 @@
         - messages.each do |type, message|
           .message.message-closable{ :class => "message-#{type}" }
             = message
-            %span X
         ~ yield if block_given?
       #footer
