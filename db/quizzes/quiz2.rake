@@ -34,7 +34,6 @@ namespace :db do
         "in the `String`{: lang='ruby'} class"
       ]
       problem 'Between Planet and Mars, which is the class?', :solution => 0, :options => %w[Planet Mars]
-      problem "Where are class' methods stored?", :match => /\bsingleton\b.*\bclass\b/i
       problem "When you see something that begins with an `@asperand`{: lang='ruby'}, you know it is a[n]", :match => /\binstance.*\bvariable\b/i
       problem <<-PROBLEM, :match => /attr_accessor\s+(:value|'value'|"value")/
         What is another way of defining these methods?
