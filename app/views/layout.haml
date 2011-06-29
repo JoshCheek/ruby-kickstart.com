@@ -56,7 +56,7 @@
             %a{ :href => '/quiz_results' } Quiz Results
             |
             - @quizzes.each do |quiz|
-              %a{ :href => "/quizzes/#{quiz.number}" }= "Take #{quiz.name}"
+              %a{ :href => "/quizzes/#{quiz.number}" }= quiz.name
               = '|' unless quiz == @quizzes.last
           .right
             %a{ :href => '/' } Home
