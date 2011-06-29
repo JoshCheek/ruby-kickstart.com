@@ -123,13 +123,15 @@ namespace :db do
   desc "Populate the quizzes into the db."
   task :populate => :bootstrap
   
-  desc "Populate with test data"
-  task :td => [:reset, :bootstrap] do
-    Quiz.add 1, 'Test Data Quiz' do
-      problem "(a) ?, (b) ?", :mappings => { '(a)' => 'a', '(b)' => 'b' }, :presentation_order => %w[a b]
-      problem "The answer is c?", :solution => 0, :options => %w[c d]
-      problem "Write the letter e", :match => /e/
-      problem "The next letter is f", :predicate => true
+  namespace :populate do
+    desc "Populate with test data"
+    task :td => [:bootstrap] do
+      Quiz.add 1, 'Test Data Quiz' do
+        problem "(a) ?, (b) ?", :mappings => { '(a)' => 'a', '(b)' => 'b' }, :presentation_order => %w[a b]
+        problem "The answer is c?", :solution => 0, :options => %w[c d]
+        problem "Write the letter e", :match => /e/
+        problem "The next letter is f", :predicate => true
+      end
     end
   end
 end
