@@ -1,5 +1,3 @@
-require 'bundler/bouncer'
-
 # ==========  Helpers  ==========
 
 task :bootstrap do

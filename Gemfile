@@ -10,7 +10,6 @@ gem 'acts_as_list'          , '1' , :git => 'git://github.com/JoshCheek/acts_as_
 gem 'omniauth'              , '~> 0.2.6'
 gem 'kramdown'              , '~> 0.13.3'
 gem 'coderay'               , '~> 0.9.7'
-gem 'bundler-bouncer'       , '~> 0.1.2'
 
 group :development, :test do
   gem 'rake'          , '~> 0.9.2'

@@ -1,4 +1,3 @@
-require 'bundler/bouncer'
 require 'yaml'
 require 'coderay'
 require 'kramdown'
