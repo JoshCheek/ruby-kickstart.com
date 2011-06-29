@@ -1,9 +1,10 @@
+require 'bundler/setup'
 require 'yaml'
 require 'coderay'
 require 'kramdown'
 require 'sinatra'
 require 'active_record'
-require "active_record/acts/list"
+require 'active_record/acts/list'
 require 'omniauth'
 require 'erb'
 
