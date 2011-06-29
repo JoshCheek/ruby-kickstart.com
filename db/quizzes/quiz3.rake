@@ -42,7 +42,7 @@ namespace :db do
         "`current_time = Proc.new { Time.now }`{: lang='ruby'}",
       ]
       problem <<-PROBLEM, :predicate => false
-        This will raise an error.
+        This will raise an error because the Proc references the local variable `user`{: lang='ruby'}.
         
         {: lang='ruby'}
             user = 'Sally'
@@ -52,7 +52,7 @@ namespace :db do
             notify.call
       PROBLEM
       problem <<-PROBLEM, :predicate => true
-        This will raise an error.
+        This will raise an error because the method references the local variable `user`{: lang='ruby'}.
         
         {: lang='ruby'}
             user = 'Sally'
@@ -69,7 +69,9 @@ namespace :db do
       problem 'Blocks can be stored in instance variables and then executed when something interesting happens.', :predicate => true
       add_problem :many_to_many do
         set_question <<-PROBLEM
-          For a and b, how would you pass the block, given the signatures of `receiver1`{: lang='ruby'} and `receiver2`{: lang='ruby'}? For c and d, how would you invoke them?
+          For a and b, how would you pass the block, given the signatures of `receiver1`{: lang='ruby'} and `receiver2`{: lang='ruby'}?
+          
+          For c and d, how would you invoke them?
         
           {: lang='ruby'}
               def caller(&block)
