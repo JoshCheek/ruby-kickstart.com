@@ -8,6 +8,15 @@ require "active_record/acts/list.rb"
 require 'omniauth'
 require 'erb'
 
+
+
+module Kramdown
+  module Options
+    # @options[:coderay_css] = Definition.new :coderay_css , Symbol , :class , "" # highlight by giving classes on spans that we can style with a stylesheet
+    @options[:coderay_line_numbers]  = Definition.new :coderay_line_numbers , Symbol , nil , "" # nil means no line numbers
+  end
+end
+
 Tilt.prefer(Tilt::KramdownTemplate)
 
 $root = File.expand_path(File.dirname __FILE__)
