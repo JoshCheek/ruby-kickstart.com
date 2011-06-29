@@ -41,8 +41,8 @@ namespace :db do
         "`(add 1, 2)`{: lang='ruby'}",
         "`(add 1 2)`{: lang='ruby'}",
         "all of the above",
-        "`add(1, 2)` or `add 1, 2`{: lang='ruby'}",
-        "`add(1 2)` or `add 1 2`{: lang='ruby'}",
+        "`add(1, 2)`{: lang='ruby'} or `add 1, 2`{: lang='ruby'}",
+        "`add(1 2)`{: lang='ruby'} or `add 1 2`{: lang='ruby'}",
       ]
       problem 'What does `puts("I want #{1 + 2} tacos")` print? (notice double quotes)', :solution => 1, :options => [
         'I want #{1 + 2} tacos',
