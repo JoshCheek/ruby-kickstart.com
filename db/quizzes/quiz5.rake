@@ -33,7 +33,7 @@ namespace :db do
           Where does `select`{: lang='ruby'} come from?
         PROBLEM
         add_option  'It is available in every module.'
-        add_option  %q(It is defined on self, the object that invoked `threes_r0`{: lang='ruby'}.), :solution => true
+        add_option  %q(It is defined on `self`{: lang='ruby'}, the object that invoked `threes_r0`{: lang='ruby'}.), :solution => true
         add_option  'It is the Ruby keyword that defines a select statement.'
       end
       problem <<-PROBLEM, :predicate => false
@@ -59,9 +59,9 @@ namespace :db do
         %q|`"String".search(/S/)`{: lang='ruby'}|,
       ]
       problem %q|What will `"bba bb bc bd be"[/\bb[aeiou]/]`{: lang='ruby'} return?|, :solution => 5, :options => %w[bba ba bb bc bd be]
-      problem 'In regular expressions, the * matches any character.', :predicate => false
+      problem 'In regular expressions, the * matches any character except newlines.', :predicate => false
+      problem 'In regular expressions, the . matches any character except newlines.', :predicate => true
       problem %q(What will `[/^./, /.$/].map { |regex| "a b"[regex] }`{: lang='ruby'} return?), :match => /\[\s*(['"])a\1\s*,\s*(['"])b\2\s*\]/
-      problem %q(`/./`{: lang='ruby'} will match any character in a string, except for newlines.), :predicate => true
       problem %q(After matching a string against `/Name: (\w*)/`{: lang='ruby'}, how would you access the name?), :solution => 3, :options => [
         'It will be returned by the match function.',
         "Invoke `regex.name`{: lang='ruby'}.",
