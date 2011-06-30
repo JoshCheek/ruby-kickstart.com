@@ -57,6 +57,7 @@ before do
     Quiz.find_latest(3),
     Quiz.find_latest(4),
     Quiz.find_latest(5),
+    Quiz.find_latest(6),
   ].compact
 end
 
