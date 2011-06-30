@@ -1,4 +1,4 @@
-%form{ :name => 'quiz', :action => "/quizzes/#{@quiz.number}", :method => 'post' }
+%form.quiz{ :action => "/quizzes/#{@quiz.number}", :method => 'post' }
   - @quiz.each_id_problem_and_index do |id, problem, index|
     %div.quizProblem{ :class => problem.class.to_s.sub(/^./) { |char| char.downcase } }
       %h3= index

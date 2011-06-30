@@ -100,6 +100,6 @@ var formInitialize = function(form) {
 };
 
 jQuery(function(){
-  formInitialize(jQuery('form[name="quiz"]'));
+  formInitialize(jQuery('form.quiz'));
 });
 
