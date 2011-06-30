@@ -39,7 +39,7 @@ namespace :db do
         'localhost.com:4567/',
         'localhost:4567/',
       ]
-      problem 'Which ERB tag places the text it evaluates to into the document?', :solution => 1, :options => ['<% ... %>', '<%= ... %>', '< ... >', '#{ ... }']
+      problem 'Which ERB tag places the text it evaluates to into the document?', :solution => 1, :options => ['<% ... %>', '<%= ... %>', '< ... >', '\#{ ... }']
       problem 'Which route would best match a form submitted to "http://ruby-kickstart.com/quizzes/6"? (ie the form for this quiz)', :solution => 1, :options => [
         "`get '/quizzes/:quiz_number'`{: lang='ruby'}",
         "`post '/quizzes/:quiz_number'`{: lang='ruby'}",
