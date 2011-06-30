@@ -62,7 +62,7 @@ namespace :db do
             notify
       PROBLEM
       problem 'How do methods receive blocks?', :solution => 2, :options => ['like any other parameter', 'by placing an *asterisk in front of the last parameter', 'by placing an &ampersand in front of the last parameter']
-      problem "In the code `method { ... }`{: lang='ruby'}, the { ... } is placed into a special block slot for the method.", :predicate => true
+      problem "In the code `method { ... }`{: lang='ruby'}, the `{ ... }`{: lang='ruby'} is placed into a special block slot for the method.", :predicate => true
       problem 'Use `{ ... }` to pass', :solution => 0, :options => ['inline blocks', 'multiline blocks']
       problem "Use `do ... end`{: lang='ruby'} to pass", :solution => 1, :options => ['inline blocks', 'multiline blocks']
       problem "In the method declaration `def method(&block)`{: lang='ruby'}, the block variable is set to an empty Proc, if method is invoked without a block.", :predicate => false
