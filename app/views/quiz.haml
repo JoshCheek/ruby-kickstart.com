@@ -12,7 +12,7 @@
           - problem.options.each do |quiz_option|
             %li.radio.quizQuestion
               %input{ :type => "radio", :name => "quiz_results[#{id}]", :value => quiz_option }
-                = inline_markdown quiz_option
+              = inline_markdown quiz_option
               
               
       - when QuizMatchAnswerProblem
@@ -23,10 +23,10 @@
         %ul
           %li.radio.quizQuestion
             %input{ :type => 'radio', :name => "quiz_results[#{id}]", :value => 1  }
-              true
+            true
           %li.radio.quizQuestion
             %input{ :type => 'radio', :name => "quiz_results[#{id}]", :value => 0 }
-              false
+            false
     
     
       - when QuizManyToManyProblem
