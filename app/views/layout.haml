@@ -47,35 +47,34 @@
   %body.layout-fixed
 
     #topMenu.clearfix
-      %p
-        - if doing_maintenance?
-          Currently doing maintenance, quizzes will be back up when done.
+      - if doing_maintenance?
+        Currently doing maintenance, quizzes will be back up when done.
+      
+      - elsif current_user
+        .left
+          %a{ :href => '/quiz_results' } Quiz Results
+          |
+          - @quizzes.each do |quiz|
+            %a{ :href => "/quizzes/#{quiz.number}" }= quiz.name
+            = '|' unless quiz == @quizzes.last
+        .right
+          %a{ :href => '/' } Home
+          |
+          %a{ :href => "/about" } About
+          |
+          %a{ :href => '/logout' }
+            Logout
+            = current_user.name
+      
         
-        - elsif current_user
-          .left
-            %a{ :href => '/quiz_results' } Quiz Results
-            |
-            - @quizzes.each do |quiz|
-              %a{ :href => "/quizzes/#{quiz.number}" }= quiz.name
-              = '|' unless quiz == @quizzes.last
-          .right
-            %a{ :href => '/' } Home
-            |
-            %a{ :href => "/about" } About
-            |
-            %a{ :href => '/logout' }
-              Logout
-              = current_user.name
-
-          
-        - else
-          .right
-            Login with
-            %a{ :href => '/auth/facebook' } Facebook
-            to take the quizzes!
-            |
-            %a{ :href => "/about" } About
-
+      - else
+        .right
+          Login with
+          %a{ :href => '/auth/facebook' } Facebook
+          to take the quizzes!
+          |
+          %a{ :href => "/about" } About
+            
     #page
       .pad
       #header
