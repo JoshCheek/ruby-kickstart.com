@@ -35,9 +35,9 @@
             %li.radio.quizQuestion
               = inline_markdown question
               %select{ :name => "quiz_results[#{id}][#{question}]" }
-                -problem.solution_set.each do |potential_solution|
+                - problem.solution_set.each do |potential_solution|
                   %option{ :value => potential_solution }
-                    = inline_markdown potential_solution
+                    = potential_solution
     
     
       - else
