@@ -70,19 +70,19 @@ namespace :db do
       ]
       add_problem :many_to_many do
         set_question 'Match each task with the git command to accomplish it.'
-        subproblem 'How do you initialize a repository?', '`$ git init`'
-        subproblem 'How do you see a list of files that are different from your repository?', '`$ git status`'
-        subproblem 'How do you see the content itself that is different from your repository?', '`$ git diff`'
-        subproblem 'How do you put all the files in the current directory to the staging area?', '`$ git add .`'
-        subproblem 'How do you put all the files in the staging area into the repository?', '`$ git commit -m "committing changes"`'
-        subproblem 'How do you send your code to Heroku?', '`$ git push heroku master`'
+        subproblem 'How do you initialize a repository?', '$ git init'
+        subproblem 'How do you see a list of files that are different from your repository?', '$ git status'
+        subproblem 'How do you see the content itself that is different from your repository?', '$ git diff'
+        subproblem 'How do you put all the files in the current directory to the staging area?', '$ git add .'
+        subproblem 'How do you put all the files in the staging area into the repository?', '$ git commit -m "committing changes"'
+        subproblem 'How do you send your code to Heroku?', '$ git push heroku master'
         presentation_order [
-          "`$ git add .`",
-          "`$ git diff`",
-          "`$ git init`",
-          "`$ git commit -m \"committing changes\"`",
-          "`$ git push heroku master`",
-          "`$ git status`",
+          '$ git add .',
+          '$ git diff',
+          '$ git init',
+          '$ git commit -m "committing changes"',
+          '$ git push heroku master',
+          '$ git status',
         ]
       end
       problem "After you've got your Gemfile, Gemfile.lock, config.ru, main.rb, and put everything under git, how do you put your app on Heroku?", :solution => 2, :options => [

@@ -2,7 +2,7 @@ namespace :db do
   task :populate => :quiz4
   task :quiz4 => :bootstrap do
     Quiz.add 4, 'Session 4 Quiz' do
-      problem <<-PROBLEM, :mappings => { '(a)' => "`&&`{: lang='ruby'}", '(b)' => "`||`{: lang='ruby'}", '(c)' => "`||`{: lang='ruby'}", '(d)' => "`&&`{: lang='ruby'}" }, :presentation_order => ["`&&`{:\ lang='ruby'}", "`||`{:\ lang='ruby'}"]
+      problem <<-PROBLEM, :mappings => { '(a)' => '&&', '(b)' => '||', '(c)' => '||', '(d)' => '&&' }, :presentation_order => %w[&& ||]
         Match the rules to the boolean operators!
         
         (a) If the left hand side is true, return the right hand side<br />

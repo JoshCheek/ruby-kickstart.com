@@ -3,9 +3,9 @@ namespace :db do
   task :quiz2 => :bootstrap do
     Quiz.add 2, 'Session 2 Quiz' do
       problem 'What is an ordered list of objects called?', :match => /\barrays?\b/i
-      problem %q(If `array = ['zero', 'one', 'two']`{: lang='ruby'}, then what does `array[1]`{: lang='ruby'} return?),  :solution => 1, :options => [%q(`"zero"`{: lang='ruby'}), %q(`"one"`{: lang='ruby'}), %q(`"two"`{: lang='ruby'}), %q(`"nil"`{: lang='ruby'})]
-      problem %q(If `array = ['zero', 'one', 'two']`{: lang='ruby'}, then what does `array[-1]`{: lang='ruby'} return?), :solution => 2, :options => [%q(`"zero"`{: lang='ruby'}), %q(`"one"`{: lang='ruby'}), %q(`"two"`{: lang='ruby'}), %q(`"nil"`{: lang='ruby'})]
-      problem %q(If `array = ['zero', 'one', 'two']`{: lang='ruby'}, then what does `array[10]`{: lang='ruby'} return?), :solution => 3, :options => [%q(`"zero"`{: lang='ruby'}), %q(`"one"`{: lang='ruby'}), %q(`"two"`{: lang='ruby'}), %q(`"nil"`{: lang='ruby'}), %q(it raises an error)]
+      problem %q(If `array = ['zero', 'one', 'two']`{: lang='ruby'}, then what does `array[1]`{: lang='ruby'} return?),  :solution => 1, :options => [%q(`"zero"`{: lang='ruby'}), %q(`"one"`{: lang='ruby'}), %q(`"two"`{: lang='ruby'}), %q(`nil`{: lang='ruby'})]
+      problem %q(If `array = ['zero', 'one', 'two']`{: lang='ruby'}, then what does `array[-1]`{: lang='ruby'} return?), :solution => 2, :options => [%q(`"zero"`{: lang='ruby'}), %q(`"one"`{: lang='ruby'}), %q(`"two"`{: lang='ruby'}), %q(`nil`{: lang='ruby'})]
+      problem %q(If `array = ['zero', 'one', 'two']`{: lang='ruby'}, then what does `array[10]`{: lang='ruby'} return?), :solution => 3, :options => [%q(`"zero"`{: lang='ruby'}), %q(`"one"`{: lang='ruby'}), %q(`"two"`{: lang='ruby'}), %q(`nil`{: lang='ruby'}), %q(it raises an error)]
       problem 'If you have a big array', :solution => 2, :options => [
         'it is faster to access the first element than the last',
         'it is faster to access the last element than the first',
