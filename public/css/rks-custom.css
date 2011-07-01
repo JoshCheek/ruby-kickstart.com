@@ -11,6 +11,10 @@
   width: auto;
 }
 
+#topMenu div.right {
+  width: auto;
+}
+
 #header h1#title {
   line-height: 100%;
   width: 100%;
