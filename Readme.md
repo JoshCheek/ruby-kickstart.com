@@ -1,5 +1,38 @@
-Website for [ruby-kickstart.com](http://ruby-kickstart.com)
+Description
+-----------
 
+Website for [ruby-kickstart.com](http://ruby-kickstart.com).
+It is written in Sinatra.
+
+
+Contributing
+------------
+
+I welcome contributions. The tests are not complete, unfortunately. I welcome
+tests as well as help making the styles better, fixing bugs, making quiz
+questions better, etc.
+
+
+Infrastructure
+--------------
+
+The basic relationship is that quizzes have lots of quiz problems. There are
+four types of quiz problems, predicate (true/false), match answer (user submits
+text that is matched against a regex), multiple choice (select one of the options),
+and many to many (many questions, many answers, user lines them up).
+
+When a user takes a quiz, a quiz taken is created, which tracks the quiz the
+user took. For each of the quiz's questions, the quiz taken has a solution.
+The solutions mimic the problems (ie a solution type for each of the four
+problem types).
+
+Here is the basic infrastructure, in something sort of resembling an ER Diagram.
+
+![er diagram](https://github.com/JoshCheek/ruby-kickstart.com/raw/master/resources/er-diagram.png)
+
+
+Licenses
+--------
 
 The code in public/murano is under its own license given in that directory.
 
