@@ -93,7 +93,7 @@ namespace :db do
       end
       problem 'A method can see instance variables set in other methods in the same class', :predicate => true
       problem 'A method can see local variables set in other methods in the same class', :predicate => false
-      problem "Where does a class find its methods shared by all classes?", :match => /\bClass\b/
+      problem "Where does a class find its methods that are shared by all classes?", :match => /\bClass\b/
       problem "Where does a class find its methods that other classes don't have?", :match => /\bsingleton\b.*\bclass/i
       problem <<-PROBLEM, :mappings => { '(a)' => 'Klass.method', '(b)' => 'Klass.new.method' , '(c)' => 'Klass.method' }, :presentation_order => %w[Klass.method Klass.new.method]
         How do you invoke each of the methods below?
