@@ -47,7 +47,7 @@ namespace :db do
         "`post 'ruby-kickstart.com/quizzes/6'`{: lang='ruby'}",
       ]
       problem "If this input was in a form `<input type='text' name='the_data'>`{: lang='html'}, you could access the contents through `params[:the_data]`{: lang='ruby'}", :predicate => true
-      problem "If your route said `erb :quiz`{: lang='ruby'}, what file would Sinatra expect the erb template to be in?", :match => %r{\bviews/quiz\.erb\b}
+      problem "If your route said `erb :quiz`{: lang='ruby'}, what file would Sinatra expect the erb template to be in? (give the path from the root of your project)", :match => %r{\bviews/quiz\.erb\b}
       problem "How do you get a similar layout across all your views?", :match => /\blayout\.erb\b/
       problem "If you had the route `get '/hello/:first_name'`{: lang='ruby'}, how would you access the first name?", :match => /\bparams\[\s*:first_name\s*\]/
       problem "How would you run your app using rack?", :solution => 3, :options => [
