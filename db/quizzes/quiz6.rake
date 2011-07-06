@@ -2,7 +2,7 @@ namespace :db do
   task :populate => :quiz6
   task :quiz6 => :bootstrap do
     Quiz.add 6, 'Session 6 Quiz' do
-      problem 'How are devices located on the internet?', :match => [/ip/i, /address/i]
+      problem 'If you want to send data over the internet to a program on a computer, how is that computer identified?', :match => [/ip/i, /address/i]
       problem '`google.com` represents the IP address `74.125.91.103`. What represents the IP address of your computer?', :solution => 0, :options => %w[localhost localhost.com computer self this]
       problem "Once you've located the device, how do you talk to the server?", :solution => 2, :options => [
         'It will be the only application running on that device.',
