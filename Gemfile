@@ -4,7 +4,7 @@ gem 'sinatra'               , '1.3.0.d'
 gem 'haml'                  , '3.1.1'
 gem 'pg'                    , '~> 0.11.0', :group => :production
 gem 'standalone_migrations' , '0.4.7'
-gem 'pry'                   , '0.8.3'
+gem 'pry'                   , '~> 0.9.2'
 gem 'shotgun'               , '0.9'
 gem 'acts_as_list'          , '1' , :git => 'git://github.com/JoshCheek/acts_as_list.git'
 gem 'omniauth'              , '~> 0.2.6'
