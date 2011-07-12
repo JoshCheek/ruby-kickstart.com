@@ -66,7 +66,7 @@ namespace :db do
       problem 'Use `{ ... }` to pass', :solution => 0, :options => ['inline blocks', 'multiline blocks']
       problem "Use `do ... end`{: lang='ruby'} to pass", :solution => 1, :options => ['inline blocks', 'multiline blocks']
       problem "In the method declaration `def method(&block)`{: lang='ruby'}, the block variable is set to an empty Proc, if method is invoked without a block.", :predicate => false
-      problem 'Blocks can be stored in instance variables and then executed when something interesting happens.', :predicate => true
+      problem 'When you receive a block like this `def method(&block)`{: lang="ruby"}, it can then be stored in an instance variable and executed later, when something interesting happens.', :predicate => true
       add_problem :many_to_many do
         set_question <<-PROBLEM
           For a and b, how would you pass the block, given the signatures of `receiver1`{: lang='ruby'} and `receiver2`{: lang='ruby'}?

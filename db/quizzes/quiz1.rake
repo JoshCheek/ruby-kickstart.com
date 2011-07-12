@@ -34,15 +34,10 @@ namespace :db do
       problem 'How do you write local variables?', :solution => 0, :options => ['With snake_case', 'With CamelCase']
       problem 'How do you write constants?', :solution => 1, :options => ['With snake_case', 'With CamelCase']
       problem 'What are the two names for objects you pass to a method when you invoke it?', :match => [/\barguments?\b/i, /\bparameters?\b/i]
-      problem "How do you invoke a method named `add`{: lang='ruby'}, and pass it the numbers 1 and 2? (pick the best answer)", :solution => 6, :options => [
+      problem "Which of these method invocations isn't valid?", :solution => 2, :options => [
         "`add(1, 2)`{: lang='ruby'}",
-        "`add(1 2)`{: lang='ruby'}",
         "`add 1, 2`{: lang='ruby'}",
-        "`(add 1, 2)`{: lang='ruby'}",
-        "`(add 1 2)`{: lang='ruby'}",
-        "all of the above",
-        "`add(1, 2)`{: lang='ruby'} or `add 1, 2`{: lang='ruby'}",
-        "`add(1 2)`{: lang='ruby'} or `add 1 2`{: lang='ruby'}",
+        "`add 1 2`{: lang='ruby'}",
       ]
       problem 'What does `puts("I want #{1 + 2} tacos")` print? (notice double quotes)', :solution => 1, :options => [
         'I want #{1 + 2} tacos',

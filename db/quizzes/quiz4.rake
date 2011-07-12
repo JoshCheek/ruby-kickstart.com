@@ -67,7 +67,7 @@ namespace :db do
         "`raise 'exception'`{: lang='ruby'}",
       ]
       problem "How do you prevent an exception from killing your program?", :solution => 1, :options => [
-        "User try/catch",
+        "Use try/catch",
         "Use begin/rescue/end",
         "Don't call code that could raise an exception.",
       ]
