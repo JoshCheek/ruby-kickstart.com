@@ -6,7 +6,7 @@ gem 'pg'                    , '~> 0.11.0', :group => :production
 gem 'standalone_migrations' , '0.4.7'
 gem 'pry'                   , '~> 0.9.2'
 gem 'shotgun'               , '0.9'
-gem 'acts_as_list'          , '1' , :git => 'git://github.com/JoshCheek/acts_as_list.git'
+gem 'acts_as_list'          , '~> 0.1.3'
 gem 'kramdown'              , '~> 0.13.3'
 gem 'coderay'               , '~> 0.9.7'
 

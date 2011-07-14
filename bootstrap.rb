@@ -4,7 +4,6 @@ require 'coderay'
 require 'kramdown'
 require 'sinatra'
 require 'active_record'
-require 'active_record/acts/list'
 require 'erb'
 
 
@@ -21,7 +20,7 @@ $root = File.expand_path(File.dirname __FILE__)
 $: << $root
 
 require 'bootstrap_database'
-ActiveRecord::Base.send :include, ActiveRecord::Acts::List # It's stupid that I have to do this, maybe I'll override its behaviour
+require 'acts_as_list'
 
 # load models
 models_pattern = "#{File.dirname __FILE__}/app/models/*"
