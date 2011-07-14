@@ -36,23 +36,15 @@ describe QuizTaken do
       }
     end
     
-    @user = User.create :provider => 'provider',
-                        :uid      => 'uid',
-                        :name     => 'Josh Cheek'
   end
 
   subject do
-    QuizTaken.new :user => @user, :quiz => @quiz
+    QuizTaken.new :quiz => @quiz
   end
 
   its(:quiz) { should == @quiz }
-  its(:user) { should == @user }
   
   context 'should not be valid without' do
-    specify 'user' do
-      subject.user = nil
-      should_not be_valid
-    end
     specify 'quiz' do
       subject.quiz = nil
       should_not be_valid

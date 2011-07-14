@@ -19,10 +19,7 @@ describe QuizSolution do
       }
     end
     
-    @user = User.create :provider => 'provider',
-                        :uid      => 'uid',
-                        :name     => 'Josh Cheek'
-    @quiz_taken = QuizTaken.new :user => @user, :quiz => @quiz
+    @quiz_taken = QuizTaken.new :quiz => @quiz
     @quiz_taken.apply_solutions valid_solutions
   end
   
@@ -32,7 +29,6 @@ describe QuizSolution do
   
   it { should be_instance_of QuizSolution }
   its(:quiz)          { should == @quiz }
-  its(:user)          { should == @user }
   its(:quiz_taken)    { should == @quiz_taken }
   its(:quiz_problem)  { should == @quiz.quiz_problems.first }
   

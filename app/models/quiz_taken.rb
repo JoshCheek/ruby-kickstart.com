@@ -1,9 +1,7 @@
 class QuizTaken < ActiveRecord::Base
   belongs_to :quiz
-  belongs_to :user
   has_many   :quiz_solutions
   
-  validates_presence_of :user
   validates_presence_of :quiz
   validates_associated  :quiz_solutions
 

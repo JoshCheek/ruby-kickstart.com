@@ -5,7 +5,6 @@ require 'kramdown'
 require 'sinatra'
 require 'active_record'
 require 'active_record/acts/list'
-require 'omniauth'
 require 'erb'
 
 
@@ -33,8 +32,3 @@ end
 
 
 set :views, File.dirname(__FILE__) + '/app/views'
-
-configure :development, :test do
-  OmniAuth.config.test_mode = true
-  OmniAuth.config.add_mock(:facebook, {:uid => '12345'})
-end
