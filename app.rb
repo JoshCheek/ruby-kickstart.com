@@ -67,6 +67,6 @@ end
 
 get '/quiz_results/:quiz_id' do
   @quiz_taken = QuizTaken.find params[:quiz_id]
-  @title = @quiz_taken.name
+  @title = "#{@quiz_taken.name} #{@quiz_taken.summary}"
   haml :quiz_results
 end
